@@ -12,19 +12,8 @@ nbproject
 # windows thumbnail cache
 Thumbs.db
 
-# composer itself is not needed
-composer.phar
-
 # Mac DS_Store Files
 .DS_Store
-
-# phpunit itself is not needed
-phpunit.phar
-# local phpunit config
-/phpunit.xml
-
-# vagrant runtime
-/.vagrant
 
 # ignore generated files
 /frontend/web/index.php
