@@ -10,7 +10,7 @@ class Address extends \Faker\Provider\Address
     /**
      * @var array Countries in icelandic
      */
-    protected static $country = [
+    protected static $country = array(
         'Afganistan', 'Albanía', 'Alsír', 'Andorra', 'Angóla', 'Angvilla', 'Antígva og Barbúda', 'Argentína',
         'Armenía', 'Arúba', 'Aserbaídsjan', 'Austur-Kongó', 'Austurríki', 'Austur-Tímor', 'Álandseyjar',
         'Ástralía', 'Bahamaeyjar', 'Bandaríkin', 'Bandaríska Samóa', 'Bangladess', 'Barbados', 'Barein',
@@ -43,12 +43,12 @@ class Address extends \Faker\Provider\Address
         'Tékkland', 'Tonga', 'Tógó', 'Tókelá', 'Trínidad og Tóbagó', 'Tsjad', 'Tsjetsjenía', 'Turks- og Caicos-eyjar',
         'Túnis', 'Túrkmenistan', 'Túvalú', 'Tyrkland', 'Ungverjaland', 'Úganda', 'Úkraína', 'Úrúgvæ', 'Úsbekistan',
         'Vanúatú', 'Venesúela', 'Vestur-Kongó', 'Vestur-Sahara', 'Víetnam', 'Wales', 'Wallis- og Fútúnaeyjar', 'Þýskaland'
-    ];
+    );
 
     /**
      * @var array Icelandic cities.
      */
-    protected static $cityNames = [
+    protected static $cityNames = array(
         'Reykjavík', 'Seltjarnarnes', 'Vogar', 'Kópavogur', 'Garðabær', 'Hafnarfjörður', 'Reykjanesbær', 'Grindavík',
         'Sandgerði', 'Garður', 'Reykjanesbær', 'Mosfellsbær', 'Akranes', 'Borgarnes', 'Reykholt', 'Stykkishólmur',
         'Flatey', 'Grundarfjörður', 'Ólafsvík', 'Snæfellsbær', 'Hellissandur', 'Búðardalur', 'Reykhólahreppur',
@@ -61,80 +61,80 @@ class Address extends \Faker\Provider\Address
         'Stöðvarfjörður', 'Breiðdalsvík', 'Djúpivogur', 'Höfn', 'Selfoss', 'Hveragerði', 'Þorlákshöfn', 'Ölfus',
         'Eyrarbakki', 'Stokkseyri', 'Laugarvatn', 'Flúðir', 'Hella', 'Hvolsvöllur', 'Vík', 'Kirkjubæjarklaustur',
         'Vestmannaeyjar'
-    ];
+    );
 
     /**
      * @var array Street name suffix.
      */
-    protected static $streetSuffix = [
+    protected static $streetSuffix = array(
         'ás', 'bakki', 'braut', 'bær', 'brún', 'berg', 'fold', 'gata', 'gróf',
         'garðar', 'höfði', 'heimar', 'hamar', 'hólar', 'háls', 'kvísl', 'lækur',
         'leiti', 'land', 'múli', 'nes', 'rimi', 'stígur', 'stræti', 'stekkur',
         'slóð', 'skógar', 'sel', 'teigur', 'tún', 'vangur', 'vegur', 'vogur',
         'vað'
-    ];
+    );
 
     /**
      * @var array Street name prefix.
      */
-    protected static $streetPrefix = [
+    protected static $streetPrefix = array(
         'Aðal', 'Austur', 'Bakka', 'Braga', 'Báru', 'Brunn', 'Fiski', 'Leifs',
         'Týs', 'Birki', 'Suður', 'Norður', 'Vestur', 'Austur', 'Sanda', 'Skógar',
         'Stór', 'Sunnu', 'Tungu', 'Tangar', 'Úlfarfells', 'Vagn', 'Vind', 'Ysti',
         'Þing', 'Hamra', 'Hóla', 'Kríu', 'Iðu', 'Spóa', 'Starra', 'Uglu', 'Vals'
-    ];
+    );
 
     /**
      * @var Icelandic zip code.
-     **/
-    protected static $postcode = [
+    **/
+    protected static $postcode = array(
         '%##'
-    ];
+    );
 
     /**
      * @var array Icelandic regions.
      */
-    protected static $regionNames = [
+    protected static $regionNames = array(
         'Höfuðborgarsvæðið', 'Norðurland', 'Suðurland', 'Vesturland', 'Vestfirðir', 'Austurland', 'Suðurnes'
-    ];
+    );
 
     /**
      * @var array Icelandic building numbers.
      */
-    protected static $buildingNumber = [
+    protected static $buildingNumber = array(
         '%##', '%#', '%#', '%', '%', '%', '%?', '% ?',
-    ];
+    );
 
     /**
      * @var array Icelandic city format.
      */
-    protected static $cityFormats = [
+    protected static $cityFormats = array(
         '{{cityName}}',
-    ];
+    );
 
     /**
      * @var array Icelandic street's name formats.
      */
-    protected static $streetNameFormats = [
+    protected static $streetNameFormats = array(
         '{{streetPrefix}}{{streetSuffix}}',
         '{{streetPrefix}}{{streetSuffix}}',
         '{{firstNameMale}}{{streetSuffix}}',
         '{{firstNameFemale}}{{streetSuffix}}'
-    ];
+    );
 
     /**
      * @var array Icelandic street's address formats.
      */
-    protected static $streetAddressFormats = [
+    protected static $streetAddressFormats = array(
         '{{streetName}} {{buildingNumber}}'
-    ];
+    );
 
     /**
      * @var array Icelandic address format.
      */
-    protected static $addressFormats = [
+    protected static $addressFormats = array(
         "{{streetAddress}}\n{{postcode}} {{city}}",
-    ];
+    );
 
     /**
      * Randomly return a real city name.

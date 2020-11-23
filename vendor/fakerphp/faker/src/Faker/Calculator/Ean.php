@@ -4,11 +4,13 @@ namespace Faker\Calculator;
 
 /**
  * Utility class for validating EAN-8 and EAN-13 numbers
+ *
+ * @package Faker\Calculator
  */
 class Ean
 {
     /** @var string EAN validation pattern */
-    public const PATTERN = '/^(?:\d{8}|\d{13})$/';
+    const PATTERN = '/^(?:\d{8}|\d{13})$/';
 
     /**
      * Computes the checksum of an EAN number.
@@ -40,7 +42,7 @@ class Ean
      * the checksum is correct.
      *
      * @param string $ean An EAN number
-     * @return bool
+     * @return boolean
      */
     public static function isValid($ean)
     {

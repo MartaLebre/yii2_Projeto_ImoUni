@@ -7,20 +7,20 @@ namespace Faker\Provider\cs_CZ;
  */
 class DateTime extends \Faker\Provider\DateTime
 {
-    protected static $days = [
+    protected static $days = array(
         'neděle', 'pondělí', 'úterý', 'středa', 'čtvrtek', 'pátek', 'sobota'
-    ];
-    protected static $months = [
+    );
+    protected static $months = array(
         'leden', 'únor', 'březen', 'duben', 'květen', 'červen', 'červenec',
         'srpen', 'září', 'říjen', 'listopad', 'prosinec'
-    ];
-    protected static $monthsGenitive  = [
+    );
+    protected static $monthsGenitive  = array(
         'ledna', 'února', 'března', 'dubna', 'května', 'června', 'července',
         'srpna', 'září', 'října', 'listopadu', 'prosince'
-    ];
-    protected static $formattedDateFormat = [
+    );
+    protected static $formattedDateFormat = array(
         '{{dayOfMonth}}. {{monthNameGenitive}} {{year}}',
-    ];
+    );
 
     public static function monthName($max = 'now')
     {

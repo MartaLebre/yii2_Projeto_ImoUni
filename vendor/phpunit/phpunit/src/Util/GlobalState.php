@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php
 /*
  * This file is part of PHPUnit.
  *
@@ -11,38 +11,35 @@ namespace PHPUnit\Util;
 
 use Closure;
 
-/**
- * @internal This class is not covered by the backward compatibility promise for PHPUnit
- */
-final class GlobalState
+class GlobalState
 {
     /**
      * @var string[]
      */
-    private const SUPER_GLOBAL_ARRAYS = [
+    protected static $superGlobalArrays = [
         '_ENV',
         '_POST',
         '_GET',
         '_COOKIE',
         '_SERVER',
         '_FILES',
-        '_REQUEST',
+        '_REQUEST'
     ];
 
     /**
-     * @throws Exception
+     * @return string
      */
-    public static function getIncludedFilesAsString(): string
+    public static function getIncludedFilesAsString()
     {
-        return self::processIncludedFilesAsString(\get_included_files());
+        return static::processIncludedFilesAsString(\get_included_files());
     }
 
     /**
-     * @param string[] $files
+     * @param array $files
      *
-     * @throws Exception
+     * @return string
      */
-    public static function processIncludedFilesAsString(array $files): string
+    public static function processIncludedFilesAsString(array $files)
     {
         $blacklist = new Blacklist;
         $prefix    = false;
@@ -56,7 +53,7 @@ final class GlobalState
             $file = $files[$i];
 
             if (!empty($GLOBALS['__PHPUNIT_ISOLATION_BLACKLIST']) &&
-                \in_array($file, $GLOBALS['__PHPUNIT_ISOLATION_BLACKLIST'], true)) {
+                \in_array($file, $GLOBALS['__PHPUNIT_ISOLATION_BLACKLIST'])) {
                 continue;
             }
 
@@ -77,22 +74,29 @@ final class GlobalState
         return $result;
     }
 
-    public static function getIniSettingsAsString(): string
+    /**
+     * @return string
+     */
+    public static function getIniSettingsAsString()
     {
-        $result = '';
+        $result      = '';
+        $iniSettings = \ini_get_all(null, false);
 
-        foreach (\ini_get_all(null, false) as $key => $value) {
+        foreach ($iniSettings as $key => $value) {
             $result .= \sprintf(
                 '@ini_set(%s, %s);' . "\n",
                 self::exportVariable($key),
-                self::exportVariable((string) $value)
+                self::exportVariable($value)
             );
         }
 
         return $result;
     }
 
-    public static function getConstantsAsString(): string
+    /**
+     * @return string
+     */
+    public static function getConstantsAsString()
     {
         $constants = \get_defined_constants(true);
         $result    = '';
@@ -111,11 +115,15 @@ final class GlobalState
         return $result;
     }
 
-    public static function getGlobalsAsString(): string
+    /**
+     * @return string
+     */
+    public static function getGlobalsAsString()
     {
-        $result = '';
+        $result            = '';
+        $superGlobalArrays = self::getSuperGlobalArrays();
 
-        foreach (self::SUPER_GLOBAL_ARRAYS as $superGlobalArray) {
+        foreach ($superGlobalArrays as $superGlobalArray) {
             if (isset($GLOBALS[$superGlobalArray]) && \is_array($GLOBALS[$superGlobalArray])) {
                 foreach (\array_keys($GLOBALS[$superGlobalArray]) as $key) {
                     if ($GLOBALS[$superGlobalArray][$key] instanceof Closure) {
@@ -132,11 +140,11 @@ final class GlobalState
             }
         }
 
-        $blacklist   = self::SUPER_GLOBAL_ARRAYS;
+        $blacklist   = $superGlobalArrays;
         $blacklist[] = 'GLOBALS';
 
         foreach (\array_keys($GLOBALS) as $key) {
-            if (!$GLOBALS[$key] instanceof Closure && !\in_array($key, $blacklist, true)) {
+            if (!\in_array($key, $blacklist) && !$GLOBALS[$key] instanceof Closure) {
                 $result .= \sprintf(
                     '$GLOBALS[\'%s\'] = %s;' . "\n",
                     $key,
@@ -148,28 +156,43 @@ final class GlobalState
         return $result;
     }
 
-    private static function exportVariable($variable): string
+    /**
+     * @return string[]
+     */
+    protected static function getSuperGlobalArrays()
     {
-        if (\is_scalar($variable) || $variable === null ||
+        return self::$superGlobalArrays;
+    }
+
+    protected static function exportVariable($variable)
+    {
+        if (\is_scalar($variable) || null === $variable ||
             (\is_array($variable) && self::arrayOnlyContainsScalars($variable))) {
             return \var_export($variable, true);
         }
 
-        return 'unserialize(' . \var_export(\serialize($variable), true) . ')';
+        return 'unserialize(' .
+            \var_export(\serialize($variable), true) .
+            ')';
     }
 
-    private static function arrayOnlyContainsScalars(array $array): bool
+    /**
+     * @param array $array
+     *
+     * @return bool
+     */
+    protected static function arrayOnlyContainsScalars(array $array)
     {
         $result = true;
 
         foreach ($array as $element) {
             if (\is_array($element)) {
                 $result = self::arrayOnlyContainsScalars($element);
-            } elseif (!\is_scalar($element) && $element !== null) {
+            } elseif (!\is_scalar($element) && null !== $element) {
                 $result = false;
             }
 
-            if (!$result) {
+            if ($result === false) {
                 break;
             }
         }

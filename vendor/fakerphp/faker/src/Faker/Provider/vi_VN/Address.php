@@ -4,9 +4,9 @@ namespace Faker\Provider\vi_VN;
 
 class Address extends \Faker\Provider\Address
 {
-    protected static $buildingNumber = ['####', '###', '##', '#'];
-    protected static $postcode = ['#####', '######', '#####-####'];
-    protected static $province = [
+    protected static $buildingNumber = array('####', '###', '##', '#');
+    protected static $postcode = array('#####', '######', '#####-####');
+    protected static $province = array(
         'An Giang', 'Bà Rịa - Vũng Tàu',
         'Bắc Giang', 'Bắc Kạn', 'Bạc Liêu',
         'Bắc Ninh', 'Bến Tre', 'Bình Định',
@@ -27,21 +27,21 @@ class Address extends \Faker\Provider\Address
         'Thừa Thiên Huế', 'Tiền Giang', 'Trà Vinh',
         'Tuyên Quang', 'Vĩnh Long', 'Vĩnh Phúc',
         'Yên Bái', 'Phú Yên',
-    ];
-    protected static $city = [
+    );
+    protected static $city = array(
         'Cần Thơ', 'Đà Nẵng', 'Hải Phòng', 'Hà Nội', 'Hồ Chí Minh',
-    ];
-    protected static $streetNameFormats = [
+    );
+    protected static $streetNameFormats = array(
         'Phố {{lastName}} {{middleName}} {{firstName}}',
         'Phố {{lastName}} {{middleName}} {{firstName}}',
         'Phố {{lastName}} {{middleName}} {{firstName}}',
         'Phố {{firstName}}',
         'Phố {{lastName}}',
-    ];
-    protected static $streetAddressFormats = [
+    );
+    protected static $streetAddressFormats = array(
         '{{buildingNumber}} {{streetName}}',
-    ];
-    protected static $hamletNameFormats = [
+    );
+    protected static $hamletNameFormats = array(
         '{{hamletPrefix}} {{middleName}} {{firstName}}',
         '{{hamletPrefix}} {{lastName}} {{firstName}}',
         '{{hamletPrefix}} {{firstName}} {{lastName}}',
@@ -51,11 +51,11 @@ class Address extends \Faker\Provider\Address
         '{{hamletPrefix}} {{lastName}}',
         '{{hamletPrefix}} ##',
         '{{hamletPrefix}} #',
-    ];
-    protected static $hamletPrefix = [
+    );
+    protected static $hamletPrefix = array(
         'Thôn', 'Ấp',
-    ];
-    protected static $wardNameFormats = [
+    );
+    protected static $wardNameFormats = array(
         '{{hamletPrefix}} {{middleName}} {{firstName}}',
         '{{hamletPrefix}} {{lastName}} {{firstName}}',
         '{{wardPrefix}} {{firstName}} {{lastName}}',
@@ -65,11 +65,11 @@ class Address extends \Faker\Provider\Address
         '{{wardPrefix}} {{lastName}}',
         '{{wardPrefix}} ##',
         '{{wardPrefix}} #',
-    ];
-    protected static $wardPrefix = [
+    );
+    protected static $wardPrefix = array(
         'Phường', 'Xã',
-    ];
-    protected static $districtNameFormats = [
+    );
+    protected static $districtNameFormats = array(
         '{{districtPrefix}} {{middleName}} {{firstName}}',
         '{{districtPrefix}} {{lastName}} {{firstName}}',
         '{{districtPrefix}} {{firstName}} {{lastName}}',
@@ -79,16 +79,16 @@ class Address extends \Faker\Provider\Address
         '{{districtPrefix}} {{lastName}}',
         '{{districtPrefix}} ##',
         '{{districtPrefix}} #',
-    ];
-    protected static $districtPrefix = [
+    );
+    protected static $districtPrefix = array(
         'Quận', 'Huyện',
-    ];
-    protected static $addressFormats = [
+    );
+    protected static $addressFormats = array(
         "{{streetAddress}}, {{wardName}}, {{districtName}}\n{{city}}",
         "{{streetAddress}}, {{wardName}}, {{districtName}}\n{{province}}",
         "{{buildingNumber}}, {{hamletName}}, {{wardName}}, {{districtName}}\n{{province}}",
-    ];
-    protected static $country = [
+    );
+    protected static $country = array(
         'Afghanistan', 'Albania', 'Algeria', 'American Samoa', 'Andorra', 'Angola', 'Anguilla', 'Antarctica (the territory South of 60 deg S)', 'Antigua and Barbuda', 'Argentina', 'Armenia', 'Aruba', 'Australia', 'Austria', 'Azerbaijan',
         'Bahamas', 'Bahrain', 'Bangladesh', 'Barbados', 'Belarus', 'Belgium', 'Belize', 'Benin', 'Bermuda', 'Bhutan', 'Bolivia', 'Bosnia and Herzegovina', 'Botswana', 'Bouvet Island (Bouvetoya)', 'Brazil', 'British Indian Ocean Territory (Chagos Archipelago)', 'British Virgin Islands', 'Brunei Darussalam', 'Bulgaria', 'Burkina Faso', 'Burundi',
         'Cambodia', 'Cameroon', 'Canada', 'Cape Verde', 'Cayman Islands', 'Central African Republic', 'Chad', 'Chile', 'China', 'Christmas Island', 'Cocos (Keeling) Islands', 'Colombia', 'Comoros', 'Congo', 'Cook Islands', 'Costa Rica', 'Cote d\'Ivoire', 'Croatia', 'Cuba', 'Cyprus', 'Czech Republic',
@@ -114,7 +114,7 @@ class Address extends \Faker\Provider\Address
         'Wallis and Futuna', 'Western Sahara',
         'Yemen',
         'Zambia', 'Zimbabwe'
-    ];
+    );
 
     public function hamletName()
     {

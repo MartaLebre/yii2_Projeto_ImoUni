@@ -4,7 +4,7 @@ namespace Faker\Provider\es_VE;
 
 class Company extends \Faker\Provider\Company
 {
-    protected static $formats = [
+    protected static $formats = array(
         '{{companyPrefix}} {{lastName}} {{companySuffix}}',
         '{{companyPrefix}} {{lastName}}',
         '{{companyPrefix}} {{lastName}} y {{lastName}}',
@@ -12,13 +12,13 @@ class Company extends \Faker\Provider\Company
         '{{lastName}} de {{lastName}} {{companySuffix}}',
         '{{lastName}} y {{lastName}}',
         '{{lastName}} de {{lastName}}'
-    ];
+    );
 
-    protected static $companyPrefix = [
+    protected static $companyPrefix = array(
         'Asociación', 'Centro', 'Corporación', 'Cooperativa', 'Empresa', 'Gestora', 'Global', 'Grupo', 'Viajes',
         'Inversiones', 'Lic.', 'Dr.'
-    ];
-    protected static $companySuffix = ['S.R.L.', 'C.A.', 'S.A.', 'R.L.', 'etc'];
+    );
+    protected static $companySuffix = array('S.R.L.', 'C.A.', 'S.A.', 'R.L.', 'etc');
 
     /**
      * @example 'Grupo'
@@ -35,6 +35,6 @@ class Company extends \Faker\Provider\Company
      */
     public function taxpayerIdentificationNumber($separator = '')
     {
-        return static::randomElement(['J', 'G', 'V', 'E', 'P', 'C']) . $separator . static::numerify('########') . $separator . static::numerify('#');
+        return static::randomElement(array('J', 'G', 'V', 'E', 'P', 'C')) . $separator . static::numerify('########') . $separator . static::numerify('#');
     }
 }

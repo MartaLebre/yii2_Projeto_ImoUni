@@ -7,27 +7,20 @@ namespace Faker\Provider;
  */
 class Image extends Base
 {
-    /** @var string */
-    public const BASE_URL = 'https://via.placeholder.com';
-
-    /**
-     * @var array
-     * @deprecated Categories are no longer used as a list in the placeholder API but referenced as string instead
-     */
-    protected static $categories = [
+    protected static $categories = array(
         'abstract', 'animals', 'business', 'cats', 'city', 'food', 'nightlife',
         'fashion', 'people', 'nature', 'sports', 'technics', 'transport'
-    ];
+    );
 
     /**
      * Generate the URL that will return a random image
      *
      * Set randomize to false to remove the random GET parameter at the end of the url.
      *
-     * @example 'http://via.placeholder.com/640x480.png/CCCCCC?text=well+hi+there'
+     * @example 'http://lorempixel.com/640/480/?12345'
      *
-     * @param int $width
-     * @param int $height
+     * @param integer $width
+     * @param integer $height
      * @param string|null $category
      * @param bool $randomize
      * @param string|null $word
@@ -35,36 +28,30 @@ class Image extends Base
      *
      * @return string
      */
-    public static function imageUrl(
-        $width = 640,
-        $height = 480,
-        $category = null,
-        $randomize = true,
-        $word = null,
-        $gray = false
-    ) {
-        $size = sprintf('%dx%d.png', $width, $height);
+    public static function imageUrl($width = 640, $height = 480, $category = null, $randomize = true, $word = null, $gray = false)
+    {
+        $baseUrl = "https://lorempixel.com/";
+        $url = "{$width}/{$height}/";
 
-        $imageParts = [];
-        if ($category !== null) {
-            $imageParts[] = $category;
-        }
-        if ($word !== null) {
-            $imageParts[] = $word;
-        }
-        if ($randomize === true) {
-            $imageParts[] = Lorem::word();
+        if ($gray) {
+            $url = "gray/" . $url;
         }
 
-        $backgroundColor = $gray === true ? 'CCCCCC' : str_replace('#', '', Color::safeHexColor());
+        if ($category) {
+            if (!in_array($category, static::$categories)) {
+                throw new \InvalidArgumentException(sprintf('Unknown image category "%s"', $category));
+            }
+            $url .= "{$category}/";
+            if ($word) {
+                $url .= "{$word}/";
+            }
+        }
 
-        return sprintf(
-            '%s/%s/%s%s',
-            self::BASE_URL,
-            $size,
-            $backgroundColor,
-            count($imageParts) > 0 ? '?text=' . urlencode(implode(' ', $imageParts)) : ''
-        );
+        if ($randomize) {
+            $url .= '?' . static::randomNumber(5, true);
+        }
+
+        return $baseUrl . $url;
     }
 
     /**
@@ -72,18 +59,10 @@ class Image extends Base
      *
      * Requires curl, or allow_url_fopen to be on in php.ini.
      *
-     * @example '/path/to/dir/13b73edae8443990be1aa8f1a483bc27.png'
+     * @example '/path/to/dir/13b73edae8443990be1aa8f1a483bc27.jpg'
      */
-    public static function image(
-        $dir = null,
-        $width = 640,
-        $height = 480,
-        $category = null,
-        $fullPath = true,
-        $randomize = true,
-        $word = null,
-        $gray = false
-    ) {
+    public static function image($dir = null, $width = 640, $height = 480, $category = null, $fullPath = true, $randomize = true, $word = null, $gray = false)
+    {
         $dir = is_null($dir) ? sys_get_temp_dir() : $dir; // GNU/Linux / OS X / Windows compatible
         // Validate directory path
         if (!is_dir($dir) || !is_writable($dir)) {
@@ -93,7 +72,7 @@ class Image extends Base
         // Generate a random filename. Use the server address so that a file
         // generated at the same time on a different server won't have a collision.
         $name = md5(uniqid(empty($_SERVER['SERVER_ADDR']) ? '' : $_SERVER['SERVER_ADDR'], true));
-        $filename = $name . '.png';
+        $filename = $name .'.jpg';
         $filepath = $dir . DIRECTORY_SEPARATOR . $filename;
 
         $url = static::imageUrl($width, $height, $category, $randomize, $word, $gray);

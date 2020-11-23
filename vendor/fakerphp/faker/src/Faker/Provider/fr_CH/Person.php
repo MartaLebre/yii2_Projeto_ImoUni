@@ -7,7 +7,7 @@ class Person extends \Faker\Provider\fr_FR\Person
     /**
      * @link http://www.bfs.admin.ch/bfs/portal/de/index/themen/01/02/blank/dos/prenoms/02.html
      */
-    protected static $firstNameMale = [
+    protected static $firstNameMale = array(
         'Adrian', 'Adrien', 'Alain', 'Albert', 'Alberto', 'Alessandro', 'Alex', 'Alexander', 'Alexandre', 'Alexis', 'Alfred', 'Ali', 'Andrea', 'André', 'Angelo', 'Anthony', 'Antoine', 'Antonio', 'António', 'Arnaud', 'Arthur', 'Aurélien', 'Axel',
         'Baptiste', 'Bastien', 'Benjamin', 'Benoît', 'Bernard', 'Bertrand', 'Bruno', 'Bryan',
         'Carlos', 'Charles', 'Christian', 'Christophe', 'Christopher', 'Claude', 'Claudio', 'Cyril', 'Cédric',
@@ -31,12 +31,12 @@ class Person extends \Faker\Provider\fr_FR\Person
         'Walter', 'William', 'Willy',
         'Xavier',
         'Yann', 'Yannick', 'Yvan', 'Yves',
-    ];
+    );
 
     /**
      * @link http://www.bfs.admin.ch/bfs/portal/de/index/themen/01/02/blank/dos/prenoms/02.html
      */
-    protected static $firstNameFemale = [
+    protected static $firstNameFemale = array(
         'Agnès', 'Alexandra', 'Alice', 'Alicia', 'Aline', 'Amélie', 'Ana', 'Anaïs', 'Andrea', 'Andrée', 'Angela', 'Anita', 'Anna', 'Anne', 'Anne-Marie', 'Antoinette', 'Ariane', 'Arlette', 'Audrey', 'Aurélie',
         'Barbara', 'Bernadette', 'Brigitte', 'Béatrice',
         'Camille', 'Carine', 'Carla', 'Carmen', 'Carole', 'Caroline', 'Catherine', 'Chantal', 'Charlotte', 'Chloé', 'Christelle', 'Christiane', 'Christine', 'Cindy', 'Claire', 'Clara', 'Claudia', 'Claudine', 'Colette', 'Coralie', 'Corinne', 'Cristina', 'Cécile', 'Célia', 'Céline',
@@ -59,12 +59,12 @@ class Person extends \Faker\Provider\fr_FR\Person
         'Valentine', 'Valérie', 'Vanessa', 'Victoria', 'Virginie', 'Viviane', 'Véronique',
         'Yolande', 'Yvette', 'Yvonne',
         'Zoé',
-    ];
+    );
 
     /**
      * @link http://blog.tagesanzeiger.ch/datenblog/index.php/6859
      */
-    protected static $lastName = [
+    protected static $lastName = array(
         'Aebischer', 'Aeby', 'Andrey', 'Aubert', 'Aubry',
         'Bachmann', 'Baechler', 'Baeriswyl', 'Barbey', 'Barras', 'Baumann', 'Baumgartner', 'Berger', 'Bernard', 'Berset', 'Bersier', 'Berthoud', 'Besson', 'Blanc', 'Blaser', 'Boillat', 'Bonvin', 'Bourquin', 'Bruchez', 'Brunner', 'Brügger', 'Buchs', 'Bugnon', 'Burri', 'Bühler',
         'Castella', 'Cattin', 'Chappuis', 'Chapuis', 'Chassot', 'Chatelain', 'Chevalley', 'Chollet', 'Christen', 'Clerc', 'Clément', 'Constantin', 'Crausaz',
@@ -86,7 +86,7 @@ class Person extends \Faker\Provider\fr_FR\Person
         'Vaucher', 'Vonlanthen', 'Vuilleumier',
         'Waeber', 'Weber', 'Wenger', 'Widmer', 'Wyss',
         'Zbinden', 'Zimmermann',
-    ];
+    );
 
     /**
      * Generates a valid random AVS13 (swiss social security) number
@@ -99,15 +99,17 @@ class Person extends \Faker\Provider\fr_FR\Person
      */
     public static function avs13()
     {
-        $p = [
+        $p = array(
             756,
             self::numerify('####'),
             self::numerify('####'),
             self::numerify('#'),
-        ];
+        );
 
-        $checksum = \Faker\Calculator\Ean::checksum(implode('', $p));
+        $checksum = \Faker\Calculator\Ean::checksum(implode($p));
 
-        return sprintf("%s.%s.%s.%s%s", $p[0], $p[1], $p[2], $p[3], $checksum);
+        $avs = sprintf("%s.%s.%s.%s%s", $p[0], $p[1], $p[2], $p[3], $checksum);
+
+        return $avs;
     }
 }

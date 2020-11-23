@@ -4,6 +4,7 @@ namespace Faker\ORM\CakePHP;
 
 class Populator
 {
+
     protected $generator;
     protected $entities = [];
     protected $quantities = [];

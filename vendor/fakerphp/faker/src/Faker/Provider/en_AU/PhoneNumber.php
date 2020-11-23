@@ -4,7 +4,7 @@ namespace Faker\Provider\en_AU;
 
 class PhoneNumber extends \Faker\Provider\PhoneNumber
 {
-    protected static $formats = [
+    protected static $formats = array(
         // Local calls
         '#### ####',
         '####-####',
@@ -28,21 +28,21 @@ class PhoneNumber extends \Faker\Provider\PhoneNumber
         '+61-{{areaCode}}-####-####',
         '+61.{{areaCode}}.####.####',
         '+61{{areaCode}}########',
-    ];
+    );
 
     // 04 Mobile telephones (Australia-wide) mostly commonly written 4 - 3 - 3 instead of 2 - 4 - 4
-    protected static $mobileFormats = [
+    protected static $mobileFormats = array(
         '04## ### ###',
         '04##-###-###',
         '04##.###.###',
         '+61 4## ### ###',
         '+61-4##-###-###',
         '+61.4##.###.###',
-    ];
+    );
 
-    protected static $areacodes = [
+    protected static $areacodes = array(
         '2', '3', '7', '8'
-    ];
+    );
 
     public static function mobileNumber()
     {

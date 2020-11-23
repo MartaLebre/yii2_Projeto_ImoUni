@@ -1,5 +1,6 @@
 <?php
 
+
 namespace Faker\ORM\Spot;
 
 use Spot\Locator;
@@ -11,8 +12,8 @@ class Populator
 {
     protected $generator;
     protected $locator;
-    protected $entities = [];
-    protected $quantities = [];
+    protected $entities = array();
+    protected $quantities = array();
 
     /**
      * Populator constructor.
@@ -28,17 +29,17 @@ class Populator
     /**
      * Add an order for the generation of $number records for $entity.
      *
-     * @param string $entityName Name of Entity object to generate
-     * @param int $number The number of entities to populate
-     * @param array $customColumnFormatters
-     * @param array $customModifiers
-     * @param bool $useExistingData Should we use existing rows (e.g. roles) to populate relations?
+     * @param $entityName string Name of Entity object to generate
+     * @param $number int The number of entities to populate
+     * @param $customColumnFormatters array
+     * @param $customModifiers array
+     * @param $useExistingData bool Should we use existing rows (e.g. roles) to populate relations?
      */
     public function addEntity(
         $entityName,
         $number,
-        $customColumnFormatters = [],
-        $customModifiers = [],
+        $customColumnFormatters = array(),
+        $customModifiers = array(),
         $useExistingData = false
     ) {
         $mapper = $this->locator->mapper($entityName);
@@ -73,7 +74,7 @@ class Populator
             throw new \InvalidArgumentException("No entity manager passed to Spot Populator.");
         }
 
-        $insertedEntities = [];
+        $insertedEntities = array();
         foreach ($this->quantities as $entityName => $number) {
             for ($i = 0; $i < $number; $i++) {
                 $insertedEntities[$entityName][] = $this->entities[$entityName]->execute(

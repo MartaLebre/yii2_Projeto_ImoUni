@@ -4,7 +4,7 @@ namespace Faker\Provider\fa_IR;
 
 class Company extends \Faker\Provider\Company
 {
-    protected static $formats = [
+    protected static $formats = array(
         '{{companyPrefix}} {{companyField}} {{firstName}}',
         '{{companyPrefix}} {{companyField}} {{firstName}}',
         '{{companyPrefix}} {{companyField}} {{firstName}}',
@@ -13,20 +13,20 @@ class Company extends \Faker\Provider\Company
         '{{companyField}} {{firstName}}',
         '{{companyField}} {{firstName}}',
         '{{companyField}} {{lastName}}',
-    ];
+    );
 
-    protected static $companyPrefix = [
+    protected static $companyPrefix = array(
         'شرکت', 'موسسه', 'سازمان', 'بنیاد'
-    ];
+    );
 
-    protected static $companyField = [
+    protected static $companyField = array(
         'فناوری اطلاعات', 'راه و ساختمان', 'توسعه معادن', 'استخراج و اکتشاف',
         'سرمایه گذاری', 'نساجی', 'کاریابی', 'تجهیزات اداری', 'تولیدی', 'فولاد'
-    ];
+    );
 
-    protected static $contract = [
+    protected static $contract = array(
         'رسمی', 'پیمانی', 'تمام وقت', 'پاره وقت', 'پروژه ای', 'ساعتی',
-    ];
+    );
 
     /**
      * @example 'شرکت'
@@ -47,9 +47,9 @@ class Company extends \Faker\Provider\Company
     }
 
     /**
-     * @example 'تمام وقت'
-     * @return string
-     */
+    * @example 'تمام وقت'
+    * @return string
+    */
     public function contract()
     {
         return static::randomElement(static::$contract);

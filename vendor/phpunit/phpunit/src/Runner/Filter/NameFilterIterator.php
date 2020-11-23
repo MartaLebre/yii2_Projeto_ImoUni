@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php
 /*
  * This file is part of PHPUnit.
  *
@@ -15,71 +15,36 @@ use PHPUnit\Util\RegularExpression;
 use RecursiveFilterIterator;
 use RecursiveIterator;
 
-/**
- * @internal This class is not covered by the backward compatibility promise for PHPUnit
- */
-final class NameFilterIterator extends RecursiveFilterIterator
+class NameFilterIterator extends RecursiveFilterIterator
 {
     /**
      * @var string
      */
-    private $filter;
+    protected $filter;
 
     /**
      * @var int
      */
-    private $filterMin;
-
+    protected $filterMin;
     /**
      * @var int
      */
-    private $filterMax;
+    protected $filterMax;
 
     /**
-     * @throws \Exception
+     * @param RecursiveIterator $iterator
+     * @param string            $filter
      */
-    public function __construct(RecursiveIterator $iterator, string $filter)
+    public function __construct(RecursiveIterator $iterator, $filter)
     {
         parent::__construct($iterator);
-
         $this->setFilter($filter);
     }
 
     /**
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @param string $filter
      */
-    public function accept(): bool
-    {
-        $test = $this->getInnerIterator()->current();
-
-        if ($test instanceof TestSuite) {
-            return true;
-        }
-
-        $tmp = \PHPUnit\Util\Test::describe($test);
-
-        if ($test instanceof WarningTestCase) {
-            $name = $test->getMessage();
-        } elseif ($tmp[0] !== '') {
-            $name = \implode('::', $tmp);
-        } else {
-            $name = $tmp[1];
-        }
-
-        $accepted = @\preg_match($this->filter, $name, $matches);
-
-        if ($accepted && isset($this->filterMax)) {
-            $set      = \end($matches);
-            $accepted = $set >= $this->filterMin && $set <= $this->filterMax;
-        }
-
-        return (bool) $accepted;
-    }
-
-    /**
-     * @throws \Exception
-     */
-    private function setFilter(string $filter): void
+    protected function setFilter($filter)
     {
         if (RegularExpression::safeMatch($filter, '') === false) {
             // Handles:
@@ -92,8 +57,8 @@ final class NameFilterIterator extends RecursiveFilterIterator
                         $matches[1]
                     );
 
-                    $this->filterMin = (int) $matches[2];
-                    $this->filterMax = (int) $matches[3];
+                    $this->filterMin = $matches[2];
+                    $this->filterMax = $matches[3];
                 } else {
                     $filter = \sprintf(
                         '%s.*with data set #%s$',
@@ -114,16 +79,43 @@ final class NameFilterIterator extends RecursiveFilterIterator
 
             // Escape delimiters in regular expression. Do NOT use preg_quote,
             // to keep magic characters.
-            $filter = \sprintf(
-                '/%s/i',
-                \str_replace(
-                    '/',
-                    '\\/',
-                    $filter
-                )
-            );
+            $filter = \sprintf('/%s/i', \str_replace(
+                '/',
+                '\\/',
+                $filter
+            ));
         }
 
         $this->filter = $filter;
+    }
+
+    public function accept(): bool
+    {
+        $test = $this->getInnerIterator()->current();
+
+        if ($test instanceof TestSuite) {
+            return true;
+        }
+
+        $tmp = \PHPUnit\Util\Test::describe($test, false);
+
+        if ($test instanceof WarningTestCase) {
+            $name = $test->getMessage();
+        } else {
+            if ($tmp[0] !== '') {
+                $name = \implode('::', $tmp);
+            } else {
+                $name = $tmp[1];
+            }
+        }
+
+        $accepted = @\preg_match($this->filter, $name, $matches);
+
+        if ($accepted && isset($this->filterMax)) {
+            $set      = \end($matches);
+            $accepted = $set >= $this->filterMin && $set <= $this->filterMax;
+        }
+
+        return (bool) $accepted;
     }
 }

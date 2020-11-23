@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php
 /*
  * This file is part of PHPUnit.
  *
@@ -10,19 +10,25 @@
 namespace PHPUnit\Util;
 
 /**
- * @internal This class is not covered by the backward compatibility promise for PHPUnit
+ * Error handler that converts PHP errors and warnings to exceptions.
  */
-final class RegularExpression
+class RegularExpression
 {
     /**
-     * @return false|int
+     * @param string $pattern
+     * @param string $subject
+     * @param null   $matches
+     * @param int    $flags
+     * @param int    $offset
+     *
+     * @return int
      */
-    public static function safeMatch(string $pattern, string $subject)
+    public static function safeMatch($pattern, $subject, $matches = null, $flags = 0, $offset = 0)
     {
-        return ErrorHandler::invokeIgnoringWarnings(
-            static function () use ($pattern, $subject) {
-                return \preg_match($pattern, $subject);
-            }
-        );
+        $handler_terminator = ErrorHandler::handleErrorOnce(E_WARNING);
+        $match              = \preg_match($pattern, $subject, $matches, $flags, $offset);
+        $handler_terminator(); // cleaning
+
+        return $match;
     }
 }

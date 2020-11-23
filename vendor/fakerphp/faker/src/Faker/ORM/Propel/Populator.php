@@ -9,8 +9,8 @@ namespace Faker\ORM\Propel;
 class Populator
 {
     protected $generator;
-    protected $entities = [];
-    protected $quantities = [];
+    protected $entities = array();
+    protected $quantities = array();
 
     /**
      * @param \Faker\Generator $generator
@@ -26,7 +26,7 @@ class Populator
      * @param mixed $entity A Propel ActiveRecord classname, or a \Faker\ORM\Propel\EntityPopulator instance
      * @param int   $number The number of entities to populate
      */
-    public function addEntity($entity, $number, $customColumnFormatters = [], $customModifiers = [])
+    public function addEntity($entity, $number, $customColumnFormatters = array(), $customModifiers = array())
     {
         if (!$entity instanceof \Faker\ORM\Propel\EntityPopulator) {
             $entity = new \Faker\ORM\Propel\EntityPopulator($entity);
@@ -58,7 +58,7 @@ class Populator
         }
         $isInstancePoolingEnabled = \Propel::isInstancePoolingEnabled();
         \Propel::disableInstancePooling();
-        $insertedEntities = [];
+        $insertedEntities = array();
         $con->beginTransaction();
         foreach ($this->quantities as $class => $number) {
             for ($i=0; $i < $number; $i++) {

@@ -7,9 +7,9 @@ class PhoneNumber extends \Faker\Provider\PhoneNumber
     /**
      * {@link} https://en.wikipedia.org/wiki/Telephone_numbers_in_Latvia
      **/
-    protected static $formats = [
+    protected static $formats = array(
         '########',
         '## ### ###',
         '+371 ########',
-    ];
+    );
 }

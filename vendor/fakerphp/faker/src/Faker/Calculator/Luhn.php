@@ -34,7 +34,7 @@ class Luhn
     }
 
     /**
-     * @param string $partialNumber
+     * @param $partialNumber
      * @return string
      */
     public static function computeCheckDigit($partialNumber)

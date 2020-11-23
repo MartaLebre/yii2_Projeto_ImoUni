@@ -4,26 +4,26 @@ namespace Faker\Provider\el_CY;
 
 class Address extends \Faker\Provider\Address
 {
-    protected static $citySuffix = ['Λευκωσία', 'Λεμεσός', 'Λάρνακα', 'Πάφος'];
-    protected static $streetSuffix = [];
-    protected static $streetPrefix = [
+    protected static $citySuffix = array('Λευκωσία', 'Λεμεσός', 'Λάρνακα', 'Πάφος');
+    protected static $streetSuffix = array();
+    protected static $streetPrefix = array(
         'Όδος', 'Οδός', 'Λεωφόρος',
-    ];
-    protected static $cityFormats = [
+    );
+    protected static $cityFormats = array(
         '{{citySuffix}}',
-    ];
-    protected static $streetNameFormats = [
+    );
+    protected static $streetNameFormats = array(
         '{{streetPrefix}} {{lastName}}',
         '{{streetPrefix}} {{lastName}} {{lastName}}',
         '{{streetPrefix}} Αγίου {{lastName}}',
         '{{streetPrefix}} Βασιλέως {{lastName}}',
-    ];
-    protected static $streetAddressFormats = [
+    );
+    protected static $streetAddressFormats = array(
         '{{streetName}}, {{buildingNumber}}',
-    ];
-    protected static $buildingNumber = ['##', '#'];
-    protected static $postcode = ['####'];
-    protected static $country = [
+    );
+    protected static $buildingNumber = array('##', '#');
+    protected static $postcode = array('####');
+    protected static $country = array(
         'Ανγκόλα', 'Αζερμπαϊτζάν', 'Αίγυπτος', 'Αιθιοπία', 'Αϊτή', 'Αλβανία', 'Αλγερία', 'Αργεντινή', 'Αρμενία', 'Αυστραλία', 'Αυστρία', 'Αφγανιστάν',
         'Βέλγιο', 'Βενεζουέλα', 'Βιετνάμ', 'Βολιβία', 'Βοσνία και Ερζεγοβίνη', 'Βουλγαρία', 'Βραζιλία',
         'Γαλλία', 'Γερμανία', 'Γεωργία', 'Γροιλανδία',
@@ -43,7 +43,7 @@ class Address extends \Faker\Provider\Address
         'Υεμένη',
         'Φιλιππίνες', 'Φινλανδία',
         'Χιλή',
-    ];
+    );
 
     /**
      * @example 'Όδος'

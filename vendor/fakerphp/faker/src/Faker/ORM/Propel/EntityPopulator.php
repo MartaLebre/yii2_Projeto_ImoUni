@@ -2,8 +2,8 @@
 
 namespace Faker\ORM\Propel;
 
-use ColumnMap;
-use Faker\Provider\Base;
+use \Faker\Provider\Base;
+use \ColumnMap;
 
 /**
  * Service class for populating a table through a Propel ActiveRecord class.
@@ -11,10 +11,12 @@ use Faker\Provider\Base;
 class EntityPopulator
 {
     protected $class;
-    protected $columnFormatters = [];
-    protected $modifiers = [];
+    protected $columnFormatters = array();
+    protected $modifiers = array();
 
     /**
+     * Class constructor.
+     *
      * @param string $class A Propel ActiveRecord classname
      */
     public function __construct($class)
@@ -54,7 +56,7 @@ class EntityPopulator
      */
     public function guessColumnFormatters(\Faker\Generator $generator)
     {
-        $formatters = [];
+        $formatters = array();
         $class = $this->class;
         $peerClass = $class::PEER;
         $tableMap = $peerClass::getTableMap();
@@ -98,13 +100,13 @@ class EntityPopulator
             $columnName = Base::toLower($columnMap->getName());
             switch ($name) {
                 case 'nested_set':
-                    $columnNames = [$params['left_column'], $params['right_column'], $params['level_column']];
+                    $columnNames = array($params['left_column'], $params['right_column'], $params['level_column']);
                     if (in_array($columnName, $columnNames)) {
                         return true;
                     }
                     break;
                 case 'timestampable':
-                    $columnNames = [$params['create_column'], $params['update_column']];
+                    $columnNames = array($params['create_column'], $params['update_column']);
                     if (in_array($columnName, $columnNames)) {
                         return true;
                     }
@@ -139,7 +141,7 @@ class EntityPopulator
      */
     public function guessModifiers(\Faker\Generator $generator)
     {
-        $modifiers = [];
+        $modifiers = array();
         $class = $this->class;
         $peerClass = $class::PEER;
         $tableMap = $peerClass::getTableMap();

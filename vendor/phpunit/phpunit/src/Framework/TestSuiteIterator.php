@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php
 /*
  * This file is part of PHPUnit.
  *
@@ -9,71 +9,96 @@
  */
 namespace PHPUnit\Framework;
 
+use RecursiveIterator;
+
 /**
- * @internal This class is not covered by the backward compatibility promise for PHPUnit
+ * Iterator for test suites.
  */
-final class TestSuiteIterator implements \RecursiveIterator
+class TestSuiteIterator implements RecursiveIterator
 {
     /**
      * @var int
      */
-    private $position = 0;
+    protected $position;
 
     /**
      * @var Test[]
      */
-    private $tests;
+    protected $tests;
 
+    /**
+     * @param TestSuite $testSuite
+     */
     public function __construct(TestSuite $testSuite)
     {
         $this->tests = $testSuite->tests();
     }
 
-    public function rewind(): void
+    /**
+     * Rewinds the Iterator to the first element.
+     */
+    public function rewind()
     {
         $this->position = 0;
     }
 
-    public function valid(): bool
+    /**
+     * Checks if there is a current element after calls to rewind() or next().
+     *
+     * @return bool
+     */
+    public function valid()
     {
         return $this->position < \count($this->tests);
     }
 
-    public function key(): int
+    /**
+     * Returns the key of the current element.
+     *
+     * @return int
+     */
+    public function key()
     {
         return $this->position;
     }
 
-    public function current(): Test
+    /**
+     * Returns the current element.
+     *
+     * @return Test
+     */
+    public function current()
     {
-        return $this->tests[$this->position];
+        return $this->valid() ? $this->tests[$this->position] : null;
     }
 
-    public function next(): void
+    /**
+     * Moves forward to next element.
+     */
+    public function next()
     {
         $this->position++;
     }
 
     /**
-     * @throws NoChildTestSuiteException
+     * Returns the sub iterator for the current element.
+     *
+     * @return TestSuiteIterator
      */
-    public function getChildren(): self
+    public function getChildren()
     {
-        if (!$this->hasChildren()) {
-            throw new NoChildTestSuiteException(
-                'The current item is not a TestSuite instance and therefore does not have any children.'
-            );
-        }
-
-        $current = $this->current();
-
-        \assert($current instanceof TestSuite);
-
-        return new self($current);
+        return new self(
+            $this->tests[$this->position]
+        );
     }
 
-    public function hasChildren(): bool
+    /**
+     * Checks whether the current element has children.
+     *
+     * @return bool
+     */
+    public function hasChildren()
     {
-        return $this->valid() && $this->current() instanceof TestSuite;
+        return $this->tests[$this->position] instanceof TestSuite;
     }
 }

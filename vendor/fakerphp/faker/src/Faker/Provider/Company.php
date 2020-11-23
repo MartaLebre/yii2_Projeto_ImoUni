@@ -4,15 +4,15 @@ namespace Faker\Provider;
 
 class Company extends Base
 {
-    protected static $formats = [
+    protected static $formats = array(
         '{{lastName}} {{companySuffix}}',
-    ];
+    );
 
-    protected static $companySuffix = ['Ltd'];
+    protected static $companySuffix = array('Ltd');
 
-    protected static $jobTitleFormat = [
+    protected static $jobTitleFormat = array(
         '{{word}}',
-    ];
+    );
 
     /**
      * @example 'Acme Ltd'

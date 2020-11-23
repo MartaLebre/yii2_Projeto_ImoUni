@@ -10,21 +10,21 @@ class Internet extends \Faker\Provider\Internet
     /**
      * @var array Some safe email TLD.
      */
-    protected static $safeEmailTld = [
+    protected static $safeEmailTld = array(
         'org', 'com', 'net', 'dk', 'dk', 'dk',
-    ];
+    );
 
     /**
      * @var array Some email domains in Denmark.
      */
-    protected static $freeEmailDomain = [
+    protected static $freeEmailDomain = array(
         'gmail.com', 'yahoo.com', 'yahoo.dk', 'hotmail.com', 'hotmail.dk', 'mail.dk', 'live.dk'
-    ];
+    );
 
     /**
      * @var array Some TLD.
      */
-    protected static $tld = [
+    protected static $tld = array(
         'com', 'com', 'com', 'biz', 'info', 'net', 'org', 'dk', 'dk', 'dk',
-    ];
+    );
 }

@@ -4,11 +4,12 @@ namespace Faker\Provider\en_SG;
 
 class Address extends \Faker\Provider\Address
 {
-    // http://en.wikipedia.org/wiki/Singapore_Post#Address_format
-    protected static $streetNumber = ['##', '###'];
 
     // http://en.wikipedia.org/wiki/Singapore_Post#Address_format
-    protected static $blockNumber = [
+    protected static $streetNumber = array('##', '###');
+
+    // http://en.wikipedia.org/wiki/Singapore_Post#Address_format
+    protected static $blockNumber = array(
         'Blk ##',
         'Blk ###',
         'Blk ###A',
@@ -19,10 +20,10 @@ class Address extends \Faker\Provider\Address
         'Blk ###F',
         'Blk ###G',
         'Blk ###H',
-    ];
+    );
 
     // http://www.streetdirectory.com/asia_travel/travel/street/alphabet2/
-    protected static $streetSuffix = [
+    protected static $streetSuffix = array(
         'Alley', 'Avenue',
         'Bridge',
         'Crescent',
@@ -34,16 +35,16 @@ class Address extends \Faker\Provider\Address
         'Quay',
         'Road',
         'Walk', 'Way',
-    ];
+    );
 
     // http://www.streetdirectory.com/asia_travel/travel/street/alphabet2/
-    protected static $streetPrefix = [
+    protected static $streetPrefix = array(
         'Jalan',
-    ];
+    );
 
     // http://www.streetdirectory.com/asia_travel/travel/street/alphabet2/
     // http://remembersingapore.org/2011/04/04/old-names-of-places/
-    protected static $streetName = [
+    protected static $streetName = array(
         'Adam', 'Airport', 'Alexandra', 'Aljunied', 'Ampang', 'Ann Siang', 'Angus', 'Anson', 'Armenian',
         'Balmoral', 'Battery', 'Bencoolen',
         'Collyer', 'Clarke', 'Church', 'Cecil', 'Cross', 'Chulia', 'Cheang Hong Lim', 'Chin Swee', 'Choon Guan',
@@ -64,34 +65,34 @@ class Address extends \Faker\Provider\Address
         'Raffles', 'Robinson', 'Rochor', 'Regent', 'Ridley', 'River Valley',
         'Sixth', 'Somerset', 'Stanley', 'Stamford', 'Shenton', 'Sultan',
         'Telok Ayer', 'Temple', 'Thomson', 'Unity', 'Victoria', 'Xilin', 'York', 'Zion',
-    ];
+    );
 
-    protected static $streetAddressFormats = [
+    protected static $streetAddressFormats = array(
         '{{streetPrefix}} {{streetName}}',
         '{{streetName}} {{streetSuffix}}',
-    ];
+    );
 
-    protected static $floorNumber = [
+    protected static $floorNumber = array(
         '##', '0#',
-    ];
+    );
 
-    protected static $apartmentNumber = [
+    protected static $apartmentNumber = array(
         '##', '###',
-    ];
+    );
 
     // http://en.wikipedia.org/wiki/Singapore_Post#Address_format
-    protected static $addressFormats = [
+    protected static $addressFormats = array(
         "{{streetNumber}} {{streetAddress}}\n{{townName}} {{postcode}}",
         "{{blockNumber}} {{streetAddress}}\n{{floorNumber}} {{apartmentNumber}}\n{{townName}} {{postcode}}",
-    ];
+    );
 
     protected static $townName = 'SINGAPORE';
 
-    protected static $postcode = ['######'];
+    protected static $postcode = array('######');
 
-    protected static $country = [
+    protected static $country = array(
         'SINGAPORE',
-    ];
+    );
 
     public function streetPrefix()
     {

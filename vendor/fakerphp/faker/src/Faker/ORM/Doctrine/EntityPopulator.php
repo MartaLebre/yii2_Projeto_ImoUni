@@ -2,8 +2,8 @@
 
 namespace Faker\ORM\Doctrine;
 
-use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 
 /**
  * Service class for populating a table through a Doctrine Entity class.
@@ -17,13 +17,15 @@ class EntityPopulator
     /**
      * @var array
      */
-    protected $columnFormatters = [];
+    protected $columnFormatters = array();
     /**
      * @var array
      */
-    protected $modifiers = [];
+    protected $modifiers = array();
 
     /**
+     * Class constructor.
+     *
      * @param ClassMetadata $class
      */
     public function __construct(ClassMetadata $class)
@@ -39,6 +41,9 @@ class EntityPopulator
         return $this->class->getName();
     }
 
+    /**
+     * @param $columnFormatters
+     */
     public function setColumnFormatters($columnFormatters)
     {
         $this->columnFormatters = $columnFormatters;
@@ -87,7 +92,7 @@ class EntityPopulator
      */
     public function guessColumnFormatters(\Faker\Generator $generator)
     {
-        $formatters = [];
+        $formatters = array();
         $nameGuesser = new \Faker\Guesser\Name($generator);
         $columnTypeGuesser = new ColumnTypeGuesser($generator);
         foreach ($this->class->getFieldNames() as $fieldName) {
@@ -95,7 +100,7 @@ class EntityPopulator
                 continue;
             }
 
-            $size = $this->class->fieldMappings[$fieldName]['length'] ?? null;
+            $size = isset($this->class->fieldMappings[$fieldName]['length']) ? $this->class->fieldMappings[$fieldName]['length'] : null;
             if ($formatter = $nameGuesser->guessFormat($fieldName, $size)) {
                 $formatters[$fieldName] = $formatter;
                 continue;
@@ -120,7 +125,7 @@ class EntityPopulator
                     if ($mapping['targetEntity'] == $relatedClass) {
                         if ($mapping['type'] == \Doctrine\ORM\Mapping\ClassMetadata::ONE_TO_ONE) {
                             $unique = true;
-                            $optional = $mapping['joinColumns'][0]['nullable'] ?? false;
+                            $optional = isset($mapping['joinColumns'][0]['nullable']) ? $mapping['joinColumns'][0]['nullable'] : false;
                             break;
                         }
                     }
@@ -131,7 +136,7 @@ class EntityPopulator
                     if ($mapping['targetDocument'] == $relatedClass) {
                         if ($mapping['type'] == \Doctrine\ODM\MongoDB\Mapping\ClassMetadata::ONE && $mapping['association'] == \Doctrine\ODM\MongoDB\Mapping\ClassMetadata::REFERENCE_ONE) {
                             $unique = true;
-                            $optional = $mapping['nullable'] ?? false;
+                            $optional = isset($mapping['nullable']) ? $mapping['nullable'] : false;
                             break;
                         }
                     }
@@ -140,6 +145,7 @@ class EntityPopulator
 
             $index = 0;
             $formatters[$assocName] = function ($inserted) use ($relatedClass, &$index, $unique, $optional) {
+
                 if (isset($inserted[$relatedClass])) {
                     if ($unique) {
                         $related = null;
@@ -205,7 +211,7 @@ class EntityPopulator
                 }
                 // Try a standard setter if it's available, otherwise fall back on reflection
                 $setter = sprintf("set%s", ucfirst($field));
-                if (is_callable([$obj, $setter])) {
+                if (is_callable(array($obj, $setter))) {
                     $obj->$setter($value);
                 } else {
                     $this->class->reflFields[$field]->setValue($obj, $value);

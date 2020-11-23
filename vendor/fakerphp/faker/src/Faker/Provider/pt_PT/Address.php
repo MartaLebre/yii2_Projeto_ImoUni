@@ -4,29 +4,29 @@ namespace Faker\Provider\pt_PT;
 
 class Address extends \Faker\Provider\Address
 {
-    protected static $streetPrefix = ['Av.', 'Avenida', 'R.', 'Rua', 'Tv.', 'Travessa', 'Lg.', 'Largo'];
+    protected static $streetPrefix = array('Av.', 'Avenida', 'R.', 'Rua', 'Tv.', 'Travessa', 'Lg.', 'Largo');
 
-    protected static $streetNameFormats = [
+    protected static $streetNameFormats = array(
         '{{streetPrefix}} {{lastName}}',
         '{{streetPrefix}} {{firstName}} {{lastName}}',
         '{{streetPrefix}} St. {{firstName}} {{lastName}}',
         '{{streetPrefix}} São. {{firstName}}',
         '{{streetPrefix}} de {{lastName}}',
-    ];
+    );
 
-    protected static $streetAddressFormats = [
+    protected static $streetAddressFormats = array(
         '{{streetName}}',
         '{{streetName}}, {{buildingNumber}}',
         '{{streetName}}, {{buildingNumber}}, {{secondaryAddress}}',
-    ];
+    );
 
     /** @link http://www.univ-ab.pt/PINTAC/carta_normas.htm address example in letters **/
-    protected static $addressFormats = [
+    protected static $addressFormats = array(
         "{{streetAddress}} {{postcode}} {{city}}",
-    ];
+    );
 
     /** @link http://www.mapadeportugal.net/indicecidades.asp **/
-    private static $cities = [
+    private static $cities = array(
         'Abrantes', 'Agualva-Cacém', 'Águeda', 'Albufeira', 'Alcácer do Sal', 'Alcobaça', 'Almada', 'Almeirim', 'Alverca do Ribatejo', 'Amadora', 'Amarante', 'Amora', 'Anadia', 'Angra do Heroísmo', 'Aveiro', 'Barcelos', 'Barreiro',
         'Beja', 'Braga', 'Bragança', 'Caldas da Rainha', 'Camara de Lobos', 'Cantanhede', 'Cartaxo', 'Castelo Branco', 'Chaves', 'Coimbra', 'Covilhã', 'Elvas', 'Entroncamento', 'Ermesinde', 'Esmoriz', 'Espinho', 'Esposende', 'Estarreja',
         'Estremoz', 'Évora', 'Fafe', 'Faro', 'Fátima', 'Felgueiras', 'Fiães', 'Figueira da Foz', 'Freamunde', 'Funchal', 'Fundão', 'Gafanha da Nazaré', 'Gondomar', 'Gouveia', 'Guarda', 'Guimarães', 'Horta', 'Ílhavo', 'Lagoa', 'Lagos', 'Lamego',
@@ -36,23 +36,23 @@ class Address extends \Faker\Provider\Address
         'Rio Tinto', 'Sacavém', 'Santa Comba Dão', 'Santa Cruz', 'Santa Maria da Feira', 'Santana', 'Santarém', 'Santiago do Cacém', 'Santo Tirso',
         'São João da Madeira', 'São Mamede de Infesta', 'Seia', 'Seixal', 'Setúbal', 'Silves', 'Sines', 'Tarouca', 'Tavira', 'Tomar', 'Tondela', 'Torres Novas', 'Torres Vedras', 'Valbom', 'Vale de Cambra', 'Valongo', 'Valpaços', 'Vendas Novas',
         'Viana do Castelo', 'Vila do Conde', 'Vila Franca de Xira', 'Vila Nova de Famalicão', 'Vila Nova de Foz Côa', 'Vila Nova de Gaia', 'Vila Praia da Vitória', 'Vila Real', 'Vila Real de Santo António', 'Viseu', 'Vizela'
-    ];
+    );
 
-    protected static $postcode = [
+    protected static $postcode = array(
         '%##0-###', '%##0',
         '%##1-###', '%##1',
         '%##4-###', '%##4',
         '%##5-###', '%##5',
         '%##9-###', '%##9',
-    ];
+        );
 
-    protected static $buildingNumber = ['nº %', 'nº %%','nº %%%', '%', '%#', '%##'];
+    protected static $buildingNumber = array('nº %', 'nº %%','nº %%%', '%', '%#', '%##');
 
-    protected static $secondaryAddressFormats = [
+    protected static $secondaryAddressFormats = array(
         'Bloco %', 'Bl. %',
         '%º Dir.', '%#º Dir.', '%º Dr.', '%#º Dr.',
         '%º Esq.', '%#º Esq.', '%º Eq.', '%#º Eq.',
-    ];
+    );
 
     /**
      * @example '6º Dir.'
@@ -63,7 +63,7 @@ class Address extends \Faker\Provider\Address
     }
 
     /** @link http://www.indexmundi.com/pt/ **/
-    protected static $country = [
+    protected static $country = array(
         'Afeganistão', 'África do Sul', 'Albânia', 'Alemanha', 'Andorra',
         'Angola', 'Antigua e Barbuda', 'Arabia Saudita', 'Argélia',
         'Argentina', 'Armênia', 'Austrália', 'Áustria', 'Azerbaijão',
@@ -104,7 +104,7 @@ class Address extends \Faker\Provider\Address
         'Tuvalu', 'Tunísia', 'Ucrânia', 'Uganda', 'Uruguai', 'Uzbequistão',
         'Vaticano', 'Vanuatu', 'Venezuela', 'Vietnã', 'Yemen', 'Zâmbia',
         'Zimbábue'
-    ];
+    );
 
     /**
      * @example 'Avenida' ' Rua'

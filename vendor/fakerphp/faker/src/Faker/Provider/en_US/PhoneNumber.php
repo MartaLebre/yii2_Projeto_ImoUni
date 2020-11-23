@@ -7,7 +7,7 @@ class PhoneNumber extends \Faker\Provider\PhoneNumber
     /**
      * @see https://en.wikipedia.org/wiki/National_conventions_for_writing_telephone_numbers#United_States.2C_Canada.2C_and_other_NANP_countries
      */
-    protected static $formats = [
+    protected static $formats = array(
         // International format
         '+1-{{areaCode}}-{{exchangeCode}}-####',
         '+1 ({{areaCode}}) {{exchangeCode}}-####',
@@ -41,21 +41,21 @@ class PhoneNumber extends \Faker\Provider\PhoneNumber
         '({{areaCode}}) {{exchangeCode}}-#### x#####',
         '1-{{areaCode}}-{{exchangeCode}}-#### x#####',
         '{{areaCode}}.{{exchangeCode}}.#### x#####'
-    ];
+    );
 
     /**
      * @see https://en.wikipedia.org/wiki/Toll-free_telephone_number#United_States
      */
-    protected static $tollFreeAreaCodes = [
+    protected static $tollFreeAreaCodes = array(
         800, 844, 855, 866, 877, 888
-    ];
-    protected static $tollFreeFormats = [
+    );
+    protected static $tollFreeFormats = array(
         // Standard formats
         '{{tollFreeAreaCode}}-{{exchangeCode}}-####',
         '({{tollFreeAreaCode}}) {{exchangeCode}}-####',
         '1-{{tollFreeAreaCode}}-{{exchangeCode}}-####',
         '{{tollFreeAreaCode}}.{{exchangeCode}}.####',
-    ];
+    );
 
     public function tollFreeAreaCode()
     {
@@ -82,7 +82,7 @@ class PhoneNumber extends \Faker\Provider\PhoneNumber
         $digits[] = self::randomDigit();
         $digits[] = self::randomDigitNot($digits[1]);
 
-        return implode('', $digits);
+        return join('', $digits);
     }
 
     /**
@@ -103,6 +103,6 @@ class PhoneNumber extends \Faker\Provider\PhoneNumber
             $digits[] = self::randomDigit();
         }
 
-        return implode('', $digits);
+        return join('', $digits);
     }
 }

@@ -7,7 +7,7 @@ class Address extends \Faker\Provider\Address
     /**
      * @link http://bandung.go.id/images/download/daftarruasjalan.htm
      **/
-    protected static $street = [
+    protected static $street = array(
         "Abang", "Abdul", "Abdul Muis", "Abdul Rahmat", "Abdul. Muis", "Abdullah",
         "Aceh", "Achmad", "Achmad Yani", "Acordion", "Adisucipto",
         "Adisumarmo", "Agus Salim", "Ahmad Dahlan", "Antapani Lama", "Arifin",
@@ -63,16 +63,16 @@ class Address extends \Faker\Provider\Address
         "Wahid Hasyim", "Wahidin", "Wahidin Sudirohusodo", "Warga", "Wora Wari",
         "Yap Tjwan Bing", "Yoga", "Yogyakarta", "Yohanes", "Yos",
         "Yos Sudarso", "Yosodipuro", "Zamrud",
-    ];
+    );
 
-    protected static $streetPrefix = [
+    protected static $streetPrefix = array(
         "Ds.", "Dk.", "Gg.", "Jln.", "Jr.", "Kpg.", "Ki.", "Psr."
-    ];
+    );
 
     /**
      * @link http://kodepos.nomor.net/_kodepos.php?_i=provinsi-kodepos
      */
-    protected static $state = [
+    protected static $state = array(
         'Aceh', 'Sumatera Utara', 'Sumatera Barat', 'Jambi', 'Bangka Belitung', 'Riau',
         'Kepulauan Riau', 'Bengkulu', 'Sumatera Selatan', 'Lampung', 'Banten',
         'DKI Jakarta', 'Jawa Barat', 'Jawa Tengah', 'Jawa Timur', 'Nusa Tenggara Timur',
@@ -81,25 +81,25 @@ class Address extends \Faker\Provider\Address
         'Kalimantan Utara', 'Sulawesi Selatan', 'Sulawesi Utara', 'Gorontalo',
         'Sulawesi Tengah', 'Sulawesi Barat', 'Sulawesi Tenggara', 'Maluku',
         'Maluku Utara', 'Papua Barat', 'Papua'
-    ];
+    );
 
     /**
      * Abbreviated State Names.
      * Currently this is all just a guesswork, but should be highly accurate
      * @var array
      */
-    protected static $stateAbbr = [
-        'Aceh', 'SumUt', 'SumBar', 'Jambi', 'BaBel', 'Riau', 'KepR', 'Bengkulu', 'SumSel',
-        'Lampung', 'Banten', 'DKI', 'JaBar', 'JaTeng', 'JaTim', 'NTT', 'DIY',
-        'Bali', 'NTB', 'KalBar', 'KalTeng', 'KalSel', 'KalTim', 'KalUt', 'SulSel',
-        'SulUt', 'Gorontalo', 'SulTeng', 'SulBar', 'SulTra', 'Maluku', 'MalUt',
-        'PapBar', 'Papua'
-    ];
+    protected static $stateAbbr = array(
+       'Aceh', 'SumUt', 'SumBar', 'Jambi', 'BaBel', 'Riau', 'KepR', 'Bengkulu', 'SumSel',
+       'Lampung', 'Banten', 'DKI', 'JaBar', 'JaTeng', 'JaTim', 'NTT', 'DIY',
+       'Bali', 'NTB', 'KalBar', 'KalTeng', 'KalSel', 'KalTim', 'KalUt', 'SulSel',
+       'SulUt', 'Gorontalo', 'SulTeng', 'SulBar', 'SulTra', 'Maluku', 'MalUt',
+       'PapBar', 'Papua'
+    );
 
     /**
-     * @link http://id.wikipedia.org/wiki/Daftar_negara-negara_di_dunia
-     **/
-    protected static $country = [
+    * @link http://id.wikipedia.org/wiki/Daftar_negara-negara_di_dunia
+    **/
+    protected static $country = array(
         'Afganistan', 'Afrika Selatan', 'Albania', 'Aljazair',
         'Amerika Serikat', 'Andorra', 'Angola', 'Anguilla',
 
@@ -219,12 +219,12 @@ class Address extends \Faker\Provider\Address
         'Wilayah Samudra Hindia Britania',
 
         'Wilayah Selatan Perancis', 'Yaman', 'Yunani', 'Zambia', 'Zimbabwe'
-    ];
+    );
 
     /**
      * @link http://id.wikipedia.org/wiki/Daftar_kabupaten_dan_kota_Indonesia#Daftar_kota
      */
-    protected static $cityNames = [
+    protected static $cityNames = array(
         "Administrasi Jakarta Barat", "Administrasi Jakarta Pusat",
         "Administrasi Jakarta Selatan", "Administrasi Jakarta Timur",
         "Administrasi Jakarta Utara", "Ambon", "Balikpapan", "Banda Aceh",
@@ -251,25 +251,25 @@ class Address extends \Faker\Provider\Address
         "Tarakan", "Tasikmalaya", "Tebing Tinggi", "Tegal",
         "Ternate", "Tidore Kepulauan", "Tomohon", "Tual",
         "Yogyakarta",
-    ];
+    );
 
-    protected static $cityFormats = [
+    protected static $cityFormats = array(
         '{{cityName}}',
-    ];
+    );
 
-    protected static $streetNameFormats = [
+    protected static $streetNameFormats = array(
         '{{street}}'
-    ];
+    );
 
-    protected static $streetAddressFormats = [
+    protected static $streetAddressFormats = array(
         '{{streetPrefix}} {{street}} No. {{buildingNumber}}',
-    ];
+    );
 
-    protected static $addressFormats = [
+    protected static $addressFormats = array(
         "{{streetAddress}}, {{city}} {{postcode}}, {{stateAbbr}}",
-    ];
+    );
 
-    protected static $postcode = ['%####'];
+    protected static $postcode = array('%####');
 
     /**
      * @example 'Kalimantan Tengah'
