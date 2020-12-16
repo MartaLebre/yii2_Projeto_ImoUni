@@ -18,7 +18,7 @@ class PerfilSearch extends Perfil
     {
         return [
             [['id_user', 'tipo', 'numero_telemovel'], 'integer'],
-            [['email', 'password', 'data_nascimento', 'data_criacao', 'primeiro_nome', 'ultimo_nome', 'genero'], 'safe'],
+            [['data_nascimento', 'primeiro_nome', 'ultimo_nome', 'genero'], 'safe'],
         ];
     }
 
@@ -61,13 +61,10 @@ class PerfilSearch extends Perfil
             'id_user' => $this->id_user,
             'tipo' => $this->tipo,
             'data_nascimento' => $this->data_nascimento,
-            'data_criacao' => $this->data_criacao,
             'numero_telemovel' => $this->numero_telemovel,
         ]);
 
-        $query->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'password', $this->password])
-            ->andFilterWhere(['like', 'primeiro_nome', $this->primeiro_nome])
+        $query->andFilterWhere(['like', 'primeiro_nome', $this->primeiro_nome])
             ->andFilterWhere(['like', 'ultimo_nome', $this->ultimo_nome])
             ->andFilterWhere(['like', 'genero', $this->genero]);
 

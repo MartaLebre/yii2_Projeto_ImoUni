@@ -19,7 +19,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '3a68a4b5d6c0b95bda7c0f186e11400c5831294d',
+    'reference' => '515769266ae495776ed750b5632eb74a9f18ae8d',
     'name' => 'yiisoft/yii2-app-advanced',
   ),
   'versions' => 
@@ -42,6 +42,15 @@ private static $installed = array (
       ),
       'reference' => '68b0d231a13201eb14acd3dc84e51543d16e5f7e',
     ),
+    'bower-asset/eonasdan-bootstrap-datetimepicker' => 
+    array (
+      'pretty_version' => '4.17.47',
+      'version' => '4.17.47.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '25c11d79e614bc6463a87c3dd9cbf8280422e006',
+    ),
     'bower-asset/inputmask' => 
     array (
       'pretty_version' => '3.3.11',
@@ -59,6 +68,24 @@ private static $installed = array (
       array (
       ),
       'reference' => '4c0e4becb8263bb5b3e6dadc448d8e7305ef8215',
+    ),
+    'bower-asset/jquery-ui' => 
+    array (
+      'pretty_version' => '1.12.1',
+      'version' => '1.12.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '44ecf3794cc56b65954cc19737234a3119d036cc',
+    ),
+    'bower-asset/moment' => 
+    array (
+      'pretty_version' => '2.29.1',
+      'version' => '2.29.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'b7ec8e2ec068e03de4f832f28362675bb9e02261',
     ),
     'bower-asset/punycode' => 
     array (
@@ -291,6 +318,16 @@ private static $installed = array (
       array (
       ),
       'reference' => '3b8a3a99ba1f6a3952ac2747d989303cbd6b7a3e',
+    ),
+    'nex/yii2-datepicker' => 
+    array (
+      'pretty_version' => 'dev-master',
+      'version' => 'dev-master',
+      'aliases' => 
+      array (
+        0 => '9999999-dev',
+      ),
+      'reference' => '14a5623e3ac8b487dd615db8c89fb7e53110a6f0',
     ),
     'opis/closure' => 
     array (
@@ -772,7 +809,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '3a68a4b5d6c0b95bda7c0f186e11400c5831294d',
+      'reference' => '515769266ae495776ed750b5632eb74a9f18ae8d',
     ),
     'yiisoft/yii2-bootstrap' => 
     array (
@@ -818,6 +855,15 @@ private static $installed = array (
       array (
       ),
       'reference' => 'd879cb186361fbc6f71a2d994d580b5a071a5642',
+    ),
+    'yiisoft/yii2-jui' => 
+    array (
+      'pretty_version' => '2.0.7',
+      'version' => '2.0.7.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'ce45c16d4fbbe7d1c516d8d0e8311e07f6138eed',
     ),
     'yiisoft/yii2-swiftmailer' => 
     array (

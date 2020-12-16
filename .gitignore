@@ -22,3 +22,5 @@ Thumbs.db
 /backend/web/index.php
 /backend/web/index-test.php
 /backend/web/robots.txt
+
+/vendor/

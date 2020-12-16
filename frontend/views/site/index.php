@@ -1,51 +1,61 @@
 <?php
 
-/* @var $this yii\web\View */
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 
-$this->title = 'My Yii Application';
+/* @var $this yii\web\View */
+/* @var $model common\models\AnuncioSearch */
+/* @var $form yii\widgets\ActiveForm */
+
+$this->title = 'ImoUni';
 ?>
 <div class="site-index">
 
     <div class="jumbotron">
-        <h1>Congratulations!</h1>
+        <h1>ImoUni</h1>
+        <p class="lead">Encontre a sua propriedade hoje!</p>
 
-        <p class="lead">You have successfully created your Yii-powered application.</p>
+        <div class="anuncio-search">
+            <?php $form = ActiveForm::begin([
+                'action' => ['index'],
+                'method' => 'get',
+            ]); ?>
+        
+            <?php //$form->field($model, 'titulo')->textInput(['autofocus' => true]) ?>
 
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
+            <div class="form-group">
+                <?= Html::submitButton('Pesquisar', ['class' => 'btn btn-default', 'name' => 'search-button']) ?>
+            </div>
+            <?php ActiveForm::end(); ?>
+        </div>
     </div>
+    
 
-    <div class="body-content">
-
+    <div class="body-content jumbotron">
+        <h3 class="panel-title" style="font-size: 20px">Escolha uma das</h3>
+        <h2 class="panel-title" style="font-size: 30px">Cidades universitárias!</h2>
+        <br>
+        
         <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+            <div class="col-lg-3">
+                <h2><a class="btn btn-default" href="#url">Lisboa</a></h2>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
+                img
             </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+            <div class="col-lg-3">
+                <h2><a class="btn btn-default" href="#url">Porto</a></h2>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
+                img
             </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+            <div class="col-lg-3">
+                <h2><a class="btn btn-default" href="#url">Coimbra</a></h2>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+                img
+            </div>
+            <div class="col-lg-3">
+                <h2><a class="btn btn-default" href="#url">Leiria</a></h2>
 
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
+                img
             </div>
         </div>
 

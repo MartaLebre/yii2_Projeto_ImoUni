@@ -8,11 +8,8 @@ use Yii;
  * This is the model class for table "perfil".
  *
  * @property int $id_user
- * @property string $email
- * @property string $password
  * @property int $tipo
  * @property string $data_nascimento
- * @property string $data_criacao
  * @property int $numero_telemovel
  * @property string $primeiro_nome
  * @property string $ultimo_nome
@@ -41,11 +38,11 @@ class Perfil extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_user', 'email', 'password', 'tipo', 'data_nascimento', 'data_criacao', 'numero_telemovel', 'primeiro_nome', 'ultimo_nome', 'genero'], 'required'],
+            [['id_user', 'tipo', 'data_nascimento', 'numero_telemovel', 'primeiro_nome', 'ultimo_nome', 'genero'], 'required'],
             [['id_user', 'tipo', 'numero_telemovel'], 'integer'],
-            [['data_nascimento', 'data_criacao'], 'safe'],
+            [['data_nascimento'], 'safe'],
             [['genero'], 'string'],
-            [['email', 'password', 'primeiro_nome', 'ultimo_nome'], 'string', 'max' => 45],
+            [['primeiro_nome', 'ultimo_nome'], 'string', 'max' => 45],
             [['numero_telemovel'], 'unique'],
             [['id_user'], 'unique'],
             [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_user' => 'id']],
@@ -58,15 +55,12 @@ class Perfil extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_user' => 'Id User',
-            'email' => 'Email',
-            'password' => 'Password',
-            'tipo' => 'Tipo',
-            'data_nascimento' => 'Data Nascimento',
-            'data_criacao' => 'Data Criacao',
-            'numero_telemovel' => 'Numero Telemovel',
-            'primeiro_nome' => 'Primeiro Nome',
-            'ultimo_nome' => 'Ultimo Nome',
+            'id_user' => 'Id user',
+            'tipo' => 'Tipo de utilizador',
+            'data_nascimento' => 'Data de nascimento',
+            'numero_telemovel' => 'Número de telemovel',
+            'primeiro_nome' => 'Primeiro nome',
+            'ultimo_nome' => 'Ultimo nome',
             'genero' => 'Genero',
         ];
     }

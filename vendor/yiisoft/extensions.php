@@ -48,4 +48,22 @@ return array (
       '@yii/faker' => $vendorDir . '/yiisoft/yii2-faker/src',
     ),
   ),
+  'yiisoft/yii2-jui' => 
+  array (
+    'name' => 'yiisoft/yii2-jui',
+    'version' => '2.0.7.0',
+    'alias' => 
+    array (
+      '@yii/jui' => $vendorDir . '/yiisoft/yii2-jui',
+    ),
+  ),
+  'nex/yii2-datepicker' => 
+  array (
+    'name' => 'nex/yii2-datepicker',
+    'version' => 'dev-master',
+    'alias' => 
+    array (
+      '@nex/datepicker' => $vendorDir . '/nex/yii2-datepicker',
+    ),
+  ),
 );
