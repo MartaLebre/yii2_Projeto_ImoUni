@@ -9,6 +9,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
+use common\models\Perfil;
 
 AppAsset::register($this);
 ?>
@@ -33,26 +34,38 @@ AppAsset::register($this);
         'brandUrl' => Yii::$app->homeUrl,
         'options' => ['class' => 'navbar-inverse navbar-fixed-top'],
     ]);
-    $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'Pesquisar', 'url' => ['/site/about']],
-        ['label' => 'Propriedades', 'url' => ['/site/contact']],
-    ];
-    if (Yii::$app->user->isGuest) {
-        $menuItems_auth[] = ['label' => 'Signup', 'url' => ['/site/signup']];
-        $menuItems_auth[] = ['label' => 'Login', 'url' => ['/site/login']];
-    } else {
-        $menuItems_auth[] = ['label' => 'Perfil', 'url' => ['/site/login']];
+    if(Yii::$app->user->isGuest){
+        $menuItems = [
+            ['label' => 'Home', 'url' => ['/site/index']],
+            ['label' => 'Pesquisar', 'url' => ['/anuncio/index']],
+        ];
+        
+        $menuItems_auth = [
+            ['label' => 'Signup', 'url' => ['/site/signup']],
+            ['label' => 'Login', 'url' => ['/site/login']],
+        ];
+    }
+    else{
+        if(Perfil::findOne(Yii::$app->user->getId())->getAttribute('tipo') == 2){
+            $menuItems = [
+                ['label' => 'Home', 'url' => ['/site/index']],
+                ['label' => 'Pesquisar', 'url' => ['/anuncio/index']],
+                ['label' => 'Propriedades', 'url' => ['#url']],
+            ];
+        }
+        $menuItems_auth[] = ['label' => Yii::$app->user->identity->username, 'url' => ['#url']];
         $menuItems_auth[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
-            . Html::submitButton('Logout (' . Yii::$app->user->identity->username . ')', ['class' => 'btn btn-link logout'])
+            . Html::submitButton('Logout', ['class' => 'btn btn-link logout'])
             . Html::endForm()
             . '</li>';
     }
+    
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-left'],
         'items' => $menuItems,
     ]);
+    
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => $menuItems_auth,

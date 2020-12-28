@@ -1,6 +1,6 @@
 <?php
 
-namespace app\controllers;
+namespace frontend\controllers;
 
 use Yii;
 use common\models\Anuncio;
@@ -37,7 +37,7 @@ class AnuncioController extends Controller
     {
         $searchModel = new AnuncioSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+    
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

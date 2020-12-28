@@ -39,7 +39,7 @@ $this->title = 'Signup | ImoUni';
     
             <?= $form->field($model, 'genero')->dropDownList(['masculino' => 'Masculino', 'femenino' => 'Femenino'])->label('Genero') ?>
             
-            <?= $form->field($model, 'data_nascimento')->widget(DatePicker::className(), ['clientOptions' => ['format' => 'd-M-yyyy',]]);?>
+            <?= $form->field($model, 'data_nascimento')->widget(DatePicker::className(), ['clientOptions' => ['format' => 'd-M-yyyy']]);?>
             
             <?= $form->field($model, 'tipo')->dropDownList(['1' => 'Estudante', '2' => 'Proprietario'])->label('Tipo de utilizador') ?>
             

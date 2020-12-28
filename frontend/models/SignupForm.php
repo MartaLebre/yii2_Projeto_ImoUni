@@ -14,6 +14,8 @@ class SignupForm extends Model
     public $username;
     public $email;
     public $password;
+    
+    //perfil
     public $tipo;
     public $data_nascimento;
     public $numero_telemovel;
@@ -46,11 +48,13 @@ class SignupForm extends Model
             ['tipo', 'trim'],
             ['tipo', 'required', 'message' => 'Escolha uma opção.'],
     
-            ['data_nascimento', 'trim'],
+            ['data_nascimento', 'safe'],
             ['data_nascimento', 'required', 'message' => 'Introduza a sua data de nascimento.'],
+            /*
             ['data_nascimento', 'date', 'message' => 'Data de nascimento incorreta.'],
-            ['data_nascimento', 'date', 'format' => 'd-M-yyyy',
+            ['data_nascimento', 'date', 'format' => 'Y-M-d'],
                                         'message' => 'Formato de data inválida.'],
+            */
             
             ['password', 'required', 'message' => 'Introduza uma password.'],
             ['password', 'string', 'min' => 6, 'tooShort' => 'A password tem que ter no mínimo 6 digitos.'],
@@ -58,6 +62,7 @@ class SignupForm extends Model
             ['numero_telemovel', 'trim'],
             ['numero_telemovel', 'integer', 'message' => 'Número de telemovel incorreto.'],
             ['numero_telemovel', 'required', 'message' => 'Introduza um número de telemovel.'],
+            ['numero_telemovel', 'unique', 'targetClass' => '\common\models\Perfil', 'message' => 'Este número de telemovel já está registado.'],
             [
                 'numero_telemovel', 'string', 'min' => 9, 'max' => 9,
                 'tooShort' => 'O número de telemovel tem que ter 9 dígitos.',
@@ -81,7 +86,7 @@ class SignupForm extends Model
             ],
     
             ['ultimo_nome', 'trim'],
-            ['genero', 'required', 'message' => 'Indique os seu genero.'],
+            ['genero', 'required', 'message' => 'Indique o seu genero.'],
         
         ];
     }
@@ -103,11 +108,28 @@ class SignupForm extends Model
         $user->setPassword($this->password);
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();
+        $user->save();
+    
+        //perfil
+        $perfil = new Perfil();
+        $perfil->id_user = $user->id;
+        $perfil->tipo = $this->tipo;
+        $perfil->data_nascimento = $this->data_nascimento;
+        $perfil->numero_telemovel = $this->numero_telemovel;
+        $perfil->primeiro_nome = $this->primeiro_nome;
+        $perfil->ultimo_nome = $this->ultimo_nome;
+        $perfil->genero = $this->genero;
+        $perfil->save();
+    
+        /*
+        $auth = Yii::$app->authManager;
+        $authorRole = $auth->getRole('senhorio');
+        if($perfil->tipo == 2){
+            $auth->assign($authorRole, $user->getId());
+        }
+        */
         
-        // DADOS PERFIL
-        
-        return $user->save() && $this->sendEmail($user);
-
+        return true;
     }
 
     /**
@@ -115,6 +137,7 @@ class SignupForm extends Model
      * @param User $user user model to with email should be send
      * @return bool whether the email was sent
      */
+    /*
     protected function sendEmail($user)
     {
         return Yii::$app
@@ -128,4 +151,5 @@ class SignupForm extends Model
             ->setSubject('Account registration at ' . Yii::$app->name)
             ->send();
     }
+    */
 }

@@ -24,12 +24,6 @@ $this->title = 'Login | ImoUni';
 
                 <?= $form->field($model, 'rememberMe')->checkbox()->label('Lembrar-me') ?>
 
-            <div style="color:#999;margin:1em 0">
-                <?= Html::a('Esqueceu a sua password?', ['site/request-password-reset']) ?>
-                <br>
-                <?= Html::a('Reenviar verificação de email', ['site/resend-verification-email']) ?>
-            </div>
-
                 <div class="form-group">
                     <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
                 </div>

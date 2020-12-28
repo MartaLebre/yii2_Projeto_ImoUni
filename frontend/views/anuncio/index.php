@@ -1,44 +1,35 @@
 <?php
 
+use yii\helpers\Url;
 use yii\helpers\Html;
-use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\AnuncioSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Anuncios';
-$this->params['breadcrumbs'][] = $this->title;
-?>
-<div class="anuncio-index">
+$this->title = 'Anuncios | ' . Yii::$app->name;?>
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="anuncio-search">
+    <?php echo $this->render('_search', ['model' => $searchModel]);?>
+</div>
+<?php $anuncioSearch = $dataProvider->getModels();?>
 
-    <p>
-        <?= Html::a('Create Anuncio', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'id_proprietario',
-            'id_casa',
-            'titulo',
-            'preco',
-            //'data_criacao',
-            //'data_disponibilidade',
-            //'despesas_inc',
-            //'descricao:ntext',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
-
-
+<div class="body-content">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <?php foreach($anuncioSearch as $anuncio){ ?>
+                    <div class="card col-sm-6 col-md-3">
+                        <div class="card-content">
+                            <a href="<?=Url::to(['/anuncio/view', 'id' => $anuncio["id"]]); ?>">
+                                <div class="card-body">
+                                    <h5 class="card-title">Titulo: <?= $anuncio['titulo']?></h5>
+                                    <p class="card-text description">Preço: <?= $anuncio['preco']?></p>
+                                    <p class="card-text description">Descrição: <?= $anuncio['descricao']?></p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
 </div>

@@ -1,9 +1,10 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\AnuncioSearch;
+use Yii;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
-use Yii;
 use yii\base\InvalidArgumentException;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
@@ -14,6 +15,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use common\models\Anuncio;
 
 /**
  * Site controller
@@ -74,7 +76,11 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $searchModel = new AnuncioSearch();
+    
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+        ]);
     }
 
     /**
@@ -117,6 +123,7 @@ class SiteController extends Controller
      *
      * @return mixed
      */
+    /*
     public function actionContact()
     {
         $model = new ContactForm();
@@ -134,16 +141,19 @@ class SiteController extends Controller
             ]);
         }
     }
+    */
 
     /**
      * Displays about page.
      *
      * @return mixed
      */
+    /*
     public function actionAbout()
     {
         return $this->render('about');
     }
+    */
 
     /**
      * Signs user up.
@@ -154,7 +164,7 @@ class SiteController extends Controller
     {
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
-            Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.');
+            Yii::$app->session->setFlash('success', 'Registo efetuado com sucesso.');
             return $this->goHome();
         }
 
@@ -168,6 +178,7 @@ class SiteController extends Controller
      *
      * @return mixed
      */
+    /*
     public function actionRequestPasswordReset()
     {
         $model = new PasswordResetRequestForm();
@@ -185,6 +196,7 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
+    */
 
     /**
      * Resets password.
@@ -193,6 +205,7 @@ class SiteController extends Controller
      * @return mixed
      * @throws BadRequestHttpException
      */
+    /*
     public function actionResetPassword($token)
     {
         try {
@@ -211,6 +224,7 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
+    */
 
     /**
      * Verify email address
@@ -219,6 +233,7 @@ class SiteController extends Controller
      * @throws BadRequestHttpException
      * @return yii\web\Response
      */
+    /*
     public function actionVerifyEmail($token)
     {
         try {
@@ -236,12 +251,14 @@ class SiteController extends Controller
         Yii::$app->session->setFlash('error', 'Sorry, we are unable to verify your account with provided token.');
         return $this->goHome();
     }
+    */
 
     /**
      * Resend verification email
      *
      * @return mixed
      */
+    /*
     public function actionResendVerificationEmail()
     {
         $model = new ResendVerificationEmailForm();
@@ -257,4 +274,5 @@ class SiteController extends Controller
             'model' => $model
         ]);
     }
+    */
 }

@@ -1,36 +1,36 @@
 <?php
 
+use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\AnuncioSearch */
 /* @var $form yii\widgets\ActiveForm */
 
-$this->title = 'ImoUni';
+$this->title = Yii::$app->name;
 ?>
+
 <div class="site-index">
-
     <div class="jumbotron">
-        <h1>ImoUni</h1>
+        <h1><?= Yii::$app->name ?></h1>
         <p class="lead">Encontre a sua propriedade hoje!</p>
+    </div>
 
-        <div class="anuncio-search">
+    <div class="anuncio-search">
+        <div class="container">
             <?php $form = ActiveForm::begin([
-                'action' => ['index'],
+                'action' => ['/anuncio/index'],
                 'method' => 'get',
             ]); ?>
-        
-            <?php //$form->field($model, 'titulo')->textInput(['autofocus' => true]) ?>
-
-            <div class="form-group">
-                <?= Html::submitButton('Pesquisar', ['class' => 'btn btn-default', 'name' => 'search-button']) ?>
-            </div>
+            
+            <?= $form->field($searchModel, 'titulo')->label('')?>
+            
+            <?= Html::submitButton('Pesquisar', ['class' => 'btn btn-default', 'name' => 'search-button']) ?>
+            
             <?php ActiveForm::end(); ?>
         </div>
     </div>
     
-
     <div class="body-content jumbotron">
         <h3 class="panel-title" style="font-size: 20px">Escolha uma das</h3>
         <h2 class="panel-title" style="font-size: 30px">Cidades universitárias!</h2>
