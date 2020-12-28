@@ -14,15 +14,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id_user')->textInput() ?>
 
-    <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
-
     <?= $form->field($model, 'tipo')->textInput() ?>
 
     <?= $form->field($model, 'data_nascimento')->textInput() ?>
-
-    <?= $form->field($model, 'data_criacao')->textInput() ?>
 
     <?= $form->field($model, 'numero_telemovel')->textInput() ?>
 

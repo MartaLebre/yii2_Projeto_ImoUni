@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use Yii;
+use common\models\User;
 use common\models\Perfil;
 use common\models\PerfilSearch;
 use yii\web\Controller;
@@ -84,14 +85,16 @@ class PerfilController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $modelUser = User::findOne($id);
+        $modelPerfil = Perfil::findOne($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_user]);
+        if ($modelPerfil->load(Yii::$app->request->post()) && $modelUser->load(Yii::$app->request->post())){
+            return $this->redirect(['view', 'id' => $modelPerfil->id_user]);
         }
 
         return $this->render('update', [
-            'model' => $model,
+            'modelPerfil' => $modelPerfil,
+            'modelUser' => $modelUser,
         ]);
     }
 

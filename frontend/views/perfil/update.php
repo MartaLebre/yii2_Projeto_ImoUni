@@ -1,21 +1,32 @@
 <?php
 
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Perfil */
+/* @var $modelUser common\models\User */
+/* @var $modelPerfil common\models\Perfil */
+/* @var $form yii\widgets\ActiveForm */
 
-$this->title = 'Update Perfil: ' . $model->id_user;
-$this->params['breadcrumbs'][] = ['label' => 'Perfils', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id_user, 'url' => ['view', 'id' => $model->id_user]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = 'Signup | ImoUni';
 ?>
-<div class="perfil-update">
+<div class="perfil-form">
+    <h1>Atualizar dados da conta</h1>
+    <br>
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
-
+    <div class="row">
+        <div class="col-lg-3">
+            <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
+            
+            <?= $form->field($modelUser, 'password')->textInput() ?>
+    
+            <?= $form->field($modelPerfil, 'numero_telemovel')->textInput() ?>
+            
+            <div class="form-group">
+                <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
+            </div>
+            
+            <?php ActiveForm::end(); ?>
+        </div>
+    </div>
 </div>

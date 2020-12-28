@@ -53,7 +53,7 @@ AppAsset::register($this);
                 ['label' => 'Propriedades', 'url' => ['#url']],
             ];
         }
-        $menuItems_auth[] = ['label' => Yii::$app->user->identity->username, 'url' => ['#url']];
+        $menuItems_auth[] = ['label' => Yii::$app->user->identity->username, 'url' => ['/perfil/update?id=' . Yii::$app->user->getId()]];
         $menuItems_auth[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton('Logout', ['class' => 'btn btn-link logout'])

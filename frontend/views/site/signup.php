@@ -16,7 +16,7 @@ $this->title = 'Signup | ImoUni';
     <br>
 
     <div class="row">
-        <div class="col-lg-5">
+        <div class="col-lg-4">
             <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
 
 
@@ -37,9 +37,9 @@ $this->title = 'Signup | ImoUni';
             
             <?= $form->field($model, 'numero_telemovel')->label('Telemovel') ?>
     
-            <?= $form->field($model, 'genero')->dropDownList(['masculino' => 'Masculino', 'femenino' => 'Femenino'])->label('Genero') ?>
+            <?= $form->field($model, 'genero')->dropDownList(['masculino' => 'Masculino', 'feminino' => 'Feminino'])->label('Genero') ?>
             
-            <?= $form->field($model, 'data_nascimento')->widget(DatePicker::className(), ['clientOptions' => ['format' => 'd-M-yyyy']]);?>
+            <?= $form->field($model, 'data_nascimento')->widget(DatePicker::className(), ['clientOptions' => ['format' => 'Y-M-D']]);?>
             
             <?= $form->field($model, 'tipo')->dropDownList(['1' => 'Estudante', '2' => 'Proprietario'])->label('Tipo de utilizador') ?>
             
