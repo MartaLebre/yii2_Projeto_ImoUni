@@ -92,8 +92,10 @@ class PerfilController extends Controller
         $_user = new SignupForm();
 
         if($_user->load(Yii::$app->request->post()) && $perfil->load(Yii::$app->request->post())){
-            $user->setPassword($_user->password);
-            $user->update();
+            if($_user->password == !null){
+                $user->setPassword($_user->password);
+                $user->update();
+            }
             $perfil->update();
             Yii::$app->session->setFlash('success', 'Update efetuado com sucesso.');
             $_user->password = '';

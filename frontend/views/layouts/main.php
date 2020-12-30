@@ -35,10 +35,7 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-inverse navbar-fixed-top'],
     ]);
     if(Yii::$app->user->isGuest){
-        $menuItems = [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'Pesquisar', 'url' => ['/anuncio/index']],
-        ];
+        $menuItems[] = ['label' => 'Pesquisar', 'url' => ['/anuncio/index']];
         
         $menuItems_auth = [
             ['label' => 'Signup', 'url' => ['/site/signup']],
@@ -48,17 +45,20 @@ AppAsset::register($this);
     else{
         if(Perfil::findOne(Yii::$app->user->getId())->getAttribute('tipo') == 2){
             $menuItems = [
-                ['label' => 'Home', 'url' => ['/site/index']],
                 ['label' => 'Pesquisar', 'url' => ['/anuncio/index']],
                 ['label' => 'Propriedades', 'url' => ['#url']],
             ];
         }
-        $menuItems_auth[] = ['label' => Yii::$app->user->identity->username, 'url' => ['/perfil/update?id=' . Yii::$app->user->getId()]];
-        $menuItems_auth[] = '<li>'
+        else $menuItems[] = ['label' => 'Pesquisar', 'url' => ['/anuncio/index']];
+        
+        $menuItems_auth = [
+            ['label' => Yii::$app->user->identity->username, 'url' => ['/perfil/update?id=' . Yii::$app->user->getId()]],
+            '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton('Logout', ['class' => 'btn btn-link logout'])
             . Html::endForm()
-            . '</li>';
+            . '</li>',
+        ];
     }
     
     echo Nav::widget([
