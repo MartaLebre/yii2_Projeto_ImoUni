@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use frontend\models\SignupForm;
 use Yii;
 use common\models\User;
 use common\models\Perfil;
@@ -85,17 +86,29 @@ class PerfilController extends Controller
      */
     public function actionUpdate($id)
     {
-        $modelUser = User::findOne($id);
-        $modelPerfil = Perfil::findOne($id);
+        $user = User::findOne($id);
+        $perfil = Perfil::findOne($id);
+        
+        $_user = new SignupForm();
 
-        if ($modelPerfil->load(Yii::$app->request->post()) && $modelUser->load(Yii::$app->request->post())){
-            return $this->redirect(['view', 'id' => $modelPerfil->id_user]);
+        if($_user->load(Yii::$app->request->post()) && $perfil->load(Yii::$app->request->post())){
+            $user->setPassword($_user->password);
+            $user->update();
+            $perfil->update();
+            Yii::$app->session->setFlash('success', 'Update efetuado com sucesso.');
+            $_user->password = '';
+            return $this->render('update', [
+                '_user' => $_user,
+                'perfil' => $perfil,
+            ]);
         }
-
-        return $this->render('update', [
-            'modelPerfil' => $modelPerfil,
-            'modelUser' => $modelUser,
-        ]);
+        else{
+            $_user->password = '';
+            return $this->render('update', [
+                '_user' => $_user,
+                'perfil' => $perfil,
+            ]);
+        }
     }
 
     /**

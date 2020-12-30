@@ -18,7 +18,7 @@ $this->title = 'Login | ImoUni';
         <div class="col-lg-5">
             <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true])->label('Nome de Utilizador') ?>
+                <?= $form->field($model, 'username')->textInput()->label('Nome de Utilizador') ?>
 
                 <?= $form->field($model, 'password')->passwordInput() ?>
 

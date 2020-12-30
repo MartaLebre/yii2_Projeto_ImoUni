@@ -4,8 +4,8 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $modelUser common\models\User */
-/* @var $modelPerfil common\models\Perfil */
+/* @var $_user frontend\models\SignupForm */
+/* @var $perfil common\models\Perfil */
 /* @var $form yii\widgets\ActiveForm */
 
 $this->title = 'Signup | ImoUni';
@@ -16,11 +16,11 @@ $this->title = 'Signup | ImoUni';
 
     <div class="row">
         <div class="col-lg-3">
-            <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
-            
-            <?= $form->field($modelUser, 'password')->textInput() ?>
+            <?php $form = ActiveForm::begin(['id' => 'perfil-update']); ?>
     
-            <?= $form->field($modelPerfil, 'numero_telemovel')->textInput() ?>
+            <?= $form->field($_user, 'password')->passwordInput() ?>
+            
+            <?= $form->field($perfil, 'numero_telemovel')->textInput() ?>
             
             <div class="form-group">
                 <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
