@@ -5,29 +5,18 @@ namespace backend\api\controllers;
 use Yii;
 use common\models\Casa;
 use yii\data\ActiveDataProvider;
-use yii\web\Controller;
+use yii\rest\ActiveController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * CasaController implements the CRUD actions for Casa model.
  */
-class CasaController extends Controller
+class CasaController extends ActiveController
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
+    public $modelClass = 'common\models\Casa';
+
+
 
     /**
      * Lists all Casa models.
@@ -123,5 +112,9 @@ class CasaController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionCasaDetalhes($id){
+
     }
 }

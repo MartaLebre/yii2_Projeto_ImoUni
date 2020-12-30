@@ -5,6 +5,7 @@ namespace backend\api\controllers;
 use Yii;
 use common\models\Visita;
 use yii\data\ActiveDataProvider;
+use yii\rest\ActiveController;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -12,12 +13,15 @@ use yii\filters\VerbFilter;
 /**
  * VisitaController implements the CRUD actions for Visita model.
  */
-class VisitaController extends Controller
+class VisitaController extends ActiveController
 {
+    public $modelClass = 'common\models\Visita';
+
+
     /**
      * {@inheritdoc}
      */
-    public function behaviors()
+    /*public function behaviors()
     {
         return [
             'verbs' => [
@@ -27,7 +31,7 @@ class VisitaController extends Controller
                 ],
             ],
         ];
-    }
+    }*/
 
     /**
      * Lists all Visita models.
@@ -64,14 +68,14 @@ class VisitaController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Visita();
+        $modelClass = new Visita();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($modelClass->load(Yii::$app->request->post()) && $modelClass->save()) {
+            return $this->redirect(['view', 'id' => $modelClass->id]);
         }
 
         return $this->render('create', [
-            'model' => $model,
+            'model' => $modelClass,
         ]);
     }
 

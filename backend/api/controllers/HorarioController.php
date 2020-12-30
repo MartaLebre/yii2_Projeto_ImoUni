@@ -4,7 +4,7 @@ namespace backend\api\controllers;
 
 use Yii;
 use common\models\Horario;
-use yii\data\ActiveDataProvider;
+use yii\rest\ActiveController;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -12,12 +12,14 @@ use yii\filters\VerbFilter;
 /**
  * HorarioController implements the CRUD actions for Horario model.
  */
-class HorarioController extends Controller
+class HorarioController extends ActiveController
 {
+    public $modelClass = 'common\models\Horario';
+
     /**
      * {@inheritdoc}
      */
-    public function behaviors()
+    /*public function behaviors()
     {
         return [
             'verbs' => [
@@ -27,7 +29,7 @@ class HorarioController extends Controller
                 ],
             ],
         ];
-    }
+    }*/
 
     /**
      * Lists all Horario models.
