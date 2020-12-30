@@ -5,6 +5,7 @@ namespace backend\api\controllers;
 use Yii;
 use common\models\Cozinha;
 use yii\data\ActiveDataProvider;
+use yii\rest\ActiveController;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -12,22 +13,9 @@ use yii\filters\VerbFilter;
 /**
  * CozinhaController implements the CRUD actions for Cozinha model.
  */
-class CozinhaController extends Controller
+class CozinhaController extends ActiveController
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
+    public $modelClass = 'common\models\Cozinha';
 
     /**
      * Lists all Cozinha models.

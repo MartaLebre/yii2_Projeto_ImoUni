@@ -5,6 +5,7 @@ namespace backend\api\controllers;
 use Yii;
 use common\models\Reserva;
 use yii\data\ActiveDataProvider;
+use yii\rest\ActiveController;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -12,12 +13,13 @@ use yii\filters\VerbFilter;
 /**
  * ReservaController implements the CRUD actions for Reserva model.
  */
-class ReservaController extends Controller
+class ReservaController extends ActiveController
 {
+    public $modelClass = 'common\models\Reserva';
     /**
      * {@inheritdoc}
      */
-    public function behaviors()
+    /*public function behaviors()
     {
         return [
             'verbs' => [
@@ -27,7 +29,7 @@ class ReservaController extends Controller
                 ],
             ],
         ];
-    }
+    }*/
 
     /**
      * Lists all Reserva models.

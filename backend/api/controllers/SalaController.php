@@ -5,6 +5,7 @@ namespace backend\api\controllers;
 use Yii;
 use common\models\Sala;
 use yii\data\ActiveDataProvider;
+use yii\rest\ActiveController;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -12,12 +13,14 @@ use yii\filters\VerbFilter;
 /**
  * SalaController implements the CRUD actions for Sala model.
  */
-class SalaController extends Controller
+class SalaController extends ActiveController
 {
+    public $modelClass = 'common\models\Sala';
+
     /**
      * {@inheritdoc}
      */
-    public function behaviors()
+    /*public function behaviors()
     {
         return [
             'verbs' => [
@@ -27,7 +30,7 @@ class SalaController extends Controller
                 ],
             ],
         ];
-    }
+    }*/
 
     /**
      * Lists all Sala models.

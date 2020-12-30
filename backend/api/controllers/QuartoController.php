@@ -5,6 +5,7 @@ namespace backend\api\controllers;
 use Yii;
 use common\models\Quarto;
 use yii\data\ActiveDataProvider;
+use yii\rest\ActiveController;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -12,12 +13,14 @@ use yii\filters\VerbFilter;
 /**
  * QuartoController implements the CRUD actions for Quarto model.
  */
-class QuartoController extends Controller
+class QuartoController extends ActiveController
 {
+    public $modelClass = 'common\models\Quarto';
+
     /**
      * {@inheritdoc}
      */
-    public function behaviors()
+    /*public function behaviors()
     {
         return [
             'verbs' => [
@@ -27,7 +30,7 @@ class QuartoController extends Controller
                 ],
             ],
         ];
-    }
+    }*/
 
     /**
      * Lists all Quarto models.

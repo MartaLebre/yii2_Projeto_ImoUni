@@ -55,19 +55,17 @@ return [
             'rules' => [
                 [
                     'class' => 'yii\rest\UrlRule',
-                    'controller' => [
-                        'api/default',
-                        'api/user',
-
-                    ],
+                    'controller' => 'api/user',
+                    'pluralize' => false,
                     'extraPatterns' => [
-                        'GET login' => 'login',
-                        'POST signup' => 'signup',
+                        'GET {id}/info' => 'info',
+                        //'GET total' => 'total'
                     ],
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/anuncios',
+                    'pluralize' => false,
                     'tokens' =>
                         [
                             '{id}' => '<id:\\d+>',
@@ -75,11 +73,48 @@ return [
                         ],
                     'extraPatterns' =>
                         [
-                            'POST name' => 'anunciobytitulo'
+                            'GET name' => 'anunciobytitulo'
                         ]
                 ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/casa',
+                    'pluralize' => false,
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/cozinha',
+                    'pluralize' => false,
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/horario',
+                    'pluralize' => false,
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/quarto',
+                    'pluralize' => false,
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/reserva',
+                    'pluralize' => false,
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/sala',
+                    'pluralize' => false,
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/visita',
+                    'pluralize' => false,
+                    'extraPatterns' =>
+                        [
 
-
+                        ]
+                ],
             ],
         ],
 
