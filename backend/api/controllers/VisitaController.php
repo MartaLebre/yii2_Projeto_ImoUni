@@ -17,7 +17,6 @@ class VisitaController extends ActiveController
 {
     public $modelClass = 'common\models\Visita';
 
-
     /**
      * {@inheritdoc}
      */
@@ -68,14 +67,14 @@ class VisitaController extends ActiveController
      */
     public function actionCreate()
     {
-        $modelClass = new Visita();
+        $model = new Visita();
 
-        if ($modelClass->load(Yii::$app->request->post()) && $modelClass->save()) {
-            return $this->redirect(['view', 'id' => $modelClass->id]);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
-            'model' => $modelClass,
+            'model' => $model,
         ]);
     }
 

@@ -18,6 +18,21 @@ class CozinhaController extends ActiveController
     public $modelClass = 'common\models\Cozinha';
 
     /**
+     * {@inheritdoc}
+     */
+    /*public function behaviors()
+    {
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['POST'],
+                ],
+            ],
+        ];
+    }*/
+
+    /**
      * Lists all Cozinha models.
      * @return mixed
      */

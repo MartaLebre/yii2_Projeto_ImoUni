@@ -58,8 +58,9 @@ return [
                     'controller' => 'api/user',
                     'pluralize' => false,
                     'extraPatterns' => [
-                        'GET {id}/info' => 'info',
-                        //'GET total' => 'total'
+                        'GET {id}/detalhes' => 'detalhes',
+                        'GET total' => 'total',
+                        'GET {id}/email' => 'email',
                     ],
                 ],
                 [

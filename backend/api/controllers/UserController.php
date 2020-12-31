@@ -13,7 +13,7 @@ class UserController extends ActiveController
     public $modelClass = 'common\models\User';
     public $modelClassPerfil = 'common\models\Perfil';
 
-    public function actionInfo($id){
+    public function actionDetalhes($id){
         $user = User::findOne(['id' => $id]);
         $perfil = Perfil::findOne(['id_user' => $id]);
 
@@ -34,10 +34,20 @@ class UserController extends ActiveController
         }
     }
 
-    /*public function actionTotal(){
+    public function actionTotal(){
         $usermodel = new $this->modelClass;
-        $id = $usermodel::find()->all;
+        $soma = $usermodel::find()->all();
 
-        return ['total' => count($id)];
-    }*/
+        return ['total' => count($soma)];
+    }
+
+    public function actionEmail($id){
+        $usermodel = new $this->modelClass;
+        $rec = $usermodel::find()->where("id=".$id)->one();
+
+        if($rec)
+            return ['id' => $id, 'Email' => $rec->email];
+
+        return ['id' => $id, 'Email' => "null"];
+    }
 }

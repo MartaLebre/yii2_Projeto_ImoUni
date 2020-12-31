@@ -20,6 +20,7 @@ class SalaController extends ActiveController
     /**
      * {@inheritdoc}
      */
+
     /*public function behaviors()
     {
         return [
@@ -30,7 +31,7 @@ class SalaController extends ActiveController
                 ],
             ],
         ];
-    }*/
+    }/*
 
     /**
      * Lists all Sala models.

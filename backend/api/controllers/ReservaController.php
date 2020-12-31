@@ -16,6 +16,7 @@ use yii\filters\VerbFilter;
 class ReservaController extends ActiveController
 {
     public $modelClass = 'common\models\Reserva';
+
     /**
      * {@inheritdoc}
      */
