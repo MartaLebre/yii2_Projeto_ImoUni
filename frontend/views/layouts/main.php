@@ -35,40 +35,58 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-inverse navbar-fixed-top'],
     ]);
     if(Yii::$app->user->isGuest){
-        $menuItems[] = ['label' => 'Pesquisar', 'url' => ['/anuncio/index']];
+        $navLeft[] = ['label' => 'Pesquisar', 'url' => ['/anuncio/index']];
         
-        $menuItems_auth = [
+        $navRight = [
             ['label' => 'Signup', 'url' => ['/site/signup']],
             ['label' => 'Login', 'url' => ['/site/login']],
         ];
     }
     else{
         if(Perfil::findOne(Yii::$app->user->getId())->getAttribute('tipo') == 2){
-            $menuItems = [
+            $navLeft = [
                 ['label' => 'Pesquisar', 'url' => ['/anuncio/index']],
-                ['label' => 'Propriedades', 'url' => ['#url']],
+                ['label' => 'Propriedades', 'url' => ['#']],
+            ];
+    
+            $navRight = [
+                ['label' => Yii::$app->user->identity->username,
+                 'items' => [
+                     '<li class="dropdown-header">Informações da conta</li>',
+                     ['label' => 'Alterar dados', 'url' => ['/perfil/update?id=' . Yii::$app->user->getId()]],
+                     ['label' => 'Horários', 'url' => '#']]],
+                '<li>'
+                . Html::beginForm(['/site/logout'], 'post')
+                . Html::submitButton('Logout', ['class' => 'btn btn-link logout'])
+                . Html::endForm()
+                . '</li>',
             ];
         }
-        else $menuItems[] = ['label' => 'Pesquisar', 'url' => ['/anuncio/index']];
-        
-        $menuItems_auth = [
-            ['label' => Yii::$app->user->identity->username, 'url' => ['/perfil/update?id=' . Yii::$app->user->getId()]],
-            '<li>'
-            . Html::beginForm(['/site/logout'], 'post')
-            . Html::submitButton('Logout', ['class' => 'btn btn-link logout'])
-            . Html::endForm()
-            . '</li>',
-        ];
+        else{
+            $navLeft[] = ['label' => 'Pesquisar', 'url' => ['/anuncio/index']];
+    
+            $navRight = [
+                ['label' => Yii::$app->user->identity->username,
+                 'items' =>
+                     '<li class="dropdown-header">Informações da conta</li>',
+                     ['label' => 'Alterar dados', 'url' => ['/perfil/update?id=' . Yii::$app->user->getId()]]],
+                '<li>'
+                . Html::beginForm(['/site/logout'], 'post')
+                . Html::submitButton('Logout', ['class' => 'btn btn-link logout'])
+                . Html::endForm()
+                . '</li>',
+            ];
+        }
     }
     
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-left'],
-        'items' => $menuItems,
+        'items' => $navLeft,
     ]);
     
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => $menuItems_auth,
+        'items' => $navRight,
     ]);
     NavBar::end();
     ?>
