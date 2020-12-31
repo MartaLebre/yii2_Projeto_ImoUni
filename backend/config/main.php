@@ -74,7 +74,9 @@ return [
                         ],
                     'extraPatterns' =>
                         [
-                            'GET name' => 'anunciobytitulo'
+                            'PUT alterar/{id}' => 'alterar',
+                            'DELETE apagar/{id}' => 'apagar',
+                            'POST adicionar' => 'adicionar',
                         ]
                 ],
                 [
@@ -111,10 +113,11 @@ return [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/visita',
                     'pluralize' => false,
-                    'extraPatterns' =>
-                        [
-
-                        ]
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/perfil',
+                    'pluralize' => false,
                 ],
             ],
         ],
