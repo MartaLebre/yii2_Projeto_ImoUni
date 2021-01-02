@@ -5,6 +5,7 @@ namespace backend\api\controllers;
 use Yii;
 use common\models\Perfil;
 use yii\data\ActiveDataProvider;
+use yii\rest\ActiveController;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -12,12 +13,14 @@ use yii\filters\VerbFilter;
 /**
  * PerfilController implements the CRUD actions for Perfil model.
  */
-class PerfilController extends Controller
+class PerfilController extends ActiveController
 {
+    public $modelClass = 'common\models\Perfil';
+
     /**
      * {@inheritdoc}
      */
-    public function behaviors()
+    /*public function behaviors()
     {
         return [
             'verbs' => [
@@ -27,7 +30,7 @@ class PerfilController extends Controller
                 ],
             ],
         ];
-    }
+    }/*
 
     /**
      * Lists all Perfil models.
