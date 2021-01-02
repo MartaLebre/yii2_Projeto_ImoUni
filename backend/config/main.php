@@ -62,27 +62,41 @@ return [
                         'GET total' => 'total',
                         'GET {id}/email' => 'email',
                     ],
+                    'tokens' =>
+                        [
+                            '{id}' => '<id:\\d+>',
+                        ],
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/anuncios',
                     'pluralize' => false,
-                    'tokens' =>
-                        [
-                            '{id}' => '<id:\\d+>',
-                            '{titulo}' => '<titulo:\\w+>'
-                        ],
                     'extraPatterns' =>
                         [
                             'PUT alterar/{id}' => 'alterar',
                             'DELETE apagar/{id}' => 'apagar',
                             'POST adicionar' => 'adicionar',
-                        ]
+                        ],
+                    'tokens' =>
+                        [
+                            '{id}' => '<id:\\d+>'
+                        ],
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/casa',
                     'pluralize' => false,
+                    'extraPatterns' =>
+                        [
+                            'GET {id}/detalhes' => 'detalhes',
+                            'DELETE apagar/{id}' => 'apagar',
+                            'GET {limit}/registos' => 'registos',
+                        ],
+                    'tokens' =>
+                        [
+                            '{id}' => '<id:\\d+>',
+                            '{limit}' => '<limit:\\d+>'
+                        ],
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',

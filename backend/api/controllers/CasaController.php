@@ -17,104 +17,49 @@ class CasaController extends ActiveController
     public $modelClass = 'common\models\Casa';
 
 
+    public function actionDetalhes($id){
 
-    /**
-     * Lists all Casa models.
-     * @return mixed
-     */
-    public function actionIndex()
-    {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Casa::find(),
-        ]);
+        $casa = Casa::findOne(['id' => $id]);
 
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-        ]);
-    }
+        if($casa != null){
 
-    /**
-     * Displays a single Casa model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-
-    /**
-     * Creates a new Casa model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new Casa();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return ['Casa' => [
+                'ID' => $casa->id,
+                'ID_Proprietário' => $casa->id_proprietario,
+                'Nome_rua' => $casa->nome_rua,
+                'Tipo_alojamento' => $casa->tipo_alojamento,
+                'Capacidade' => $casa->capacidade,
+                'Area_exterior' => $casa->area_exterior,
+                'Num_quartos' => $casa->num_quartos,
+                'Num_wcs' => $casa->num_wcs,
+                'Wifi' => $casa->wifi,
+                'Limpeza' => $casa->limpeza,
+                'Aquecimento_agua' => $casa->aquecimento_agua,
+                'Animais' => $casa->animais,
+                'Fumar' => $casa->fumar,
+                'Visitantes_pernoitar' => $casa->visitantes_pernoitar,
+            ]];
+        } else {
+            throw new \yii\web\NotFoundHttpException("A casa não foi encontrada");
         }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
     }
 
-    /**
-     * Updates an existing Casa model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
+    public function actionApagar($id){
+        $casamodel = new $this->modelClass;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
+        $rec = $casamodel->deleteAll("id=".$id);
 
-        return $this->render('update', [
-            'model' => $model,
-        ]);
+        if($rec)
+            return ['DelError' => $rec];
+
+        throw new \yii\web\NotFoundHttpException("Id da casa não encontrado");
     }
 
-    /**
-     * Deletes an existing Casa model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
+    public function actionRegistos($limit){
+        $casamodel = new $this->modelClass;
 
-        return $this->redirect(['index']);
-    }
+        $recs = $casamodel::find()->limit($limit)->all();
 
-    /**
-     * Finds the Casa model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Casa the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel($id)
-    {
-        if (($model = Casa::findOne($id)) !== null) {
-            return $model;
-        }
-
-        throw new NotFoundHttpException('The requested page does not exist.');
-    }
-
-    public function actionCasaDetalhes($id){
-
+        return ['limite' => $limit, 'Records' => $recs];
     }
 }
