@@ -53,8 +53,8 @@ AppAsset::register($this);
                 ['label' => Yii::$app->user->identity->username,
                  'items' => [
                      '<li class="dropdown-header">Informações da conta</li>',
-                     ['label' => 'Alterar dados', 'url' => ['/perfil/update?id=' . Yii::$app->user->getId()]],
-                     ['label' => 'Horários', 'url' => '#']]],
+                     ['label' => 'Alterar dados', 'url' => ['/perfil/update']],
+                     ['label' => 'Horários', 'url' => ['/horario/update']]]],
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton('Logout', ['class' => 'btn btn-link logout'])
@@ -67,9 +67,9 @@ AppAsset::register($this);
     
             $navRight = [
                 ['label' => Yii::$app->user->identity->username,
-                 'items' =>
+                 'items' => [
                      '<li class="dropdown-header">Informações da conta</li>',
-                     ['label' => 'Alterar dados', 'url' => ['/perfil/update?id=' . Yii::$app->user->getId()]]],
+                     ['label' => 'Alterar dados', 'url' => ['/perfil/update']]]],
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton('Logout', ['class' => 'btn btn-link logout'])

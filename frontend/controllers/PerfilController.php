@@ -84,10 +84,10 @@ class PerfilController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate()
     {
-        $user = User::findOne($id);
-        $perfil = Perfil::findOne($id);
+        $user = User::findOne(Yii::$app->user->getId());
+        $perfil = Perfil::findOne($user->getId());
         
         $_user = new SignupForm();
 

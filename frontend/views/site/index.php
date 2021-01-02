@@ -17,34 +17,7 @@ $this->title = Yii::$app->name;
     </div>
 
     <div class="anuncio-search">
-        <div class="container">
-            <?php $form = ActiveForm::begin([
-                'layout' => 'horizontal',
-                'action' => ['/anuncio/index'],
-                'method' => 'get',
-                'fieldConfig' => [
-                    'template' => "{label}\n{beginWrapper}\n{input}\n{hint}\n{error}\n{endWrapper}",
-                    'horizontalCssClasses' => [
-                        'offset' => 'col-sm-offset-3',
-                        'wrapper' => 'col-sm-6',
-                    ],
-                ],
-            ]);
-
-            // Input group
-            echo $form->field($searchModel, 'titulo',
-            ['inputTemplate' =>
-            '<div class="input-group">
-                <input type="text" class="form-control">
-                <div class="input-group-btn">
-                    <button class="btn btn-default" type="submit" name="search-button">Pesquisar</button>
-                </div>
-            </div>',
-            ])->label(false);
-            ?>
-            
-            <?php ActiveForm::end(); ?>
-        </div>
+        <?php echo $this->render('/anuncio/_search', ['model' => $searchModel]);?>
     </div>
     
     <div class="body-content jumbotron">

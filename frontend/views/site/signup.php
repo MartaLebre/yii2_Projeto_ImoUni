@@ -37,11 +37,11 @@ $this->title = 'Signup | ImoUni';
             
             <?= $form->field($model, 'numero_telemovel')->label('Telemovel') ?>
     
-            <?= $form->field($model, 'genero')->dropDownList(['masculino' => 'Masculino', 'feminino' => 'Feminino'])->label('Genero') ?>
+            <?= $form->field($model, 'genero')->dropDownList(['masculino' => 'Masculino', 'feminino' => 'Feminino'], ['prompt' => ''])->label('Genero') ?>
             
             <?= $form->field($model, 'data_nascimento')->widget(DatePicker::className(), ['clientOptions' => ['format' => 'Y-M-D']]);?>
             
-            <?= $form->field($model, 'tipo')->dropDownList(['1' => 'Estudante', '2' => 'Proprietario'])->label('Tipo de utilizador') ?>
+            <?= $form->field($model, 'tipo')->dropDownList(['1' => 'Estudante', '2' => 'Proprietario'], ['prompt' => ''])->label('Tipo de utilizador') ?>
             
             <div class="form-group">
                 <?= Html::submitButton('Registar', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>

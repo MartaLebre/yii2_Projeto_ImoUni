@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\AnuncioSearch */
@@ -9,16 +9,30 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="anuncio-search">
-    <div class="container">
-        <?php $form = ActiveForm::begin([
-            'action' => ['index'],
-            'method' => 'get',
-        ]); ?>
-        
-        <?= $form->field($model, 'titulo')->label('')?>
-        
-        <?= Html::submitButton('Pesquisar', ['class' => 'btn btn-default', 'name' => 'search-button']) ?>
-        
-        <?php ActiveForm::end(); ?>
-    </div>
+    <?php $form = ActiveForm::begin([
+        'layout' => 'horizontal',
+        'action' => ['/anuncio/index'],
+        'method' => 'get',
+        'fieldConfig' => [
+            'template' => "{label}\n{beginWrapper}\n{input}\n{hint}\n{error}\n{endWrapper}",
+            'horizontalCssClasses' => [
+                'offset' => 'col-sm-offset-3',
+                'wrapper' => 'col-sm-6',
+            ],
+        ],
+    ]);
+    
+    // Input group
+    echo $form->field($model, 'titulo',
+        ['inputTemplate' =>
+            '<div class="input-group">
+                {input}
+                <div class="input-group-btn">
+                    <button class="btn btn-default" type="submit" name="search-button">Pesquisar</button>
+                </div>
+            </div>',
+        ])->label(false);
+    ?>
+    
+    <?php ActiveForm::end(); ?>
 </div>

@@ -17,6 +17,8 @@ use Yii;
  */
 class Horario extends \yii\db\ActiveRecord
 {
+    
+    
     /**
      * {@inheritdoc}
      */
@@ -32,9 +34,10 @@ class Horario extends \yii\db\ActiveRecord
     {
         return [
             [['id_perfil'], 'integer'],
-            [['hora_comeco', 'hora_fim', 'dia_semana'], 'required'],
             [['hora_comeco', 'hora_fim'], 'safe'],
             [['dia_semana'], 'string'],
+            [['hora_comeco', 'hora_fim'], 'required', 'message' => 'Introduza a hora.'],
+            [['dia_semana'], 'required', 'message' => 'Introduza o dia da semana.'],
             [['id_perfil'], 'exist', 'skipOnError' => true, 'targetClass' => Perfil::className(), 'targetAttribute' => ['id_perfil' => 'id_user']],
         ];
     }
@@ -47,10 +50,31 @@ class Horario extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'id_perfil' => 'Id Perfil',
-            'hora_comeco' => 'Hora Comeco',
-            'hora_fim' => 'Hora Fim',
-            'dia_semana' => 'Dia Semana',
+            'hora_comeco' => 'Hora de começo',
+            'hora_fim' => 'Hora de fim',
+            'dia_semana' => 'Dia da semana',
         ];
+    }
+    
+    /**
+     * Cria um horario
+     * @param Horario $id_perfil para qual utilizador irá ser associado
+     * @return bool se for criado com sucesso
+     */
+    public function addHorario($id_perfil)
+    {
+        if (!$this->validate()) {
+            return null;
+        }
+        
+        $horario = new Horario();
+        $horario->id_perfil = $id_perfil;
+        $horario->hora_comeco = $this->hora_comeco;
+        $horario->hora_fim = $this->hora_fim;
+        $horario->dia_semana = $this->dia_semana;
+        $horario->save();
+        
+        return true;
     }
 
     /**
