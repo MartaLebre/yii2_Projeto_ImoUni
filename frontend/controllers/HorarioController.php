@@ -112,7 +112,7 @@ class HorarioController extends Controller
         $this->findModel($id)->delete();
         $id_user = Yii::$app->user->getId();
 
-        return $this->redirect(['view', 'id' => $id_user]);
+        return $this->redirect(['index', 'id' => $id_user]);
     }
 
     /**

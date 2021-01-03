@@ -54,7 +54,7 @@ AppAsset::register($this);
                  'items' => [
                      '<li class="dropdown-header">Informações da conta</li>',
                      ['label' => 'Alterar dados', 'url' => ['/perfil/update?id=' . Yii::$app->user->getId()]],
-                     ['label' => 'Horários', 'url' => ['/horario/view?id=' . Yii::$app->user->getId()]],
+                     ['label' => 'Horários', 'url' => ['/horario/index']],
                      ['label' => 'Minhas propriedades', 'url' => ['/casa/index']]]],
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
