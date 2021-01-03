@@ -6,6 +6,8 @@ use Yii;
 use yii\rest\ActiveController;
 use common\models\User;
 use common\models\Perfil;
+use common\models\Visita;
+use common\models\Reserva;
 
 
 class UserController extends ActiveController
@@ -38,7 +40,7 @@ class UserController extends ActiveController
         $usermodel = new $this->modelClass;
         $soma = $usermodel::find()->all();
 
-        return ['total' => count($soma)];
+        return ['total_users' => count($soma)];
     }
 
     public function actionEmail($id){
@@ -49,5 +51,19 @@ class UserController extends ActiveController
             return ['id' => $id, 'Email' => $rec->email];
 
         return ['id' => $id, 'Email' => "null"];
+    }
+
+    public function actionVisita($id){
+
+        $visita = Visita::findOne(['id' => $id]);
+
+        return $visita;
+    }
+
+    public function actionReserva($id){
+
+        $reserva = Reserva::findOne(['id' => $id]);
+
+        return $reserva;
     }
 }

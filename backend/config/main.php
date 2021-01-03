@@ -58,9 +58,11 @@ return [
                     'controller' => 'api/user',
                     'pluralize' => false,
                     'extraPatterns' => [
-                        'GET {id}/detalhes' => 'detalhes',
-                        'GET total' => 'total',
-                        'GET {id}/email' => 'email',
+                        'GET {id}/detalhes' => 'detalhes', //mostra informação da tabela user e da tabela perfil
+                        'GET {id}/email' => 'email', //mostra o email de um user
+                        'GET total' => 'total', //mostra o total de users
+                        'GET visita/{id}' => 'visita',
+                        'GET reserva/{id}' => 'reserva',
                     ],
                     'tokens' =>
                         [
@@ -73,9 +75,9 @@ return [
                     'pluralize' => false,
                     'extraPatterns' =>
                         [
-                            'PUT alterar/{id}' => 'alterar',
-                            'DELETE apagar/{id}' => 'apagar',
-                            'POST adicionar' => 'adicionar',
+                            'PUT alterar/{id}' => 'alterar', //Altera os dados de um anúncio
+                            'DELETE apagar/{id}' => 'apagar', //Apaga um anúncio
+                            'POST adicionar' => 'adicionar', //Adiciona um anúncio novo
                         ],
                     'tokens' =>
                         [
@@ -88,50 +90,18 @@ return [
                     'pluralize' => false,
                     'extraPatterns' =>
                         [
-                            'GET {id}/detalhes' => 'detalhes',
-                            'DELETE apagar/{id}' => 'apagar',
-                            'GET {limit}/registos' => 'registos',
+                            'GET {id}/detalhes' => 'detalhes', //mostra detalhes de uma casa
+                            'DELETE apagar/{id}' => 'apagar', //apaga uma casa
+                            'GET {n_registos}/registos' => 'registos', //define um limite de registos e mostra esses registos
+                            'GET cozinha/{id}' => 'cozinha',
+                            'GET quarto/{id}' => 'quarto',
+                            'GET sala/{id}' => 'sala',
                         ],
                     'tokens' =>
                         [
                             '{id}' => '<id:\\d+>',
-                            '{limit}' => '<limit:\\d+>'
+                            '{n_registos}' => '<n_registos:\\d+>'
                         ],
-                ],
-                [
-                    'class' => 'yii\rest\UrlRule',
-                    'controller' => 'api/cozinha',
-                    'pluralize' => false,
-                ],
-                [
-                    'class' => 'yii\rest\UrlRule',
-                    'controller' => 'api/horario',
-                    'pluralize' => false,
-                ],
-                [
-                    'class' => 'yii\rest\UrlRule',
-                    'controller' => 'api/quarto',
-                    'pluralize' => false,
-                ],
-                [
-                    'class' => 'yii\rest\UrlRule',
-                    'controller' => 'api/reserva',
-                    'pluralize' => false,
-                ],
-                [
-                    'class' => 'yii\rest\UrlRule',
-                    'controller' => 'api/sala',
-                    'pluralize' => false,
-                ],
-                [
-                    'class' => 'yii\rest\UrlRule',
-                    'controller' => 'api/visita',
-                    'pluralize' => false,
-                ],
-                [
-                    'class' => 'yii\rest\UrlRule',
-                    'controller' => 'api/perfil',
-                    'pluralize' => false,
                 ],
             ],
         ],
