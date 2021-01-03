@@ -4,6 +4,9 @@ namespace backend\api\controllers;
 
 use Yii;
 use common\models\Casa;
+use common\models\Cozinha;
+use common\models\Quarto;
+use common\models\Sala;
 use yii\data\ActiveDataProvider;
 use yii\rest\ActiveController;
 use yii\web\NotFoundHttpException;
@@ -55,11 +58,32 @@ class CasaController extends ActiveController
         throw new \yii\web\NotFoundHttpException("Id da casa não encontrado");
     }
 
-    public function actionRegistos($limit){
+    public function actionRegistos($n_registos){
         $casamodel = new $this->modelClass;
 
-        $recs = $casamodel::find()->limit($limit)->all();
+        $recs = $casamodel::find()->limit($n_registos)->all();
 
-        return ['limite' => $limit, 'Records' => $recs];
+        return ['limite' => $n_registos, 'Records' => $recs];
+    }
+
+    public function actionCozinha($id){
+
+        $cozinha = Cozinha::findOne(['id' => $id]);
+
+        return $cozinha;
+    }
+
+    public function actionQuarto($id){
+
+        $quarto = Quarto::findOne(['id' => $id]);
+
+        return $quarto;
+    }
+
+    public function actionSala($id){
+
+        $sala = Sala::findOne(['id' => $id]);
+
+        return $sala;
     }
 }
