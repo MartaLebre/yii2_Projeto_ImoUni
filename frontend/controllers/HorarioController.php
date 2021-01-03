@@ -72,7 +72,7 @@ class HorarioController extends Controller
 
         if($model->load(Yii::$app->request->post()) && $model->addHorario($id_user)){
             Yii::$app->session->setFlash('success', 'Horário registado com sucesso.');
-            return $this->redirect(['view', 'id' => $id_user]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('create', [
@@ -112,7 +112,7 @@ class HorarioController extends Controller
         $this->findModel($id)->delete();
         $id_user = Yii::$app->user->getId();
 
-        return $this->redirect(['index', 'id' => $id_user]);
+        return $this->redirect(['index']);
     }
 
     /**
