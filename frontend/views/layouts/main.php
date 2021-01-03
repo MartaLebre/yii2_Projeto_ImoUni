@@ -46,15 +46,16 @@ AppAsset::register($this);
         if(Perfil::findOne(Yii::$app->user->getId())->getAttribute('tipo') == 2){
             $navLeft = [
                 ['label' => 'Pesquisar', 'url' => ['/anuncio/index']],
-                ['label' => 'Propriedades', 'url' => ['#']],
+                ['label' => 'Meus anúncios', 'url' => ['#']],
             ];
     
             $navRight = [
                 ['label' => Yii::$app->user->identity->username,
                  'items' => [
                      '<li class="dropdown-header">Informações da conta</li>',
-                     ['label' => 'Alterar dados', 'url' => ['/perfil/update']],
-                     ['label' => 'Horários', 'url' => ['/horario/update']]]],
+                     ['label' => 'Alterar dados', 'url' => ['/perfil/update?id=' . Yii::$app->user->getId()]],
+                     ['label' => 'Horários', 'url' => ['/horario/view?id=' . Yii::$app->user->getId()]],
+                     ['label' => 'Minhas propriedades', 'url' => ['/casa/index']]]],
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton('Logout', ['class' => 'btn btn-link logout'])
@@ -69,7 +70,7 @@ AppAsset::register($this);
                 ['label' => Yii::$app->user->identity->username,
                  'items' => [
                      '<li class="dropdown-header">Informações da conta</li>',
-                     ['label' => 'Alterar dados', 'url' => ['/perfil/update']]]],
+                     ['label' => 'Alterar dados', 'url' => ['/perfil/update?id=' . Yii::$app->user->getId()]]]],
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton('Logout', ['class' => 'btn btn-link logout'])

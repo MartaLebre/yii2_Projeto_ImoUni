@@ -1,6 +1,6 @@
 <?php
 
-namespace app\controllers;
+namespace frontend\controllers;
 
 use Yii;
 use common\models\Casa;
@@ -35,12 +35,15 @@ class CasaController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new CasaSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $id = Yii::$app->user->getId();
+        $models = Casa::find()
+            ->where(['id_proprietario' => $id])
+            ->orderBy('id')
+            ->asArray()
+            ->all();
+    
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'models' => $models,
         ]);
     }
 
@@ -64,12 +67,14 @@ class CasaController extends Controller
      */
     public function actionCreate()
     {
+        $id_user = Yii::$app->user->getId();
         $model = new Casa();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+    
+        if($model->load(Yii::$app->request->post()) && $model->addCasa($id_user)){
+            Yii::$app->session->setFlash('success', 'Propriedade registada com sucesso.');
+            return $this->redirect(['view', 'id' => $id_user]);
         }
-
+    
         return $this->render('create', [
             'model' => $model,
         ]);
@@ -105,8 +110,9 @@ class CasaController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+        $id_user = Yii::$app->user->getId();
+    
+        return $this->redirect(['view', 'id' => $id_user]);
     }
 
     /**

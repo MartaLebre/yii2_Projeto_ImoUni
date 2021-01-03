@@ -35,6 +35,7 @@ class Horario extends \yii\db\ActiveRecord
         return [
             [['id_perfil'], 'integer'],
             [['hora_comeco', 'hora_fim'], 'safe'],
+            [['hora_comeco', 'hora_fim'], 'datetime', 'format' => 'H:mm', 'message' => 'Formato da hora inválido.'],
             [['dia_semana'], 'string'],
             [['hora_comeco', 'hora_fim'], 'required', 'message' => 'Introduza a hora.'],
             [['dia_semana'], 'required', 'message' => 'Introduza o dia da semana.'],

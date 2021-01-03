@@ -84,10 +84,10 @@ class PerfilController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate()
+    public function actionUpdate($id)
     {
-        $user = User::findOne(Yii::$app->user->getId());
-        $perfil = Perfil::findOne($user->getId());
+        $user = User::findOne($id);
+        $perfil = Perfil::findOne($id);
         
         $_user = new SignupForm();
 
@@ -96,9 +96,12 @@ class PerfilController extends Controller
                 $user->setPassword($_user->password);
                 $user->update();
             }
+            
             $perfil->update();
+            
             Yii::$app->session->setFlash('success', 'Update efetuado com sucesso.');
             $_user->password = '';
+            
             return $this->render('update', [
                 '_user' => $_user,
                 'perfil' => $perfil,

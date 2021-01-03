@@ -50,11 +50,8 @@ class SignupForm extends Model
     
             ['data_nascimento', 'safe'],
             ['data_nascimento', 'required', 'message' => 'Introduza a sua data de nascimento.'],
-            /*
-            ['data_nascimento', 'date', 'message' => 'Data de nascimento incorreta.'],
-            ['data_nascimento', 'date', 'format' => 'Y-M-d'],
+            ['data_nascimento', 'date', 'format' => 'Y-M-d',
                                         'message' => 'Formato de data inválida.'],
-            */
             
             ['password', 'required', 'message' => 'Introduza uma password.'],
             ['password', 'string', 'min' => 6, 'tooShort' => 'A password tem que ter no mínimo 6 digitos.'],

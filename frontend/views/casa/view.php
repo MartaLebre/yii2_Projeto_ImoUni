@@ -1,5 +1,4 @@
 <?php
-
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -12,9 +11,7 @@ $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="casa-view">
-
     <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
@@ -25,27 +22,25 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
-
     <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'id_proprietario',
-            'nome_rua',
-            'localizacao',
-            'tipo_alojamento',
-            'wifi',
-            'limpeza',
-            'capacidade',
-            'num_quartos',
-            'num_wcs',
-            'aquecimento_agua',
-            'area_exterior',
-            'animais',
-            'fumar',
-            'visitantes_pernoitar',
-            'foto',
-        ],
+    'model' => $model,
+    'attributes' => [
+    'id',
+    'id_proprietario',
+    'nome_rua',
+    'localizacao',
+    'tipo_alojamento',
+    'wifi',
+    'limpeza',
+    'capacidade',
+    'num_quartos',
+    'num_wcs',
+    'aquecimento_agua',
+    'area_exterior',
+    'animais',
+    'fumar',
+    'visitantes_pernoitar',
+    'foto',
+    ],
     ]) ?>
-
 </div>

@@ -35,12 +35,15 @@ class HorarioController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new HorarioSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $id = Yii::$app->user->getId();
+        $models = Horario::find()
+            ->where(['id_perfil' => $id])
+            ->orderBy('id')
+            ->asArray()
+            ->all();
+    
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'models' => $models,
         ]);
     }
 
@@ -64,10 +67,12 @@ class HorarioController extends Controller
      */
     public function actionCreate()
     {
+        $id_user = Yii::$app->user->getId();
         $model = new Horario();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if($model->load(Yii::$app->request->post()) && $model->addHorario($id_user)){
+            Yii::$app->session->setFlash('success', 'Horário registado com sucesso.');
+            return $this->redirect(['view', 'id' => $id_user]);
         }
 
         return $this->render('create', [
@@ -78,33 +83,20 @@ class HorarioController extends Controller
     /**
      * Updates an existing Horario model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id_perfil
+     * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate()
+    public function actionUpdate($id)
     {
-        $id_perfil = Yii::$app->user->getId();
+        $model = $this->findModel($id);
         
-        $models = Horario::find()
-            ->where(['id_perfil' => $id_perfil])
-            ->orderBy('id')
-            ->asArray()
-            ->all();
-    
-        $new_model = new Horario();
-        
-        if($new_model->load(Yii::$app->request->post()) && $new_model->addHorario($id_perfil)) {
-            Yii::$app->session->setFlash('success', 'Horário registado com sucesso.');
-            return $this->render('update', [
-                'models' => $models,
-                'new_model' => $new_model,
-            ]);
+        if($model->load(Yii::$app->request->post()) && $model->save()){
+            return $this->redirect(['view', 'id' => $model->id]);
         }
-
+        
         return $this->render('update', [
-            'models' => $models,
-            'new_model' => $new_model,
+            'model' => $model,
         ]);
     }
 
@@ -118,8 +110,9 @@ class HorarioController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
+        $id_user = Yii::$app->user->getId();
 
-        return $this->redirect(['update']);
+        return $this->redirect(['view', 'id' => $id_user]);
     }
 
     /**
