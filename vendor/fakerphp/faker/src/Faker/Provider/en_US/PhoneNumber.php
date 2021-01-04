@@ -7,7 +7,7 @@ class PhoneNumber extends \Faker\Provider\PhoneNumber
     /**
      * @see https://en.wikipedia.org/wiki/National_conventions_for_writing_telephone_numbers#United_States.2C_Canada.2C_and_other_NANP_countries
      */
-    protected static $formats = array(
+    protected static $formats = [
         // International format
         '+1-{{areaCode}}-{{exchangeCode}}-####',
         '+1 ({{areaCode}}) {{exchangeCode}}-####',
@@ -25,8 +25,9 @@ class PhoneNumber extends \Faker\Provider\PhoneNumber
         '({{areaCode}}) {{exchangeCode}}-####',
         '1-{{areaCode}}-{{exchangeCode}}-####',
         '{{areaCode}}.{{exchangeCode}}.####',
+    ];
 
-        // Extensions
+    protected static $formatsWithExtension = [
         '{{areaCode}}-{{exchangeCode}}-#### x###',
         '({{areaCode}}) {{exchangeCode}}-#### x###',
         '1-{{areaCode}}-{{exchangeCode}}-#### x###',
@@ -41,21 +42,21 @@ class PhoneNumber extends \Faker\Provider\PhoneNumber
         '({{areaCode}}) {{exchangeCode}}-#### x#####',
         '1-{{areaCode}}-{{exchangeCode}}-#### x#####',
         '{{areaCode}}.{{exchangeCode}}.#### x#####'
-    );
+    ];
 
     /**
      * @see https://en.wikipedia.org/wiki/Toll-free_telephone_number#United_States
      */
-    protected static $tollFreeAreaCodes = array(
+    protected static $tollFreeAreaCodes = [
         800, 844, 855, 866, 877, 888
-    );
-    protected static $tollFreeFormats = array(
+    ];
+    protected static $tollFreeFormats = [
         // Standard formats
         '{{tollFreeAreaCode}}-{{exchangeCode}}-####',
         '({{tollFreeAreaCode}}) {{exchangeCode}}-####',
         '1-{{tollFreeAreaCode}}-{{exchangeCode}}-####',
         '{{tollFreeAreaCode}}.{{exchangeCode}}.####',
-    );
+    ];
 
     public function tollFreeAreaCode()
     {
@@ -67,6 +68,15 @@ class PhoneNumber extends \Faker\Provider\PhoneNumber
         $format = self::randomElement(static::$tollFreeFormats);
 
         return self::numerify($this->generator->parse($format));
+    }
+
+    /**
+     * @return string
+     * @example '555-123-546 x123'
+     */
+    public function phoneNumberWithExtension()
+    {
+        return static::numerify($this->generator->parse(static::randomElement(static::$formatsWithExtension)));
     }
 
     /**
@@ -82,7 +92,7 @@ class PhoneNumber extends \Faker\Provider\PhoneNumber
         $digits[] = self::randomDigit();
         $digits[] = self::randomDigitNot($digits[1]);
 
-        return join('', $digits);
+        return implode('', $digits);
     }
 
     /**
@@ -103,6 +113,6 @@ class PhoneNumber extends \Faker\Provider\PhoneNumber
             $digits[] = self::randomDigit();
         }
 
-        return join('', $digits);
+        return implode('', $digits);
     }
 }

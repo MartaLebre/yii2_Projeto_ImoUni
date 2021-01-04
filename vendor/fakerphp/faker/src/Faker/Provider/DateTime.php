@@ -4,7 +4,7 @@ namespace Faker\Provider;
 
 class DateTime extends Base
 {
-    protected static $century = array('I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII','XIII','XIV','XV','XVI','XVII','XVIII','XIX','XX','XXI');
+    protected static $century = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV', 'XVI', 'XVII', 'XVIII', 'XIX', 'XX', 'XXI'];
 
     protected static $defaultTimezone = null;
 
@@ -35,7 +35,7 @@ class DateTime extends Base
      */
     public static function unixTime($max = 'now')
     {
-        return mt_rand(0, static::getMaxTimestamp($max));
+        return self::numberBetween(0, static::getMaxTimestamp($max));
     }
 
     /**
@@ -68,9 +68,9 @@ class DateTime extends Base
      */
     public static function dateTimeAD($max = 'now', $timezone = null)
     {
-        $min = (PHP_INT_SIZE>4 ? -62135597361 : -PHP_INT_MAX);
+        $min = (PHP_INT_SIZE > 4 ? -62135597361 : -PHP_INT_MAX);
         return static::setTimezone(
-            new \DateTime('@' . mt_rand($min, static::getMaxTimestamp($max))),
+            new \DateTime('@' . self::numberBetween($min, static::getMaxTimestamp($max))),
             $timezone
         );
     }
@@ -134,7 +134,7 @@ class DateTime extends Base
             throw new \InvalidArgumentException('Start date must be anterior to end date.');
         }
 
-        $timestamp = mt_rand($startTimestamp, $endTimestamp);
+        $timestamp = self::numberBetween($startTimestamp, $endTimestamp);
 
         return static::setTimezone(
             new \DateTime('@' . $timestamp),
@@ -163,7 +163,7 @@ class DateTime extends Base
         $otherDatetime->add($intervalObject);
 
         $begin = $datetime > $otherDatetime ? $otherDatetime : $datetime;
-        $end = $datetime===$begin ? $otherDatetime : $datetime;
+        $end = $datetime === $begin ? $otherDatetime : $datetime;
 
         return static::dateTimeBetween(
             $begin,
@@ -202,7 +202,7 @@ class DateTime extends Base
      */
     public static function dateTimeThisYear($max = 'now', $timezone = null)
     {
-        return static::dateTimeBetween('-1 year', $max, $timezone);
+        return static::dateTimeBetween('first day of january this year', $max, $timezone);
     }
 
     /**

@@ -2,8 +2,8 @@
 
 namespace Faker\ORM\Propel;
 
-use \Faker\Provider\Base;
-use \ColumnMap;
+use ColumnMap;
+use Faker\Provider\Base;
 
 /**
  * Service class for populating a table through a Propel ActiveRecord class.
@@ -11,12 +11,10 @@ use \ColumnMap;
 class EntityPopulator
 {
     protected $class;
-    protected $columnFormatters = array();
-    protected $modifiers = array();
+    protected $columnFormatters = [];
+    protected $modifiers = [];
 
     /**
-     * Class constructor.
-     *
      * @param string $class A Propel ActiveRecord classname
      */
     public function __construct($class)
@@ -56,7 +54,7 @@ class EntityPopulator
      */
     public function guessColumnFormatters(\Faker\Generator $generator)
     {
-        $formatters = array();
+        $formatters = [];
         $class = $this->class;
         $peerClass = $class::PEER;
         $tableMap = $peerClass::getTableMap();
@@ -69,8 +67,8 @@ class EntityPopulator
             }
             if ($columnMap->isForeignKey()) {
                 $relatedClass = $columnMap->getRelation()->getForeignTable()->getClassname();
-                $formatters[$columnMap->getPhpName()] = function ($inserted) use ($relatedClass) {
-                    return isset($inserted[$relatedClass]) ? $inserted[$relatedClass][mt_rand(0, count($inserted[$relatedClass]) - 1)] : null;
+                $formatters[$columnMap->getPhpName()] = function ($inserted) use ($relatedClass, $generator) {
+                    return isset($inserted[$relatedClass]) ? $generator->randomElement($inserted[$relatedClass]) : null;
                 };
                 continue;
             }
@@ -100,13 +98,13 @@ class EntityPopulator
             $columnName = Base::toLower($columnMap->getName());
             switch ($name) {
                 case 'nested_set':
-                    $columnNames = array($params['left_column'], $params['right_column'], $params['level_column']);
+                    $columnNames = [$params['left_column'], $params['right_column'], $params['level_column']];
                     if (in_array($columnName, $columnNames)) {
                         return true;
                     }
                     break;
                 case 'timestampable':
-                    $columnNames = array($params['create_column'], $params['update_column']);
+                    $columnNames = [$params['create_column'], $params['update_column']];
                     if (in_array($columnName, $columnNames)) {
                         return true;
                     }
@@ -141,7 +139,7 @@ class EntityPopulator
      */
     public function guessModifiers(\Faker\Generator $generator)
     {
-        $modifiers = array();
+        $modifiers = [];
         $class = $this->class;
         $peerClass = $class::PEER;
         $tableMap = $peerClass::getTableMap();
@@ -159,9 +157,8 @@ class EntityPopulator
                     };
                     break;
                 case 'sortable':
-                    $modifiers['sortable'] = function ($obj, $inserted) use ($class) {
-                        $maxRank = isset($inserted[$class]) ? count($inserted[$class]) : 0;
-                        $obj->insertAtRank(mt_rand(1, $maxRank + 1));
+                    $modifiers['sortable'] = function ($obj, $inserted) use ($class, $generator) {
+                        $obj->insertAtRank($generator->numberBetween(1, count($inserted[$class] ?? []) + 1));
                     };
                     break;
             }
