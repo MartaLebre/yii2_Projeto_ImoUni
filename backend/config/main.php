@@ -86,7 +86,7 @@ return [
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
-                    'controller' => '/api/casas',
+                    'controller' => 'api/casas',
                     'pluralize' => false,
                     'extraPatterns' =>
                         [

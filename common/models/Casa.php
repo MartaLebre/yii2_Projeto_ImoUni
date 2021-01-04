@@ -99,7 +99,6 @@ class Casa extends \yii\db\ActiveRecord
         
         $casa->id_proprietario = $id_user;
         $casa->nome_rua = $this->nome_rua;
-
         $casa->tipo_alojamento = $this->tipo_alojamento;
         $casa->wifi = $this->wifi;
         $casa->limpeza = $this->limpeza;
