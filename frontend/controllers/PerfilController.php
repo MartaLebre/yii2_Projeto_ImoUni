@@ -101,7 +101,6 @@ class PerfilController extends Controller
             
             Yii::$app->session->setFlash('success', 'Update efetuado com sucesso.');
             $_user->password = '';
-            
             return $this->render('update', [
                 '_user' => $_user,
                 'perfil' => $perfil,

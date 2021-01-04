@@ -39,10 +39,9 @@ class Cozinha extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'id_casa', 'lava_loica', 'maquina_roupa', 'maquina_loica', 'tostadeira', 'torradeira', 'mircro_ondas', 'frigorifico', 'arca', 'fogao', 'forno', 'foto'], 'required'],
+            [['id', 'id_casa', 'lava_loica', 'maquina_roupa', 'maquina_loica', 'tostadeira', 'torradeira', 'mircro_ondas', 'frigorifico', 'arca', 'fogao', 'forno'], 'required'],
             [['id', 'id_casa', 'lava_loica', 'maquina_roupa', 'maquina_loica', 'tostadeira', 'torradeira', 'mircro_ondas', 'arca', 'forno'], 'integer'],
             [['frigorifico', 'fogao'], 'string'],
-            [['foto'], 'string', 'max' => 1024],
             [['id'], 'unique'],
             [['id_casa'], 'exist', 'skipOnError' => true, 'targetClass' => Casa::className(), 'targetAttribute' => ['id_casa' => 'id']],
         ];
@@ -56,18 +55,47 @@ class Cozinha extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'id_casa' => 'Id Casa',
-            'lava_loica' => 'Lava Loica',
-            'maquina_roupa' => 'Maquina Roupa',
-            'maquina_loica' => 'Maquina Loica',
+            'lava_loica' => 'Lava-loica',
+            'maquina_roupa' => 'Maquina roupa',
+            'maquina_loica' => 'Maquina loica',
             'tostadeira' => 'Tostadeira',
             'torradeira' => 'Torradeira',
-            'mircro_ondas' => 'Mircro Ondas',
+            'mircro_ondas' => 'Mircro-ondas',
             'frigorifico' => 'Frigorifico',
             'arca' => 'Arca',
-            'fogao' => 'Fogao',
+            'fogao' => 'Fogão',
             'forno' => 'Forno',
             'foto' => 'Foto',
         ];
+    }
+    
+    /**
+     * Cria uma cozinha
+     * @param Casa $id_user para qual utilizador irá ser associado
+     * @return bool se for criado com sucesso
+     */
+    public function addCozinha($id_propriedade, $imgUploaded){
+        if (!$this->validate()) {
+            return null;
+        }
+        
+        $cozinha = new Cozinha();
+    
+        $cozinha->id_casa = $id_propriedade;
+        $cozinha->lava_loica = $this->lava_loica;
+        $cozinha->maquina_roupa = $this->maquina_roupa;
+        $cozinha->maquina_loica = $this->maquina_loica;
+        $cozinha->tostadeira = $this->tostadeira;
+        $cozinha->torradeira = $this->torradeira;
+        $cozinha->mircro_ondas = $this->mircro_ondas;
+        $cozinha->frigorifico = $this->frigorifico;
+        $cozinha->arca = $this->arca;
+        $cozinha->fogao = $this->fogao;
+        $cozinha->forno = $this->forno;
+        $cozinha->foto = $imgUploaded;
+        $cozinha->save();
+        
+        return true;
     }
 
     /**

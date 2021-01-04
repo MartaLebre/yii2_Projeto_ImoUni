@@ -8,6 +8,7 @@ use common\models\CasaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * CasaController implements the CRUD actions for Casa model.
@@ -70,9 +71,14 @@ class CasaController extends Controller
         $id_user = Yii::$app->user->getId();
         $model = new Casa();
     
-        if($model->load(Yii::$app->request->post()) && $model->addCasa($id_user)){
-            Yii::$app->session->setFlash('success', 'Propriedade registada com sucesso.');
-            return $this->redirect(['view', 'id' => $id_user]);
+        if($model->load(Yii::$app->request->post()) && $model->validate()){
+            $file = UploadedFile::getInstance($model,'foto');
+            $fp = fopen($file->tempName, 'r');
+            $imgUploaded = fread($fp, filesize($file->tempName));
+            fclose($fp);
+            $model->addCasa($id_user, $imgUploaded);
+            
+            return $this->redirect(['index']);
         }
     
         return $this->render('create', [
@@ -110,9 +116,9 @@ class CasaController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-        $id_user = Yii::$app->user->getId();
+        Yii::$app->session->setFlash('success', 'Propriedade eliminada com sucesso.');
     
-        return $this->redirect(['view', 'id' => $id_user]);
+        return $this->redirect(['index']);
     }
 
     /**

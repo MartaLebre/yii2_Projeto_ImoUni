@@ -110,7 +110,7 @@ class HorarioController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-        $id_user = Yii::$app->user->getId();
+        Yii::$app->session->setFlash('success', 'Horário eliminado com sucesso.');
 
         return $this->redirect(['index']);
     }

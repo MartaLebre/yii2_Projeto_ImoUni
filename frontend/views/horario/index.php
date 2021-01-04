@@ -20,10 +20,10 @@ $this->title = 'Horários | ImoUni';
                             <div class="card">
                                 <div class="card-content col-sm-6">
                                     <div class="card-body">
-                                        <p class="card-text">Dia da semana: <?=  $model['dia_semana'] ?></p>
-                                        <p class="card-text">Horário:
+                                        <h4 class="card-text">Dia da semana: <span style="text-transform: capitalize"><?=  $model['dia_semana'] ?></span></h4>
+                                        <h4 class="card-text">Horário:
                                             <?= Yii::$app->formatter->asTime($model['hora_comeco'], 'H:mm') ?> às
-                                            <?= Yii::$app->formatter->asTime($model['hora_fim'], 'H:mm') ?></p>
+                                            <?= Yii::$app->formatter->asTime($model['hora_fim'], 'H:mm') ?></h4>
                                     </div>
                                 </div>
                                 <div style="text-align: center; padding-top: 10px">
@@ -39,7 +39,7 @@ $this->title = 'Horários | ImoUni';
                         </div>
                         <hr>
                     <?php } ?>
-                    <div style="text-align: center">
+                    <div style="text-align: center; padding-bottom: 10px">
                         <?= Html::a('Adicionar horário', ['/horario/create'], ['class'=>'btn btn-primary']) ?>
                     </div>
                 </div>

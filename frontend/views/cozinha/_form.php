@@ -9,39 +9,70 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="cozinha-form">
+    <div class="row">
+        <div class="col-lg-4">
+            <h3>Caracteristicas da cozinha</h3>
+            
+            <?php $form = ActiveForm::begin(); ?>
 
-    <?php $form = ActiveForm::begin(); ?>
+            <div class="row">
+                <div class="col-sm-6">
+                    <?= $form->field($model, 'lava_loica')->dropDownList([ '0' => 'Não', '1' => 'Sim'], ['prompt' => '']) ?>
+                </div>
+                <div class="col-sm-6">
+                    <?= $form->field($model, 'maquina_roupa')->dropDownList([ '0' => 'Não', '1' => 'Sim'], ['prompt' => '']) ?>
+                </div>
+            </div>
 
-    <?= $form->field($model, 'id')->textInput() ?>
+            <div class="row">
+                <div class="col-sm-6">
+                    <?= $form->field($model, 'maquina_loica')->dropDownList([ '0' => 'Não', '1' => 'Sim'], ['prompt' => '']) ?>
+                </div>
+                <div class="col-sm-6">
+                    <?= $form->field($model, 'tostadeira')->dropDownList([ '0' => 'Não', '1' => 'Sim'], ['prompt' => '']) ?>
+                </div>
+            </div>
 
-    <?= $form->field($model, 'id_casa')->textInput() ?>
+            <div class="row">
+                <div class="col-sm-6">
+                    <?= $form->field($model, 'torradeira')->dropDownList([ '0' => 'Não', '1' => 'Sim'], ['prompt' => '']) ?>
+                </div>
+                <div class="col-sm-6">
+                    <?= $form->field($model, 'mircro_ondas')->dropDownList([ '0' => 'Não', '1' => 'Sim'], ['prompt' => '']) ?>
+                </div>
+            </div>
 
-    <?= $form->field($model, 'lava_loica')->textInput() ?>
+            <div class="row">
+                <div class="col-sm-6">
+                    <?= $form->field($model, 'frigorifico')->dropDownList([ 'sem congelador' => 'Sem congelador', 'com congelador' => 'Com congelador'], ['prompt' => '']) ?>
+                </div>
+                <div class="col-sm-6">
+                    <?= $form->field($model, 'arca')->dropDownList([ '0' => 'Não', '1' => 'Sim'], ['prompt' => '']) ?>
+                </div>
+            </div>
 
-    <?= $form->field($model, 'maquina_roupa')->textInput() ?>
-
-    <?= $form->field($model, 'maquina_loica')->textInput() ?>
-
-    <?= $form->field($model, 'tostadeira')->textInput() ?>
-
-    <?= $form->field($model, 'torradeira')->textInput() ?>
-
-    <?= $form->field($model, 'mircro_ondas')->textInput() ?>
-
-    <?= $form->field($model, 'frigorifico')->dropDownList([ 'sem congelador' => 'Sem congelador', 'com congelador' => 'Com congelador', ], ['prompt' => '']) ?>
-
-    <?= $form->field($model, 'arca')->textInput() ?>
-
-    <?= $form->field($model, 'fogao')->dropDownList([ 'gas' => 'Gas', 'eletrico' => 'Eletrico', ], ['prompt' => '']) ?>
-
-    <?= $form->field($model, 'forno')->textInput() ?>
-
-    <?= $form->field($model, 'foto')->textInput() ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+            <div class="row">
+                <div class="col-sm-6">
+                    <?= $form->field($model, 'fogao')->dropDownList([ 'gas' => 'Gás', 'eletrico' => 'Elétrico'], ['prompt' => '']) ?>
+                </div>
+                <div class="col-sm-6">
+                    <?= $form->field($model, 'forno')->dropDownList([ '0' => 'Não', '1' => 'Sim'], ['prompt' => '']) ?>
+                </div>
+            </div>
+            
+            <h3>Foto</h3>
+            <?php echo $form->field($model, 'foto')->fileInput()->label(false); ?>
+            <hr>
+        </div>
+        <div class="col-lg-4">
+            <?= var_dump($id_propriedade)?>
+            <?= var_dump($model)?>
+        </div>
     </div>
 
+    <div class="form-group">
+        <?= Html::submitButton('Adicionar cozinha', ['class' => 'btn btn-success']) ?>
+    </div>
+    
     <?php ActiveForm::end(); ?>
-
 </div>

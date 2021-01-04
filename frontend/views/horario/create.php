@@ -10,6 +10,7 @@ $this->title = 'Adicionar horários | ImoUni';
     <div class="row">
         <div class="col-lg-5">
             <h1>Adicionar horário</h1>
+            <h4>Por favor preencha os seguintes campos:</h4>
             <br>
             <div class="horario-form">
                 <div class="row">

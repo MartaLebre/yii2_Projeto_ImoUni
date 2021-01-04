@@ -13,7 +13,7 @@ $this->title = 'Login | ImoUni';
     <div class="row">
         <div class="col-lg-5">
             <h1>Login</h1>
-            <p>Por favor preencha os seguintes campos</p>
+            <h4>Por favor preencha os seguintes campos</h4>
             <br>
             <div class="horario-form">
                 <div class="row">
@@ -24,6 +24,7 @@ $this->title = 'Login | ImoUni';
     
                         <?= $form->field($model, 'password')->passwordInput() ?>
                         
+                        <hr>
                         <div class="form-group">
                             <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
                         </div>

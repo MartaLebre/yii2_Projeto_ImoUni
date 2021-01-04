@@ -59,17 +59,17 @@ class Horario extends \yii\db\ActiveRecord
     
     /**
      * Cria um horario
-     * @param Horario $id_perfil para qual utilizador irá ser associado
+     * @param Horario $id_user para qual utilizador irá ser associado
      * @return bool se for criado com sucesso
      */
-    public function addHorario($id_perfil)
+    public function addHorario($id_user)
     {
         if (!$this->validate()) {
             return null;
         }
         
         $horario = new Horario();
-        $horario->id_perfil = $id_perfil;
+        $horario->id_perfil = $id_user;
         $horario->hora_comeco = $this->hora_comeco;
         $horario->hora_fim = $this->hora_fim;
         $horario->dia_semana = $this->dia_semana;

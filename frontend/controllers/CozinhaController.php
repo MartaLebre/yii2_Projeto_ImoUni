@@ -1,6 +1,6 @@
 <?php
 
-namespace app\controllers;
+namespace frontend\controllers;
 
 use Yii;
 use common\models\Cozinha;
@@ -8,6 +8,7 @@ use common\models\CozinhaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * CozinhaController implements the CRUD actions for Cozinha model.
@@ -65,11 +66,17 @@ class CozinhaController extends Controller
     public function actionCreate()
     {
         $model = new Cozinha();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+    
+        if($model->load(Yii::$app->request->post()) && $model->validate()){
+            $file = UploadedFile::getInstance($model,'foto');
+            $fp = fopen($file->tempName, 'r');
+            $imgUploaded = fread($fp, filesize($file->tempName));
+            fclose($fp);
+            $model->addCozinha($id_propriedade, $imgUploaded);
+        
+            return $this->redirect(['/sala/create', 'id_propriedade' => $id_propriedade]);
         }
-
+    
         return $this->render('create', [
             'model' => $model,
         ]);

@@ -5,16 +5,17 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Casa */
 
-$this->title = 'Create Casa';
-$this->params['breadcrumbs'][] = ['label' => 'Casas', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Adicionar propriedade | ImoUni';
 ?>
 <div class="casa-create">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
-
+    <div class="row">
+        <div class="col-lg-12">
+            <h1>Adicionar propriedade</h1>
+            <h4>Por favor preencha os seguintes campos:</h4>
+            <br>
+            <div class="casa-form">
+                <?= $this->render('_form', ['model' => $model]) ?>
+            </div>
+        </div>
+    </div>
 </div>

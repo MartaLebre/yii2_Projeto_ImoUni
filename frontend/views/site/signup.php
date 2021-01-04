@@ -12,7 +12,7 @@ $this->title = 'Signup | ImoUni';
 ?>
 <div class="site-signup">
     <h1>Registar nova conta</h1>
-    <p>Por favor preencha os seguintes campos:</p>
+    <h4>Por favor preencha os seguintes campos:</h4>
     <br>
 
     <div class="row">
@@ -43,6 +43,7 @@ $this->title = 'Signup | ImoUni';
             
             <?= $form->field($model, 'tipo')->dropDownList(['1' => 'Estudante', '2' => 'Proprietario'], ['prompt' => ''])->label('Tipo de utilizador') ?>
             
+            <hr>
             <div class="form-group">
                 <?= Html::submitButton('Registar', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
             </div>

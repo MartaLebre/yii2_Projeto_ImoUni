@@ -18,6 +18,7 @@ use nex\datepicker\DatePicker;
 
     <?= $form->field($model, 'dia_semana')->dropDownList([ 'segunda' => 'Segunda', 'terca' => 'Terca', 'quarta' => 'Quarta', 'quinta' => 'Quinta', 'sexta' => 'Sexta', ], ['prompt' => '']) ?>
 
+    <hr>
     <div class="form-group">
         <?= Html::submitButton('Adicionar', ['class' => 'btn btn-success']) ?>
     </div>

@@ -22,6 +22,7 @@ $this->title = 'Signup | ImoUni';
             
             <?= $form->field($perfil, 'numero_telemovel')->textInput() ?>
             
+            <hr>
             <div class="form-group">
                 <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
             </div>

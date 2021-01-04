@@ -1,5 +1,6 @@
 <?php
 
+use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -11,7 +12,7 @@ $this->title = 'Minhas propriedades | ImoUni';
 ?>
 <div class="casa-index">
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-7">
             <h1>Minhas proriedades</h1>
             <br>
             <div class="panel panel-default">
@@ -19,19 +20,21 @@ $this->title = 'Minhas propriedades | ImoUni';
                     <?php foreach($models as $model){ ?>
                         <div class="row">
                             <div class="card">
-                                <div class="card-content col-lg-6">
+                                <div class="col-lg-2">
+                                    <?php echo '<img src="data:image/jpeg;base64,' . base64_encode($model['foto']) . '" style="width: 100px; height: 100px">'; ?>
+                                </div>
+                                <div class="card-content col-lg-6" style="padding-left: 30px">
                                     <div class="card-body">
-                                        <p class="card-text">Rua: <?=  $model['nome_rua'] ?></p>
-                                        <p class="card-text">Tipo de alojamento: <?= $model['tipo_alojamento'] ?></p>
-                                        <p class="card-text">Capacidade: <?=  $model['capacidade'] ?> pessoas</p>
+                                        <h4 class="card-text">Rua: <span style="text-transform: capitalize"><?=  $model['nome_rua'] ?></span></h4>
+                                        <h4 class="card-text">Tipo de alojamento: <span style="text-transform: capitalize"><?= $model['tipo_alojamento'] ?></span></h4>
+                                        <h4 class="card-text">Capacidade: <?=  $model['capacidade'] ?> pessoas</h4>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-4">
                                     <div class="row" style="padding-top: 10px">
                                         <div style="text-align: center">
-                                            <?= Html::a('Criar anúncio', ['/casa/create'], ['class'=>'btn btn-success']) ?>
+                                            <?= Html::a('Criar anúncio', ['/anuncio/create'], ['class'=>'btn btn-success']) ?>
                                         </div>
-
                                     </div>
                                     <div class="row" style="padding-top: 10px">
                                         <div style="text-align: center">
@@ -49,7 +52,7 @@ $this->title = 'Minhas propriedades | ImoUni';
                         </div>
                         <hr>
                     <?php } ?>
-                    <div style="text-align: center">
+                    <div style="text-align: center; padding-bottom: 10px">
                         <?= Html::a('Adicionar propriedade', ['/casa/create'], ['class'=>'btn btn-primary']) ?>
                     </div>
                 </div>

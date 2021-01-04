@@ -9,43 +9,71 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="casa-form">
+    <div class="row">
+        <div class="col-lg-4">
+            <h3>Caracteristicas da propriedade</h3>
+    
+            <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+    
+            <?= $form->field($model, 'nome_rua')->textInput() ?>
+            
+            <div class="row">
+                <div class="col-sm-6">
+                    <?= $form->field($model, 'tipo_alojamento')->dropDownList([ 'apartamento' => 'Apartamento', 'moradia' => 'Moradia'], ['prompt' => '']) ?>
+                </div>
+                <div class="col-sm-6">
+                    <?= $form->field($model, 'limpeza')->dropDownList([ 'quinzenal' => 'Quinzenal', 'mensal' => 'Mensal', 'nao' => 'Nao'], ['prompt' => '']) ?>
+                </div>
+            </div>
 
-    <?php $form = ActiveForm::begin(); ?>
+            <div class="row">
+                <div class="col-sm-6">
+                    <?= $form->field($model, 'capacidade')->textInput() ?>
+                </div>
+                <div class="col-sm-6">
+                    <?= $form->field($model, 'num_quartos')->textInput() ?>
+                </div>
+            </div>
 
-    <?= $form->field($model, 'id_proprietario')->textInput() ?>
+            <div class="row">
+                <div class="col-sm-6">
+                    <?= $form->field($model, 'num_wcs')->textInput() ?>
+                </div>
+                <div class="col-sm-6">
+                    <?= $form->field($model, 'aquecimento_agua')->dropDownList([ 'termoacumulador' => 'Termoacumulador', 'esquentador' => 'Esquentador'], ['prompt' => '']) ?>
+                </div>
+            </div>
 
-    <?= $form->field($model, 'nome_rua')->textInput(['maxlength' => true]) ?>
+            <div class="row">
+                <div class="col-sm-6">
+                    <?= $form->field($model, 'wifi')->dropDownList([ '0' => 'Não', '1' => 'Sim'], ['prompt' => '']) ?>
+                </div>
+                <div class="col-sm-6">
+                    <?= $form->field($model, 'area_exterior')->dropDownList([ '0' => 'Não', '1' => 'Sim'], ['prompt' => '']) ?>
+                </div>
+            </div>
 
-    <?= $form->field($model, 'localizacao')->textInput() ?>
+            <h3>Foto</h3>
+            <?php echo $form->field($model, 'foto')->fileInput()->label(false); ?>
+            
+            <hr>
+        </div>
+        
+        <div class="col-lg-2" style="padding-left: 50px">
+            <h3>Regras</h3>
+            <div>
+                <?= $form->field($model, 'animais')->dropDownList([ '0' => 'Não', '1' => 'Sim'], ['prompt' => '']) ?>
 
-    <?= $form->field($model, 'tipo_alojamento')->dropDownList([ 'apartamento' => 'Apartamento', 'moradia' => 'Moradia', ], ['prompt' => '']) ?>
+                <?= $form->field($model, 'fumar')->dropDownList([ '0' => 'Não', '1' => 'Sim'], ['prompt' => '']) ?>
 
-    <?= $form->field($model, 'wifi')->textInput() ?>
-
-    <?= $form->field($model, 'limpeza')->dropDownList([ 'quinzenal' => 'Quinzenal', 'mensal' => 'Mensal', 'nao' => 'Nao', ], ['prompt' => '']) ?>
-
-    <?= $form->field($model, 'capacidade')->textInput() ?>
-
-    <?= $form->field($model, 'num_quartos')->textInput() ?>
-
-    <?= $form->field($model, 'num_wcs')->textInput() ?>
-
-    <?= $form->field($model, 'aquecimento_agua')->dropDownList([ 'termoacumulador' => 'Termoacumulador', 'esquentador' => 'Esquentador', ], ['prompt' => '']) ?>
-
-    <?= $form->field($model, 'area_exterior')->textInput() ?>
-
-    <?= $form->field($model, 'animais')->textInput() ?>
-
-    <?= $form->field($model, 'fumar')->textInput() ?>
-
-    <?= $form->field($model, 'visitantes_pernoitar')->textInput() ?>
-
-    <?= $form->field($model, 'foto')->textInput() ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+                <?= $form->field($model, 'visitantes_pernoitar')->dropDownList([ '0' => 'Não', '1' => 'Sim'], ['prompt' => '']) ?>
+            </div>
+        </div>
     </div>
-
+    
+    <div class="form-group">
+        <?= Html::submitButton('Adicionar propriedade', ['class' => 'btn btn-success']) ?>
+    </div>
+    
     <?php ActiveForm::end(); ?>
-
 </div>
