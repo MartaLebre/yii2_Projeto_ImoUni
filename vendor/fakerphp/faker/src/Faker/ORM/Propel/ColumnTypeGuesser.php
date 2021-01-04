@@ -2,8 +2,8 @@
 
 namespace Faker\ORM\Propel;
 
-use \PropelColumnTypes;
-use \ColumnMap;
+use ColumnMap;
+use PropelColumnTypes;
 
 class ColumnTypeGuesser
 {
@@ -50,30 +50,27 @@ class ColumnTypeGuesser
                     return $generator->randomNumber($size + 2) / 100;
                 };
             case PropelColumnTypes::TINYINT:
-                return function () {
-                    return mt_rand(0, 127);
+                return function () use ($generator) {
+                    return $generator->numberBetween(0, 127);
                 };
             case PropelColumnTypes::SMALLINT:
-                return function () {
-                    return mt_rand(0, 32767);
+                return function () use ($generator) {
+                    return $generator->numberBetween(0, 32767);
                 };
             case PropelColumnTypes::INTEGER:
-                return function () {
-                    return mt_rand(0, intval('2147483647'));
+                return function () use ($generator) {
+                    return $generator->numberBetween(0, 2147483647);
                 };
             case PropelColumnTypes::BIGINT:
-                return function () {
-                    return mt_rand(0, intval('9223372036854775807'));
+                return function () use ($generator) {
+                    return $generator->numberBetween(0, PHP_INT_MAX);
                 };
             case PropelColumnTypes::FLOAT:
-                return function () {
-                    return mt_rand(0, intval('2147483647'))/mt_rand(1, intval('2147483647'));
-                };
             case PropelColumnTypes::DOUBLE:
             case PropelColumnTypes::REAL:
-                return function () {
-                    return mt_rand(0, intval('9223372036854775807'))/mt_rand(1, intval('9223372036854775807'));
-                };
+            return function () use ($generator) {
+                return $generator->randomFloat();
+            };
             case PropelColumnTypes::CHAR:
             case PropelColumnTypes::VARCHAR:
             case PropelColumnTypes::BINARY:

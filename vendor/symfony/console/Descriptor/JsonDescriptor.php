@@ -100,10 +100,7 @@ class JsonDescriptor extends Descriptor
         $this->write(json_encode($data, $flags));
     }
 
-    /**
-     * @return array
-     */
-    private function getInputArgumentData(InputArgument $argument)
+    private function getInputArgumentData(InputArgument $argument): array
     {
         return [
             'name' => $argument->getName(),
@@ -114,10 +111,7 @@ class JsonDescriptor extends Descriptor
         ];
     }
 
-    /**
-     * @return array
-     */
-    private function getInputOptionData(InputOption $option)
+    private function getInputOptionData(InputOption $option): array
     {
         return [
             'name' => '--'.$option->getName(),
@@ -130,10 +124,7 @@ class JsonDescriptor extends Descriptor
         ];
     }
 
-    /**
-     * @return array
-     */
-    private function getInputDefinitionData(InputDefinition $definition)
+    private function getInputDefinitionData(InputDefinition $definition): array
     {
         $inputArguments = [];
         foreach ($definition->getArguments() as $name => $argument) {
@@ -148,12 +139,8 @@ class JsonDescriptor extends Descriptor
         return ['arguments' => $inputArguments, 'options' => $inputOptions];
     }
 
-    /**
-     * @return array
-     */
-    private function getCommandData(Command $command)
+    private function getCommandData(Command $command): array
     {
-        $command->getSynopsis();
         $command->mergeApplicationDefinition(false);
 
         return [
@@ -161,7 +148,7 @@ class JsonDescriptor extends Descriptor
             'usage' => array_merge([$command->getSynopsis()], $command->getUsages(), $command->getAliases()),
             'description' => $command->getDescription(),
             'help' => $command->getProcessedHelp(),
-            'definition' => $this->getInputDefinitionData($command->getNativeDefinition()),
+            'definition' => $this->getInputDefinitionData($command->getDefinition()),
             'hidden' => $command->isHidden(),
         ];
     }

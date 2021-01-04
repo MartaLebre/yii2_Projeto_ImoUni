@@ -1,24 +1,19 @@
 {
-    "name": "codeception/codeception",
-    "description": "BDD-style testing framework",
-    "keywords": [
-        "BDD",
-        "acceptance testing",
-        "functional testing",
-        "unit testing",
-        "tdd"
-    ],
-    "homepage": "http://codeception.com/",
-    "type": "library",
-    "license": "MIT",
-    "authors": [
+    "name":"codeception/codeception",
+    "description":"BDD-style testing framework",
+    "keywords":["BDD", "acceptance testing", "functional testing", "unit testing", "tdd"],
+    "homepage":"http://codeception.com/",
+    "type":"library",
+    "license":"MIT",
+    "authors":[
         {
-            "name": "Michael Bodnarchuk",
-            "email": "davert@mail.ua",
-            "homepage": "http://codegyre.com"
+            "name":"Michael Bodnarchuk",
+            "email":"davert@mail.ua",
+            "homepage":"http://codegyre.com"
         }
     ],
     "minimum-stability": "RC",
+
     "require": {
         "php": ">=5.6.0 <9.0",
         "ext-curl": "*",
@@ -33,9 +28,7 @@
         "symfony/css-selector": ">=2.7 <6.0",
         "behat/gherkin": "^4.4.0",
         "codeception/phpunit-wrapper": ">6.0.15 <6.1.0 | ^6.6.1 | ^7.7.1 | ^8.1.1 | ^9.0",
-        "codeception/stub": "^2.0 | ^3.0",
-        "codeception/module-phpbrowser": "^1.0.0",
-        "codeception/module-asserts": "^1.0.0"
+        "codeception/stub": "^2.0 | ^3.0"
     },
     "require-dev": {
         "monolog/monolog": "~1.8",
@@ -57,8 +50,9 @@
         "symfony/phpunit-bridge": "For phpunit-bridge support",
         "stecman/symfony-console-completion": "For BASH autocompletion"
     },
-    "autoload": {
-        "psr-4": {
+
+    "autoload":{
+        "psr-4":{
             "Codeception\\": "src/Codeception",
             "Codeception\\Extension\\": "ext"
         }
@@ -71,12 +65,11 @@
         ]
     },
     "extra": {
-        "branch-alias": []
+        "branch-alias": {
+        }
     },
-    "bin": [
-        "codecept"
-    ],
+    "bin":["codecept"],
     "config": {
-        "platform": []
+        "platform": {}
     }
 }
