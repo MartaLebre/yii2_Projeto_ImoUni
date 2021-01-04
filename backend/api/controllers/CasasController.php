@@ -15,7 +15,7 @@ use yii\filters\VerbFilter;
 /**
  * CasaController implements the CRUD actions for Casa model.
  */
-class CasaController extends ActiveController
+class CasasController extends ActiveController
 {
     public $modelClass = 'common\models\Casa';
 
