@@ -2,58 +2,105 @@
 
 namespace frontend\tests\functional;
 
+use common\models\User;
 use frontend\tests\FunctionalTester;
 
 class SignupCest
 {
-    protected $formId = '#form-signup';
-
-
     public function _before(FunctionalTester $I)
     {
         $I->amOnRoute('site/signup');
     }
 
-    public function signupWithEmptyFields(FunctionalTester $I)
+    protected function formParams($primeiro_nome, $ultimo_nome, $username, $email, $password, $data_nascimento, $numero_telemovel, $genero, $tipo)
     {
-        $I->see('Signup', 'h1');
-        $I->see('Please fill out the following fields to signup:');
-        $I->submitForm($this->formId, []);
-        $I->seeValidationError('Username cannot be blank.');
-        $I->seeValidationError('Email cannot be blank.');
-        $I->seeValidationError('Password cannot be blank.');
-
+        return[
+            'SignupForm[primeiro_nome]' => $primeiro_nome,
+            'SignupForm[ultimo_nome]' => $ultimo_nome,
+            'SignupForm[username]' => $username,
+            'SignupForm[email]' => $email,
+            'SignupForm[password]' => $password,
+            'SignupForm[data_nascimento]' => $data_nascimento,
+            'SignupForm[numero_telemovel]' => $numero_telemovel,
+            'SignupForm[genero]' => $genero,
+            'SignupForm[tipo]' => $tipo,
+        ];
     }
 
-    public function signupWithWrongEmail(FunctionalTester $I)
+    public function VerificacaoVazio (FunctionalTester $I)
     {
-        $I->submitForm(
-            $this->formId, [
-            'SignupForm[username]'  => 'tester',
-            'SignupForm[email]'     => 'ttttt',
-            'SignupForm[password]'  => 'tester_password',
-        ]
-        );
-        $I->dontSee('Username cannot be blank.', '.help-block');
-        $I->dontSee('Password cannot be blank.', '.help-block');
-        $I->see('Email is not a valid email address.', '.help-block');
+        $I->submitForm('#signup-form', [
+            'SignupForm[primeiro_nome]' => '',
+            'SignupForm[ultimo_nome]' => '',
+            'SignupForm[username]' => '',
+            'SignupForm[email]' => '',
+            'SignupForm[password]' => '',
+            'SignupForm[data_nascimento]' => '',
+            'SignupForm[numero_telemovel]' => '',
+            'SignupForm[genero]' => '',
+            'SignupForm[tipo]' => '',
+        ]);
+        $I->seeValidationError('Este campo não pode estar em branco!');
+        $I->see('Este campo não pode estar em branco!', '.help-block');
+        $I->see('Este campo não pode estar em branco!', '.help-block');
+        $I->see('Este campo não pode estar em branco!', '.help-block');
+        $I->see('Este campo não pode estar em branco!', '.help-block');
+        $I->see('Este campo não pode estar em branco!', '.help-block');
+        $I->see('Este campo não pode estar em branco!', '.help-block');
+        $I->see('Este campo não pode estar em branco!', '.help-block');
+        $I->see('Este campo não pode estar em branco!', '.help-block');
+        $I->see('Este campo não pode estar em branco!', '.help-block');
     }
 
-    public function signupSuccessfully(FunctionalTester $I)
+    public function VerificacaoEmail (FunctionalTester $I)
     {
-        $I->submitForm($this->formId, [
-            'SignupForm[username]' => 'tester',
-            'SignupForm[email]' => 'tester.email@example.com',
-            'SignupForm[password]' => 'tester_password',
+        $I->submitForm('#signup-form', [
+            'SignupForm[primeiroNome]' => 'aaaaa',
+            'SignupForm[ultimoNome]' => 'aaaaa',
+            'SignupForm[username]' => 'aaaaa123',
+            'SignupForm[email]' => 'aaaaa123',
+            'SignupForm[password]' => '123456',
+            'SignupForm[dtaNascimento]' => '2020-11-02',
+            'SignupForm[numero_telemovel]' => '922922922',
+            'SignupForm[genero]' => 'Masculino',
+            'SignupForm[tipo]' => 'Estudante',
+        ]);
+        $I->see('Primeiro Nome');
+        $I->See('Email não é válido!', '.help-block');
+    }
+
+    public function VerificacaoRegistoCorreto(FunctionalTester $I)
+    {
+        $I->submitForm('#signup-form', [
+            'SignupForm[primeiroNome]' => 'aaaaa',
+            'SignupForm[ultimoNome]' => 'aaaaa',
+            'SignupForm[username]' => 'aaaaa123',
+            'SignupForm[email]' => 'aaaaa123@gmail.com',
+            'SignupForm[password]' => '123456',
+            'SignupForm[dtaNascimento]' => '2020-11-02',
+            'SignupForm[numero_telemovel]' => '922922922',
+            'SignupForm[genero]' => 'Masculino',
+            'SignupForm[tipo]' => 'Estudante',
+        ]);
+        /* $this->formParams('Teste',
+         'Registo', 'teste_registo123','teste_registo@hotmail.com','2020-11-02','123456789',
+         '123456789','Rua A','Vila Viçosa','Évora','Masculino')], 'insert-registo')*/
+
+        $I->see("ImoUni");
+
+        $I->seeRecord(User::className(), [
+            'username' => 'aaaaa123',
+            'email' => 'aaaaa123@gmail.com',
         ]);
 
-        $I->seeRecord('common\models\User', [
-            'username' => 'tester',
-            'email' => 'tester.email@example.com',
-            'status' => \common\models\User::STATUS_INACTIVE
+        $I->seeRecord('common\models\Perfil', [
+            'primeiroNome' => 'aaaaa',
+            'numero_telemovel' => '922922922',
         ]);
+    }
 
-        $I->seeEmailIsSent();
-        $I->see('Thank you for registration. Please check your inbox for verification email.');
+    // tests
+    public function tryToTest(FunctionalTester $I)
+    {
     }
 }

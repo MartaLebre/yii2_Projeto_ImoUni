@@ -8,13 +8,15 @@ class HomeCest
 {
     public function checkHome(AcceptanceTester $I)
     {
-        $I->amOnPage(Url::toRoute('/site/index'));
+        $I->amOnPage('/yii2_Projeto_ImoUni/frontend/web/');
+        $I->wait(3);
+
         $I->see('My Application');
 
-        $I->seeLink('About');
-        $I->click('About');
+        $I->seeLink('Signup');
+        $I->click('Signup');
         $I->wait(2); // wait for page to be opened
 
-        $I->see('This is the About page.');
+        $I->see('Registar nova conta');
     }
 }

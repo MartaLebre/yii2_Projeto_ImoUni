@@ -7,24 +7,32 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Login';
+$this->title = 'Login | ImoUni';
 ?>
 <div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
+    <div class="row">
+        <div class="col-lg-5">
+            <h1>Login</h1>
+            <h4>Por favor preencha os seguintes campos</h4>
+            <br>
+            <div class="horario-form">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 
-    <p>Please fill out the following fields to login:</p>
+                        <?= $form->field($model, 'username')->textInput()->label('Nome de Utilizador') ?>
 
-            <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
+                        <?= $form->field($model, 'password')->passwordInput() ?>
 
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+                        <hr>
+                        <div class="form-group">
+                            <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                        </div>
 
-                <?= $form->field($model, 'password')->passwordInput() ?>
-
-                <?= $form->field($model, 'rememberMe')->checkbox() ?>
-
-                <div class="form-group">
-                    <?= Html::submitButton('Login', ['class' => 'btn btn-primary btn-block', 'name' => 'login-button']) ?>
+                        <?php ActiveForm::end(); ?>
+                    </div>
                 </div>
-
-            <?php ActiveForm::end(); ?>
+            </div>
+        </div>
+    </div>
 </div>

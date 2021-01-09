@@ -1,8 +1,8 @@
 <?php
 namespace frontend\tests\unit\models;
 
-use common\fixtures\UserFixture;
-use frontend\models\SignupForm;
+
+use common\models\Casa;
 
 class SignupFormTest extends \Codeception\Test\Unit
 {
@@ -12,60 +12,37 @@ class SignupFormTest extends \Codeception\Test\Unit
     protected $tester;
 
 
-    public function _before()
+    protected function _before()
     {
-        $this->tester->haveFixtures([
-            'user' => [
-                'class' => UserFixture::className(),
-                'dataFile' => codecept_data_dir() . 'user.php'
-            ]
-        ]);
     }
 
-    public function testCorrectSignup()
+    protected function _after()
     {
-        $model = new SignupForm([
-            'username' => 'some_username',
-            'email' => 'some_email@example.com',
-            'password' => 'some_password',
-        ]);
-
-        $user = $model->signup();
-        expect($user)->true();
-
-        /** @var \common\models\User $user */
-        $user = $this->tester->grabRecord('common\models\User', [
-            'username' => 'some_username',
-            'email' => 'some_email@example.com',
-            'status' => \common\models\User::STATUS_INACTIVE
-        ]);
-
-        $this->tester->seeEmailIsSent();
-
-        $mail = $this->tester->grabLastSentEmail();
-
-        expect($mail)->isInstanceOf('yii\mail\MessageInterface');
-        expect($mail->getTo())->hasKey('some_email@example.com');
-        expect($mail->getFrom())->hasKey(\Yii::$app->params['supportEmail']);
-        expect($mail->getSubject())->equals('Account registration at ' . \Yii::$app->name);
-        expect($mail->toString())->stringContainsString($user->verification_token);
     }
 
-    public function testNotCorrectSignup()
+    // tests
+    public function testValidacaoCasa()
     {
-        $model = new SignupForm([
-            'username' => 'troy.becker',
-            'email' => 'nicolas.dianna@hotmail.com',
-            'password' => 'some_password',
-        ]);
+        $casa = new Casa();
 
-        expect_not($model->signup());
-        expect_that($model->getErrors('username'));
-        expect_that($model->getErrors('email'));
+        //Despoletar todas as regras de validação
 
-        expect($model->getFirstError('username'))
-            ->equals('This username has already been taken.');
-        expect($model->getFirstError('email'))
-            ->equals('This email address has already been taken.');
+        //descrição
+        $casa ->nome_rua = null;
+        $this->assertFalse($casa->validate(['nome_rua']));
+
+        $casa ->nome_rua= 'Rua das Flores';
+        $this->assertTrue($casa->validate('nome_rua'));
+
+    }
+    public function testCriarCasa(){
+        $casa = new Casa();
+
+        $casa-> nome_rua = 'Rua das cores';
+
+        $casa->save();
+
+        $this->tester->seeRecord('common\models\Casa',['nome_rua'=>'Rua das cores']);
+
     }
 }
