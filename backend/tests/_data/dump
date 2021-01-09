@@ -1,6 +1,0 @@
-
-Use yii2advanced;
-
-INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`, `verification_token`) VALUES
-(10, 'antonio_augusto', '', '$2y$13$SYY296.rwoH7ijn0u5D3muQ1xHxugFU5QTGal0P95LumXYHv3gubK', NULL, 'antonio_augusto@gmail.com', 10, 1609784936, 1609784936, NULL),
-(11, 'filipa_gomes', '', '$2y$13$cToWj1AbQtqulCGHdjOsouB27Fuz7hR79tO6hIxJu6.tiST0pels.', NULL, 'filipa_gomes@gmail.com', 10, 1609784988, 1609784988, NULL);

@@ -29,7 +29,7 @@ class SignupCest
 
     public function VerificacaoVazio (FunctionalTester $I)
     {
-        $I->submitForm('#signup-form', [
+        $I->submitForm('#signup', [
             'SignupForm[primeiro_nome]' => '',
             'SignupForm[ultimo_nome]' => '',
             'SignupForm[username]' => '',
@@ -54,7 +54,7 @@ class SignupCest
 
     public function VerificacaoEmail (FunctionalTester $I)
     {
-        $I->submitForm('#signup-form', [
+        $I->submitForm('#signup', [
             'SignupForm[primeiroNome]' => 'aaaaa',
             'SignupForm[ultimoNome]' => 'aaaaa',
             'SignupForm[username]' => 'aaaaa123',
@@ -71,7 +71,7 @@ class SignupCest
 
     public function VerificacaoRegistoCorreto(FunctionalTester $I)
     {
-        $I->submitForm('#signup-form', [
+        $I->submitForm('#signup', [
             'SignupForm[primeiroNome]' => 'aaaaa',
             'SignupForm[ultimoNome]' => 'aaaaa',
             'SignupForm[username]' => 'aaaaa123',
@@ -82,9 +82,7 @@ class SignupCest
             'SignupForm[genero]' => 'Masculino',
             'SignupForm[tipo]' => 'Estudante',
         ]);
-        /* $this->formParams('Teste',
-         'Registo', 'teste_registo123','teste_registo@hotmail.com','2020-11-02','123456789',
-         '123456789','Rua A','Vila Viçosa','Évora','Masculino')], 'insert-registo')*/
+
 
         $I->see("ImoUni");
 

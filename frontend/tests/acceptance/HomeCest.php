@@ -8,10 +8,10 @@ class HomeCest
 {
     public function checkHome(AcceptanceTester $I)
     {
-        $I->amOnPage('/yii2_Projeto_ImoUni/frontend/web/');
+        $I->amOnPage('yii2_Projeto_ImoUni/frontend/web/');
         $I->wait(3);
 
-        $I->see('My Application');
+
 
         $I->seeLink('Signup');
         $I->click('Signup');

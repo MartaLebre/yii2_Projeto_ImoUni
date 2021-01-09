@@ -38,11 +38,11 @@ class SignupFormTest extends \Codeception\Test\Unit
     public function testCriarCasa(){
         $casa = new Casa();
 
-        $casa-> nome_rua = 'Rua das cores';
+        $casa-> nome_rua = 'Rua das Flores';
 
         $casa->save();
 
-        $this->tester->seeRecord('common\models\Casa',['nome_rua'=>'Rua das cores']);
+        $this->tester->seeInDatabase('casa',['nome_rua'=>'Rua das Flores']);
 
     }
 }
