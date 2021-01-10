@@ -35,7 +35,7 @@ class UserCest
         $I->amOnPage(\Yii::$app->homeUrl);
     }
 
-    public function updateUserData(FunctionalTester $I)
+    public function atualizarDadosUser(FunctionalTester $I)
     {
         $I->see('erau');
         $I->click('erau');
