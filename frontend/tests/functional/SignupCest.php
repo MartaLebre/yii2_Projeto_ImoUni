@@ -11,8 +11,10 @@ class SignupCest
     {
         $I->amOnRoute('site/signup');
     }
+}
 
-    protected function formParams($primeiro_nome, $ultimo_nome, $username, $email, $password, $data_nascimento, $numero_telemovel, $genero, $tipo)
+
+   /* protected function formParams($primeiro_nome, $ultimo_nome, $username, $email, $password, $data_nascimento, $numero_telemovel, $genero, $tipo)
     {
         return[
             'SignupForm[primeiro_nome]' => $primeiro_nome,
@@ -101,4 +103,5 @@ class SignupCest
     public function tryToTest(FunctionalTester $I)
     {
     }
+
 }

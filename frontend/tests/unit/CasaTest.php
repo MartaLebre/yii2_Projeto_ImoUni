@@ -21,20 +21,20 @@ class CasaTest extends Unit
 
 
     // tests
-    public function testRegistWhithGoodParaments()
+    public function testValidacaoParamentsCorretos()
     {
         $casa = new Casa();
         $casa->nome_rua = 'Rua das Flores';
         $this->assertTrue($casa->validate(['nome_rua']));
     }
-    public function testRegisterWhithBadParaments()
+    public function testValidacaoParamentsIncorretos()
     {
         $casa = new Casa();
         $casa->nome_rua = null;
         $this->assertFalse($casa->validate(['nome_rua']));
     }
 
-    public function testRegisterOnDatabase()
+    public function testRegistoBD()
     {
         $casa = new Casa();
         $casa->nome_rua = 'Rua das Flores';

@@ -8,7 +8,7 @@ class HomeCest
 {
     public function checkHome(AcceptanceTester $I)
     {
-        $I->amOnPage('yii2_Projeto_ImoUni/frontend/web/');
+        $I->amOnPage(\Yii::$app->homeUrl);
         $I->wait(3);
 
 

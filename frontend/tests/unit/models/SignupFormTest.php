@@ -1,48 +1,32 @@
 <?php
 namespace frontend\tests\unit\models;
 
+use Codeception\Test\Unit;
+use common\fixtures\UserFixture;
+use common\models\User;
+use frontend\models\SignupForm;
+use frontend\tests\UnitTester;
+use Yii;
 
-use common\models\Casa;
-
-class SignupFormTest extends \Codeception\Test\Unit
+class SignupFormTest extends Unit
 {
     /**
-     * @var \frontend\tests\UnitTester
+     * @var UnitTester
      */
     protected $tester;
 
 
-    protected function _before()
+    public function _before()
     {
+        $this->tester->haveFixtures([
+            'user' => [
+                'class' => UserFixture::className(),
+                'dataFile' => codecept_data_dir() . 'user.php'
+            ]
+        ]);
     }
 
-    protected function _after()
+    public function testCorrectSignup()
     {
-    }
-
-    // tests
-    public function testValidacaoCasa()
-    {
-        $casa = new Casa();
-
-        //Despoletar todas as regras de validação
-
-        //descrição
-        $casa ->nome_rua = null;
-        $this->assertFalse($casa->validate(['nome_rua']));
-
-        $casa ->nome_rua= 'Rua das Flores';
-        $this->assertTrue($casa->validate('nome_rua'));
-
-    }
-    public function testCriarCasa(){
-        $casa = new Casa();
-
-        $casa-> nome_rua = 'Rua das Flores';
-
-        $casa->save();
-
-        $this->tester->seeInDatabase('casa',['nome_rua'=>'Rua das Flores']);
-
     }
 }

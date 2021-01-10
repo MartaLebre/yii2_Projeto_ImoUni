@@ -1,9 +1,9 @@
 <?php namespace frontend\tests;
 
-use common\models\Casa;
+use common\models\Cozinha;
 use Codeception\Test\Unit;
 
-class CasaTest extends Unit
+class CozinhaTest extends Unit
 {
     /**
      * @var UnitTester
@@ -21,33 +21,35 @@ class CasaTest extends Unit
 
 
     // tests
-    public function testRegistWhithGoodParaments()
+    public function testValidacaoParamentsCorretos()
     {
-        $casa = new Casa();
-        $casa->nome_rua = 'Rua das Flores';
-        $this->assertTrue($casa->validate(['nome_rua']));
-    }
-    public function testRegisterWhithBadParaments()
-    {
-        $casa = new Casa();
-        $casa->nome_rua = null;
-        $this->assertFalse($casa->validate(['nome_rua']));
+        $cozinha = new Cozinha();
+
+        $cozinha->id_casa = '7';
+        $this->assertTrue($cozinha->validate(['id_casa']));
     }
 
-    public function testRegisterOnDatabase()
+    public function testValidacaoParamentsIncorretos()
     {
-        $casa = new Casa();
-        $casa->nome_rua = 'Rua das Flores';
+        $cozinha = new Cozinha();
 
-        $casa->safeAttributes();
-        $casa->save();
+        $cozinha->id_casa = null;
+        $this->assertFalse($cozinha->validate(['id_casa']));
+    }
 
-        $this->assertEquals('Rua das Flores', $casa->nome_rua);
+    public function testRegistoBD()
+    {
+        $cozinha = new Cozinha();
+        $cozinha->id_casa = '7';
+
+        $cozinha->safeAttributes();
+        $cozinha->save();
+
+        $this->assertEquals('7', $cozinha->id_casa);
 
 
-        $this->tester->seeRecord('common\models\Casa', [
-            'nome_rua' => 'Rua das Flores'
+        $this->tester->seeRecord('common\models\Cozinha', [
+            'id_casa' => '7'
         ]);
-
     }
 }
