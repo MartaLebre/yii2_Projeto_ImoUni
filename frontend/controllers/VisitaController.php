@@ -1,6 +1,6 @@
 <?php
 
-namespace app\controllers;
+namespace frontend\controllers;
 
 use Yii;
 use common\models\Visita;
@@ -62,17 +62,19 @@ class VisitaController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($id_anuncio)
     {
         $model = new Visita();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+    
+            $model->addVisita(Yii::$app->user->getId(), $id_anuncio);
+            
+            Yii::$app->session->setFlash('success', 'Visita marcada com sucesso.');
+            return $this->redirect(['/anuncio/index']);
         }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        return $this->render('create', ['model' => $model]);
     }
 
     /**

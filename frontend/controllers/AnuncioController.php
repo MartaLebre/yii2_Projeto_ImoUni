@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\Perfil;
 use Yii;
 use common\models\Anuncio;
 use common\models\AnuncioSearch;
@@ -35,13 +36,21 @@ class AnuncioController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new AnuncioSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        if(Yii::$app->user->isGuest || (Perfil::findOne(Yii::$app->user->getId())->getAttribute('tipo') !== 2)){
+            $searchModel = new AnuncioSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
     
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        }
+        else{
+            $id_user = Yii::$app->user->getId();
+            $anuncioList = Anuncio::find()->where(['id_proprietario' => $id_user])->asArray()->all();
+    
+            return $this->render('index', ['anuncioList' => $anuncioList]);
+        }
     }
 
     /**
@@ -62,17 +71,16 @@ class AnuncioController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($id_casa)
     {
+        $id_user = Yii::$app->user->getId();
         $model = new Anuncio();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $model->addAnuncio($id_user, $id_casa)) {
+            return $this->redirect(['index']);
         }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        return $this->render('create', ['model' => $model]);
     }
 
     /**
@@ -105,7 +113,8 @@ class AnuncioController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
+    
+        Yii::$app->session->setFlash('success', 'Anúncio eliminado com sucesso.');
         return $this->redirect(['index']);
     }
 

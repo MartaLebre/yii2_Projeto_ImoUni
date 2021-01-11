@@ -45,8 +45,8 @@ AppAsset::register($this);
     else{
         if(Perfil::findOne(Yii::$app->user->getId())->getAttribute('tipo') == 2){
             $navLeft = [
-                ['label' => 'Pesquisar', 'url' => ['/anuncio/index']],
-                ['label' => 'Meus anúncios', 'url' => ['#']],
+                ['label' => 'Meus anúncios', 'url' => ['/anuncio/index']],
+                ['label' => 'Minhas propriedades', 'url' => ['/casa/index']],
             ];
     
             $navRight = [
@@ -54,8 +54,7 @@ AppAsset::register($this);
                  'items' => [
                      '<li class="dropdown-header">Informações da conta</li>',
                      ['label' => 'Alterar dados', 'url' => ['/perfil/update?id=' . Yii::$app->user->getId()]],
-                     ['label' => 'Horários', 'url' => ['/horario/index']],
-                     ['label' => 'Minhas propriedades', 'url' => ['/casa/index']]]],
+                     ['label' => 'Horários', 'url' => ['/horario/index']]]],
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton('Logout', ['class' => 'btn btn-link logout'])
@@ -100,14 +99,6 @@ AppAsset::register($this);
         <?= $content ?>
     </div>
 </div>
-
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
-    </div>
-</footer>
 
 <?php $this->endBody() ?>
 </body>

@@ -5,16 +5,18 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Anuncio */
 
-$this->title = 'Create Anuncio';
-$this->params['breadcrumbs'][] = ['label' => 'Anuncios', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Adicionar anúncio | ImoUni';
 ?>
 <div class="anuncio-create">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1>Adicionar anúncio</h1>
+            <h4>Por favor preencha os seguintes campos</h4>
+            <br>
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
-
+            <div class="anuncio-form">
+                <?= $this->render('_form', ['model' => $model]) ?>
+            </div>
+        </div>
+    </div>
 </div>

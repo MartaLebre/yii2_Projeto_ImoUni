@@ -118,3 +118,31 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+.anuncio-titulo{
+    text-transform: capitalize;
+    display: block;
+    width: 230px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.btn{
+    font-weight: bold !important;
+    text-transform: uppercase !important;
+}
+
+.panel-titulo{
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.panel-default{
+    border-color: #ccc !important;
+}
+
+.panel-default > .panel-heading {
+    background-color: #eee !important;
+    border-color: #ccc !important;
+}

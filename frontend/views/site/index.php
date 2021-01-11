@@ -1,11 +1,10 @@
 <?php
 
+use common\models\Perfil;
 use yii\helpers\Url;
 use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $form yii\widgets\ActiveForm */
 
 $this->title = Yii::$app->name;
 ?>
@@ -15,38 +14,18 @@ $this->title = Yii::$app->name;
         <h1><?= Yii::$app->name ?></h1>
         <p class="lead">Encontre a sua propriedade hoje!</p>
     </div>
-
-    <div class="anuncio-search">
-        <?php echo $this->render('/anuncio/_search', ['model' => $searchModel]);?>
-    </div>
     
-    <div class="body-content jumbotron">
-        <h3 class="panel-title" style="font-size: 20px">Escolha uma das</h3>
-        <h2 class="panel-title" style="font-size: 30px">Cidades universitárias!</h2>
-        <br>
-        
-        <div class="row">
-            <div class="col-lg-3">
-                <h2><a class="btn btn-default" href="#url">Lisboa</a></h2>
-
-                img
-            </div>
-            <div class="col-lg-3">
-                <h2><a class="btn btn-default" href="#url">Porto</a></h2>
-
-                img
-            </div>
-            <div class="col-lg-3">
-                <h2><a class="btn btn-default" href="#url">Coimbra</a></h2>
-
-                img
-            </div>
-            <div class="col-lg-3">
-                <h2><a class="btn btn-default" href="#url">Leiria</a></h2>
-
-                img
-            </div>
+    <?php if(Yii::$app->user->isGuest || (Perfil::findOne(Yii::$app->user->getId())->getAttribute('tipo') !== 2)){ ?>
+        <div class="anuncio-search">
+            <?php echo $this->render('/anuncio/_search', ['model' => $searchModel]);?>
         </div>
-
-    </div>
+    <?php }
+    else{ ?>
+        <div class="row" style="text-align: center">
+            <?= Html::a('Meus anúncios', ['/anuncio/index'], ['class'=>'btn btn-info']) ?>
+        </div>
+        <div class="row" style="text-align: center; padding-top: 10px">
+            <?= Html::a('Minhas propriedades', ['/casa/index'], ['class'=>'btn btn-info']) ?>
+        </div>
+    <?php }?>
 </div>

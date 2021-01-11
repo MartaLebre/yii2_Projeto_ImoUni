@@ -36,10 +36,12 @@ class Quarto extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_casa', 'disponibilidade', 'varanda', 'secretaria', 'armario', 'ac'], 'integer'],
-            [['disponibilidade', 'tamanho', 'tipo_cama', 'varanda', 'secretaria', 'armario', 'ac', 'foto'], 'required'],
-            [['tamanho', 'tipo_cama'], 'string'],
-            [['foto'], 'string', 'max' => 1024],
+            [['tamanho', 'tipo_cama', 'varanda', 'secretaria', 'armario', 'ac'], 'required', 'message' => 'Escolha uma das opções.'],
+    
+            [['foto'], 'file', 'extensions' => ['png', 'jpg', 'jpeg'], 'wrongExtension' => 'Apenas ficheiros com estas extenções são permitidos: png, jpg, jpeg. '],
+            [['foto'], 'file', 'maxSize' => (1024 * 1024)/2, 'tooBig' => 'O ficheiro tem ser menor que 525KB.'],
+            //[['foto'], 'file', 'skipOnEmpty' => false ,'uploadRequired' => 'Faça upload de uma fotografia.'],
+            
             [['id_casa'], 'exist', 'skipOnError' => true, 'targetClass' => Casa::className(), 'targetAttribute' => ['id_casa' => 'id']],
         ];
     }
@@ -53,14 +55,39 @@ class Quarto extends \yii\db\ActiveRecord
             'id' => 'ID',
             'id_casa' => 'Id Casa',
             'disponibilidade' => 'Disponibilidade',
-            'tamanho' => 'Tamanho',
-            'tipo_cama' => 'Tipo Cama',
+            'tamanho' => 'Tamanho da cama',
+            'tipo_cama' => 'Tipo da cama',
             'varanda' => 'Varanda',
-            'secretaria' => 'Secretaria',
-            'armario' => 'Armario',
-            'ac' => 'Ac',
+            'secretaria' => 'Secretária',
+            'armario' => 'Armário',
+            'ac' => 'AC',
             'foto' => 'Foto',
         ];
+    }
+    
+    /**
+     * Cria uma casa
+     * @param Quarto $id_casa para qual utilizador irá ser associado
+     * @return bool se for criado com sucesso
+     */
+    public function addQuarto($id_casa, $imgUploaded){
+        if (!$this->validate()) {
+            return null;
+        }
+        
+        $quarto = new Quarto();
+    
+        $quarto->id_casa = $id_casa;
+        $quarto->tamanho = $this->tamanho;
+        $quarto->tipo_cama = $this->tipo_cama;
+        $quarto->varanda = $this->varanda;
+        $quarto->secretaria = $this->secretaria;
+        $quarto->armario = $this->armario;
+        $quarto->ac = $this->ac;
+        $quarto->foto = $imgUploaded;
+        $quarto->save();
+        
+        return true;
     }
 
     /**

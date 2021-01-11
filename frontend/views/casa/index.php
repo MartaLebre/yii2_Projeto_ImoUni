@@ -1,20 +1,21 @@
 <?php
 
-use yii\grid\GridView;
+use common\models\Anuncio;
 use yii\helpers\Html;
-use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Casa */
 
 \yii\web\YiiAsset::register($this);
-$this->title = 'Minhas propriedades | ImoUni';
+$this->title = 'Minhas propriedades |' . Yii::$app->name;
 ?>
+
 <div class="casa-index">
     <div class="row">
-        <div class="col-lg-7">
+        <div class="col-lg-8">
             <h1>Minhas proriedades</h1>
             <br>
+            
             <div class="panel panel-default">
                 <div class="panel-body">
                     <?php foreach($models as $model){ ?>
@@ -25,17 +26,25 @@ $this->title = 'Minhas propriedades | ImoUni';
                                 </div>
                                 <div class="card-content col-lg-6" style="padding-left: 30px">
                                     <div class="card-body">
-                                        <h4 class="card-text">Rua: <span style="text-transform: capitalize"><?=  $model['nome_rua'] ?></span></h4>
-                                        <h4 class="card-text">Tipo de alojamento: <span style="text-transform: capitalize"><?= $model['tipo_alojamento'] ?></span></h4>
-                                        <h4 class="card-text">Capacidade: <?=  $model['capacidade'] ?> pessoas</h4>
+                                        <h4 class="card-text" style="font-weight: bold">
+                                            Rua: <span style="text-transform: capitalize; font-weight: normal"><?=  $model['nome_rua'] ?></span>
+                                        </h4>
+                                        <h4 class="card-text" style="font-weight: bold">
+                                            Tipo de alojamento: <span style="text-transform: capitalize; font-weight: normal"><?= $model['tipo_alojamento'] ?></span>
+                                        </h4>
+                                        <h4 class="card-text" style="font-weight: bold">
+                                            Capacidade: <span style="text-transform: capitalize; font-weight: normal"><?=  $model['capacidade'] ?> pessoas
+                                        </h4>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
-                                    <div class="row" style="padding-top: 10px">
-                                        <div style="text-align: center">
-                                            <?= Html::a('Criar anúncio', ['/anuncio/create'], ['class'=>'btn btn-success']) ?>
+                                    <?php if(Anuncio::find()->where(['id_casa' => $model['id']])->count() == 0){ ?>
+                                        <div class="row" style="padding-top: 10px">
+                                            <div style="text-align: center">
+                                                <?= Html::a('Criar anúncio', ['/anuncio/create', 'id_casa' => $model['id']], ['class' => 'btn btn-success']) ?>
+                                            </div>
                                         </div>
-                                    </div>
+                                    <?php }?>
                                     <div class="row" style="padding-top: 10px">
                                         <div style="text-align: center">
                                             <?= Html::a('Eliminar propriedade', ['delete', 'id' => $model['id']], [

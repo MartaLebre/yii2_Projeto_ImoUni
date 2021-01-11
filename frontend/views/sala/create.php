@@ -3,18 +3,19 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Sala */
+/* @var $model common\models\Cozinha */
 
-$this->title = 'Create Sala';
-$this->params['breadcrumbs'][] = ['label' => 'Salas', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
-?>
+$this->title = 'Adicionar sala |' . Yii::$app->name;?>
 <div class="sala-create">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1>Adicionar sala</h1>
+            <h4>Por favor preencha os seguintes campos</h4>
+            <br>
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
-
+            <div class="sala-form">
+                <?= $this->render('_form', ['model' => $model]) ?>
+            </div>
+        </div>
+    </div>
 </div>

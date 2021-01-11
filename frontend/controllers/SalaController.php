@@ -1,6 +1,6 @@
 <?php
 
-namespace app\controllers;
+namespace frontend\controllers;
 
 use Yii;
 use common\models\Sala;
@@ -8,6 +8,7 @@ use common\models\SalaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * SalaController implements the CRUD actions for Sala model.
@@ -65,14 +66,21 @@ class SalaController extends Controller
     public function actionCreate()
     {
         $model = new Sala();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $session = Yii::$app->session;
+        $id_casa = $session->get('id_casa');
+    
+        if($model->load(Yii::$app->request->post()) && $model->validate()){
+            $file = UploadedFile::getInstance($model,'foto');
+            $fp = fopen($file->tempName, 'r');
+            $imgUploaded = fread($fp, filesize($file->tempName));
+            fclose($fp);
+            
+            $model->addSala($id_casa, $imgUploaded);
+        
+            return $this->redirect(['/quarto/create']);
         }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+    
+        return $this->render('create', ['model' => $model]);
     }
 
     /**

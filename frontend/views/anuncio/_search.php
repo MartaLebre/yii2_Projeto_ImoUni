@@ -1,5 +1,4 @@
 <?php
-
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
@@ -7,7 +6,6 @@ use yii\bootstrap\ActiveForm;
 /* @var $model common\models\AnuncioSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
-
 <div class="anuncio-search">
     <?php $form = ActiveForm::begin([
         'layout' => 'horizontal',

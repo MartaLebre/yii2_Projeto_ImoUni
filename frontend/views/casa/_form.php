@@ -9,12 +9,12 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="casa-form">
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+
     <div class="row">
         <div class="col-lg-4">
             <h3>Caracteristicas da propriedade</h3>
-    
-            <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
-    
+            
             <?= $form->field($model, 'nome_rua')->textInput() ?>
             
             <div class="row">
@@ -63,9 +63,9 @@ use yii\widgets\ActiveForm;
             <h3>Regras</h3>
             <div>
                 <?= $form->field($model, 'animais')->dropDownList([ '0' => 'Não', '1' => 'Sim'], ['prompt' => '']) ?>
-
+        
                 <?= $form->field($model, 'fumar')->dropDownList([ '0' => 'Não', '1' => 'Sim'], ['prompt' => '']) ?>
-
+        
                 <?= $form->field($model, 'visitantes_pernoitar')->dropDownList([ '0' => 'Não', '1' => 'Sim'], ['prompt' => '']) ?>
             </div>
         </div>

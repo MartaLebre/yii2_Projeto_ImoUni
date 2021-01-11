@@ -66,20 +66,21 @@ class CozinhaController extends Controller
     public function actionCreate()
     {
         $model = new Cozinha();
+        $session = Yii::$app->session;
+        $id_casa = $session->get('id_casa');
     
         if($model->load(Yii::$app->request->post()) && $model->validate()){
             $file = UploadedFile::getInstance($model,'foto');
             $fp = fopen($file->tempName, 'r');
             $imgUploaded = fread($fp, filesize($file->tempName));
             fclose($fp);
-            $model->addCozinha($id_propriedade, $imgUploaded);
+            
+            $model->addCozinha($id_casa, $imgUploaded);
         
-            return $this->redirect(['/sala/create', 'id_propriedade' => $id_propriedade]);
+            return $this->redirect(['/sala/create']);
         }
-    
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        
+        return $this->render('create', ['model' => $model]);
     }
 
     /**

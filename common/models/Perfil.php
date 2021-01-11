@@ -58,10 +58,10 @@ class Perfil extends \yii\db\ActiveRecord
             'id_user' => 'Id user',
             'tipo' => 'Tipo de utilizador',
             'data_nascimento' => 'Data de nascimento',
-            'numero_telemovel' => 'Número de telemovel',
+            'numero_telemovel' => 'Número de telemóvel',
             'primeiro_nome' => 'Primeiro nome',
             'ultimo_nome' => 'Ultimo nome',
-            'genero' => 'Genero',
+            'genero' => 'Género',
         ];
     }
 

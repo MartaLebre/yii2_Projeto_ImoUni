@@ -39,10 +39,12 @@ class Cozinha extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'id_casa', 'lava_loica', 'maquina_roupa', 'maquina_loica', 'tostadeira', 'torradeira', 'mircro_ondas', 'frigorifico', 'arca', 'fogao', 'forno'], 'required'],
-            [['id', 'id_casa', 'lava_loica', 'maquina_roupa', 'maquina_loica', 'tostadeira', 'torradeira', 'mircro_ondas', 'arca', 'forno'], 'integer'],
-            [['frigorifico', 'fogao'], 'string'],
-            [['id'], 'unique'],
+            [['lava_loica', 'maquina_roupa', 'maquina_loica', 'tostadeira', 'torradeira', 'mircro_ondas', 'frigorifico', 'arca', 'fogao', 'forno'], 'required', 'message' => 'Escolha uma das opções.'],
+    
+            [['foto'], 'file', 'extensions' => ['png', 'jpg', 'jpeg'], 'wrongExtension' => 'Apenas ficheiros com estas extenções são permitidos: png, jpg, jpeg. '],
+            [['foto'], 'file', 'maxSize' => (1024 * 1024)/2, 'tooBig' => 'O ficheiro tem ser menor que 525KB.'],
+            //[['foto'], 'file', 'skipOnEmpty' => false ,'uploadRequired' => 'Faça upload de uma fotografia.'],
+            
             [['id_casa'], 'exist', 'skipOnError' => true, 'targetClass' => Casa::className(), 'targetAttribute' => ['id_casa' => 'id']],
         ];
     }
@@ -71,17 +73,17 @@ class Cozinha extends \yii\db\ActiveRecord
     
     /**
      * Cria uma cozinha
-     * @param Casa $id_user para qual utilizador irá ser associado
+     * @param Cozinha $id_casa para qual utilizador irá ser associado
      * @return bool se for criado com sucesso
      */
-    public function addCozinha($id_propriedade, $imgUploaded){
+    public function addCozinha($id_casa, $imgUploaded){
         if (!$this->validate()) {
             return null;
         }
         
         $cozinha = new Cozinha();
     
-        $cozinha->id_casa = $id_propriedade;
+        $cozinha->id_casa = $id_casa;
         $cozinha->lava_loica = $this->lava_loica;
         $cozinha->maquina_roupa = $this->maquina_roupa;
         $cozinha->maquina_loica = $this->maquina_loica;

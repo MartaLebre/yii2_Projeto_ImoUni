@@ -9,11 +9,11 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="cozinha-form">
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]);?>
+    
     <div class="row">
         <div class="col-lg-4">
             <h3>Caracteristicas da cozinha</h3>
-            
-            <?php $form = ActiveForm::begin(); ?>
 
             <div class="row">
                 <div class="col-sm-6">
@@ -63,10 +63,6 @@ use yii\widgets\ActiveForm;
             <h3>Foto</h3>
             <?php echo $form->field($model, 'foto')->fileInput()->label(false); ?>
             <hr>
-        </div>
-        <div class="col-lg-4">
-            <?= var_dump($id_propriedade)?>
-            <?= var_dump($model)?>
         </div>
     </div>
 

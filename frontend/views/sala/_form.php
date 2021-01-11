@@ -9,29 +9,48 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="sala-form">
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]);?>
 
-    <?php $form = ActiveForm::begin(); ?>
+    <div class="row">
+        <div class="col-lg-4">
+            <h3>Caracteristicas da sala</h3>
 
-    <?= $form->field($model, 'id_casa')->textInput() ?>
+            <div class="row">
+                <div class="col-sm-6">
+                    <?= $form->field($model, 'televisao')->dropDownList([ '0' => 'Não', '1' => 'Sim'], ['prompt' => '']) ?>
+                </div>
+                <div class="col-sm-6">
+                    <?= $form->field($model, 'sofa')->dropDownList([ '0' => 'Não', '1' => 'Sim'], ['prompt' => '']) ?>
+                </div>
+            </div>
 
-    <?= $form->field($model, 'televisao')->textInput() ?>
+            <div class="row">
+                <div class="col-sm-6">
+                    <?= $form->field($model, 'moveis')->dropDownList([ '0' => 'Não', '1' => 'Sim'], ['prompt' => '']) ?>
+                </div>
+                <div class="col-sm-6">
+                    <?= $form->field($model, 'mesa')->dropDownList([ '0' => 'Não', '1' => 'Sim'], ['prompt' => '']) ?>
+                </div>
+            </div>
 
-    <?= $form->field($model, 'sofa')->textInput() ?>
+            <div class="row">
+                <div class="col-sm-6">
+                    <?= $form->field($model, 'aquecimento')->dropDownList([ 'lareira' => 'Lareira', 'salamandras' => 'Salamandras', 'nao' => 'Não', ], ['prompt' => '']) ?>
+                </div>
+                <div class="col-sm-6">
+                    <?= $form->field($model, 'ac')->dropDownList([ '0' => 'Não', '1' => 'Sim'], ['prompt' => '']) ?>
+                </div>
+            </div>
 
-    <?= $form->field($model, 'moveis')->textInput() ?>
-
-    <?= $form->field($model, 'mesa')->textInput() ?>
-
-    <?= $form->field($model, 'aquecimento')->dropDownList([ 'lareira' => 'Lareira', 'salamandras' => 'Salamandras', 'nao' => 'Nao', ], ['prompt' => '']) ?>
-
-    <?= $form->field($model, 'ac')->textInput() ?>
-
-    <?= $form->field($model, 'foto')->textInput() ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+            <h3>Foto</h3>
+            <?php echo $form->field($model, 'foto')->fileInput()->label(false); ?>
+            <hr>
+        </div>
     </div>
 
+    <div class="form-group">
+        <?= Html::submitButton('Adicionar sala', ['class' => 'btn btn-success']) ?>
+    </div>
+    
     <?php ActiveForm::end(); ?>
-
 </div>

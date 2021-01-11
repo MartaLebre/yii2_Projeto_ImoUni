@@ -2,6 +2,9 @@
 
 namespace frontend\controllers;
 
+use common\models\Cozinha;
+use common\models\Sala;
+use common\models\Quarto;
 use Yii;
 use common\models\Casa;
 use common\models\CasaSearch;
@@ -76,14 +79,13 @@ class CasaController extends Controller
             $fp = fopen($file->tempName, 'r');
             $imgUploaded = fread($fp, filesize($file->tempName));
             fclose($fp);
-            $model->addCasa($id_user, $imgUploaded);
             
-            return $this->redirect(['index']);
+            $model->addCasa($id_user, $imgUploaded);
+    
+            return $this->redirect(['/cozinha/create']);
         }
     
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        return $this->render('create', ['model' => $model]);
     }
 
     /**
@@ -115,9 +117,29 @@ class CasaController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-        Yii::$app->session->setFlash('success', 'Propriedade eliminada com sucesso.');
+        $modelQuartos = Quarto::find()
+            ->where(['id_casa' => $id])
+            ->all();
+        
+        foreach($modelQuartos as $modelQuarto)
+            $modelQuarto->delete();
     
+        Sala::find()
+            ->where(['id_casa' => $id])
+            ->one()
+            ->delete();
+        
+        Cozinha::find()
+            ->where(['id_casa' => $id])
+            ->one()
+            ->delete();
+    
+        Casa::find()
+            ->where(['id' => $id])
+            ->one()
+            ->delete();
+        
+        Yii::$app->session->setFlash('success', 'Propriedade eliminada com sucesso.');
         return $this->redirect(['index']);
     }
 

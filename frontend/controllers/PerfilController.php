@@ -2,7 +2,7 @@
 
 namespace frontend\controllers;
 
-use frontend\models\SignupForm;
+use common\models\SignupForm;
 use Yii;
 use common\models\User;
 use common\models\Perfil;

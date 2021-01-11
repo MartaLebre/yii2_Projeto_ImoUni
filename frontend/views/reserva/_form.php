@@ -1,5 +1,6 @@
 <?php
 
+use nex\datepicker\DatePicker;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -9,21 +10,17 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="reserva-form">
-
     <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'id_estudante')->textInput() ?>
-
-    <?= $form->field($model, 'id_anuncio')->textInput() ?>
-
-    <?= $form->field($model, 'data_reserva')->textInput() ?>
-
-    <?= $form->field($model, 'data_entrada')->textInput() ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+    <div class="row">
+        <div class="col-lg-6">
+            <?= $form->field($model, 'data_entrada')->textInput()->widget(DatePicker::className(), ['clientOptions' => ['format' => 'Y-M-D']]); ?>
+            <hr>
+        </div>
     </div>
 
+    <div class="form-group">
+        <?= Html::submitButton('Marcar', ['class' => 'btn btn-success']) ?>
+    </div>
+    
     <?php ActiveForm::end(); ?>
-
 </div>

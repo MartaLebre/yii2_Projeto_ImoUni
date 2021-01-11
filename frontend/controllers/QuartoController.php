@@ -1,13 +1,16 @@
 <?php
 
-namespace app\controllers;
+namespace frontend\controllers;
 
+use common\models\Casa;
+use common\models\Cozinha;
 use Yii;
 use common\models\Quarto;
 use common\models\QuartoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * QuartoController implements the CRUD actions for Quarto model.
@@ -65,14 +68,34 @@ class QuartoController extends Controller
     public function actionCreate()
     {
         $model = new Quarto();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $session = Yii::$app->session;
+        $id_casa = $session->get('id_casa');
+        $modelCasa = Casa::findOne($id_casa);
+    
+        if($model->load(Yii::$app->request->post()) && $model->validate()){
+            $file = UploadedFile::getInstance($model,'foto');
+            $fp = fopen($file->tempName, 'r');
+            $imgUploaded = fread($fp, filesize($file->tempName));
+            fclose($fp);
+            
+            $model->addQuarto($id_casa, $imgUploaded);
+            
+            if($modelCasa->num_quartos <= Quarto::find()->where(['id_casa' => $id_casa])->count()){
+                if($session->has('id_casa'))
+                    $session->remove('id_casa');
+    
+                Yii::$app->session->setFlash('success', 'Propriedade registada com sucesso.');
+                return $this->redirect(['/casa/index']);
+            }
+            else{
+                $model = new Quarto();
+    
+                return $this->redirect(['create', ['model' => $model]]);
+            }
+            
         }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+    
+        return $this->render('create', ['model' => $model]);
     }
 
     /**

@@ -1,10 +1,8 @@
 <?php
-namespace frontend\models;
+namespace common\models;
 
 use Yii;
 use yii\base\Model;
-use common\models\User;
-use common\models\Perfil;
 
 /**
  * Signup form

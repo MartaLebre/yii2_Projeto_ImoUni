@@ -2,6 +2,7 @@
 namespace frontend\controllers;
 
 use common\models\AnuncioSearch;
+use common\models\Perfil;
 use Yii;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
@@ -13,9 +14,10 @@ use yii\filters\AccessControl;
 use common\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
-use frontend\models\SignupForm;
+use common\models\SignupForm;
 use frontend\models\ContactForm;
 use common\models\Anuncio;
+use yii\web\Session;
 
 /**
  * Site controller
@@ -78,9 +80,7 @@ class SiteController extends Controller
     {
         $searchModel = new AnuncioSearch();
     
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-        ]);
+        return $this->render('index', ['searchModel' => $searchModel]);
     }
 
     /**
@@ -95,9 +95,10 @@ class SiteController extends Controller
         }
 
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        } else {
+        if($model->load(Yii::$app->request->post()) && $model->login()){
+            return $this->goHome();
+        }
+        else{
             $model->password = '';
 
             return $this->render('login', [

@@ -38,11 +38,21 @@ class Anuncio extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_proprietario', 'id_casa', 'preco', 'despesas_inc'], 'integer'],
-            [['titulo', 'preco', 'data_criacao', 'data_disponibilidade', 'despesas_inc', 'descricao'], 'required'],
-            [['data_criacao', 'data_disponibilidade'], 'safe'],
-            [['descricao'], 'string'],
+            [['titulo'], 'required', 'message' => 'Introduza um título.'],
             [['titulo'], 'string', 'max' => 45],
+            
+            [['preco'], 'required', 'message' => 'Introduza um preço.'],
+            [['preco'], 'integer', 'message' => 'Preço inválido.'],
+    
+            ['data_disponibilidade', 'safe'],
+            ['data_disponibilidade', 'required', 'message' => 'Introduza a data de disponibilidade.'],
+            ['data_disponibilidade', 'date', 'format' => 'Y-M-d', 'message' => 'Formato de data inválida.'],
+            
+            [['despesas_inc'], 'required', 'message' => 'Escolha uma das opções.'],
+    
+            [['descricao'], 'required', 'message' => 'Introduza uma descrição.'],
+            [['descricao'], 'string'],
+            
             [['id_proprietario'], 'exist', 'skipOnError' => true, 'targetClass' => Perfil::className(), 'targetAttribute' => ['id_proprietario' => 'id_user']],
             [['id_casa'], 'exist', 'skipOnError' => true, 'targetClass' => Casa::className(), 'targetAttribute' => ['id_casa' => 'id']],
         ];
@@ -57,13 +67,37 @@ class Anuncio extends \yii\db\ActiveRecord
             'id' => 'ID',
             'id_proprietario' => 'Id Proprietario',
             'id_casa' => 'Id Casa',
-            'titulo' => 'Titulo',
-            'preco' => 'Preco',
-            'data_criacao' => 'Data Criacao',
-            'data_disponibilidade' => 'Data Disponibilidade',
-            'despesas_inc' => 'Despesas Inc',
-            'descricao' => 'Descricao',
+            'titulo' => 'Título',
+            'preco' => 'Preço',
+            'data_criacao' => 'Data da criação',
+            'data_disponibilidade' => 'Data de disponibilidade',
+            'despesas_inc' => 'Despesas incluídas',
+            'descricao' => 'Descrição',
         ];
+    }
+    
+    /**
+     * Cria uma casa
+     * @param Casa $id_user para qual utilizador irá ser associado
+     * @return bool se for criado com sucesso
+     */
+    public function addAnuncio($id_user, $id_casa){
+        if (!$this->validate()) {
+            return null;
+        }
+        
+        $anuncio = new Anuncio();
+    
+        $anuncio->id_proprietario = $id_user;
+        $anuncio->id_casa = $id_casa;
+        $anuncio->titulo = $this->titulo;
+        $anuncio->preco = $this->preco;
+        $anuncio->data_disponibilidade = $this->data_disponibilidade;
+        $anuncio->despesas_inc = $this->despesas_inc;
+        $anuncio->descricao = $this->descricao;
+        $anuncio->save();
+        
+        return true;
     }
 
     /**

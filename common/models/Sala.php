@@ -35,10 +35,12 @@ class Sala extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_casa', 'televisao', 'sofa', 'moveis', 'mesa', 'ac'], 'integer'],
-            [['televisao', 'sofa', 'moveis', 'mesa', 'aquecimento', 'ac', 'foto'], 'required'],
-            [['aquecimento'], 'string'],
-            [['foto'], 'string', 'max' => 1024],
+            [['televisao', 'sofa', 'moveis', 'mesa', 'aquecimento', 'ac'], 'required', 'message' => 'Escolha uma das opções.'],
+    
+            [['foto'], 'file', 'extensions' => ['png', 'jpg', 'jpeg'], 'wrongExtension' => 'Apenas ficheiros com estas extenções são permitidos: png, jpg, jpeg. '],
+            [['foto'], 'file', 'maxSize' => (1024 * 1024)/2, 'tooBig' => 'O ficheiro tem ser menor que 525KB.'],
+            //[['foto'], 'file', 'skipOnEmpty' => false ,'uploadRequired' => 'Faça upload de uma fotografia.'],
+    
             [['id_casa'], 'exist', 'skipOnError' => true, 'targetClass' => Casa::className(), 'targetAttribute' => ['id_casa' => 'id']],
         ];
     }
@@ -51,14 +53,39 @@ class Sala extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'id_casa' => 'Id Casa',
-            'televisao' => 'Televisao',
+            'televisao' => 'Televisão',
             'sofa' => 'Sofa',
-            'moveis' => 'Moveis',
+            'moveis' => 'Móveis',
             'mesa' => 'Mesa',
             'aquecimento' => 'Aquecimento',
-            'ac' => 'Ac',
+            'ac' => 'AC',
             'foto' => 'Foto',
         ];
+    }
+    
+    /**
+     * Cria uma sala
+     * @param Sala $id_casa para qual utilizador irá ser associado
+     * @return bool se for criado com sucesso
+     */
+    public function addSala($id_casa, $imgUploaded){
+        if (!$this->validate()){
+            return null;
+        }
+        
+        $sala = new Sala();
+    
+        $sala->id_casa = $id_casa;
+        $sala->televisao = $this->televisao;
+        $sala->sofa = $this->sofa;
+        $sala->moveis = $this->moveis;
+        $sala->mesa = $this->mesa;
+        $sala->aquecimento = $this->aquecimento;
+        $sala->ac = $this->ac;
+        $sala->foto = $imgUploaded;
+        $sala->save();
+        
+        return true;
     }
 
     /**

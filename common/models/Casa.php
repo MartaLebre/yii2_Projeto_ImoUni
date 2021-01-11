@@ -54,7 +54,9 @@ class Casa extends \yii\db\ActiveRecord
             [['nome_rua'], 'string'],
             [['nome_rua'], 'required', 'message' => 'Introduza um endereço.'],
             
-            [['foto'], 'file', 'extensions' => ['png', 'jpg', 'jpeg']],
+            [['foto'], 'file', 'extensions' => ['png', 'jpg', 'jpeg'], 'wrongExtension' => 'Apenas ficheiros com estas extenções são permitidos: png, jpg, jpeg. '],
+            [['foto'], 'file', 'maxSize' => (1024 * 1024)/2, 'tooBig' => 'O ficheiro tem ser menor que 525KB.'],
+            //[['foto'], 'file', 'skipOnEmpty' => false ,'uploadRequired' => 'Faça upload de uma fotografia.'],
             
             [['id_proprietario'], 'exist', 'skipOnError' => true, 'targetClass' => Perfil::className(), 'targetAttribute' => ['id_proprietario' => 'id_user']],
         ];
@@ -112,6 +114,12 @@ class Casa extends \yii\db\ActiveRecord
         $casa->visitantes_pernoitar = $this->visitantes_pernoitar;
         $casa->foto = $imgUploaded;
         $casa->save();
+    
+        $session = Yii::$app->session;
+        if($session->has('id_casa'))
+            $session->remove('id_casa');
+    
+        $session->set('id_casa', $casa->id);
         
         return true;
     }
