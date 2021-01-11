@@ -8,7 +8,7 @@ class HomeCest
 {
     public function checkOpen(FunctionalTester $I)
     {
-        $I->amOnPage(\Yii::$app->homeUrl);
-        $I->see('My Application');
+        $I->amOnPage('frontend/web/');
+        $I->see('ImoUni');
     }
 }

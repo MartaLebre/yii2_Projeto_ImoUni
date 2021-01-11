@@ -25,7 +25,7 @@ class AnuncioTest extends Unit
     {
         $anuncio = new Anuncio();
 
-        $anuncio->titulo = 'Quarto imperdivel';
+        $anuncio->titulo = 'Moradia em Leiria';
         $this->assertTrue($anuncio->validate(['titulo']));
     }
 
@@ -40,16 +40,16 @@ class AnuncioTest extends Unit
     public function testRegistoBD()
     {
         $anuncio = new Anuncio();
-        $anuncio->titulo = 'Quarto imperdivel';
+        $anuncio->titulo = 'Moradia em Leiria';
 
         $anuncio->safeAttributes();
         $anuncio->save();
 
-        $this->assertEquals('Quarto imperdivel', $anuncio->titulo);
+        $this->assertEquals('Moradia em Leiria', $anuncio->titulo);
 
 
         $this->tester->seeRecord('common\models\Anuncio', [
-            'titulo' => 'Quarto imperdivel'
+            'titulo' => 'Moradia em Leiria'
         ]);
     }
 }

@@ -3,6 +3,7 @@ namespace frontend\controllers;
 
 use common\models\AnuncioSearch;
 use common\models\Perfil;
+use common\models\User;
 use Yii;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
@@ -78,9 +79,21 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new AnuncioSearch();
+        $_perfil = Perfil::findOne(Yii::$app->user->getId());
+        if($_perfil['tipo'] !== 3){
+            $searchModel = new AnuncioSearch();
     
-        return $this->render('index', ['searchModel' => $searchModel]);
+            return $this->render('index', ['searchModel' => $searchModel]);
+        }
+        else{
+            $modelUsers = User::find()->asArray()->all();
+            $modelAnuncios = Anuncio::find()->asArray()->all();
+            
+            return $this->render('index', [
+                'modelUsers' => $modelUsers,
+                'modelAnuncios' => $modelAnuncios,
+            ]);
+        }
     }
 
     /**
@@ -276,4 +289,47 @@ class SiteController extends Controller
         ]);
     }
     */
+    
+    /**
+     * ELimina um anúncio.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionEliminar($id)
+    {
+        Anuncio::findOne($id)->delete();
+        
+        Yii::$app->session->setFlash('success', 'Anúncio eliminado com sucesso.');
+        return $this->redirect(['index']);
+    }
+    
+    /**
+     * Bloquea um utilizador.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionBloquear($id)
+    {
+        $user = User::findOne($id);
+        $user->status = 9;
+        $user->save();
+        
+        Yii::$app->session->setFlash('success', 'Utilizador bloqueado com sucesso.');
+        return $this->redirect(['index']);
+    }
+    
+    /**
+     * Desbloquea um utilizador.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDesbloquear($id)
+    {
+        $user = User::findOne($id);
+        $user->status = 10;
+        $user->save();
+        
+        Yii::$app->session->setFlash('success', 'Utilizador desbloqueado com sucesso.');
+        return $this->redirect(['index']);
+    }
 }

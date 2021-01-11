@@ -11,7 +11,7 @@ $this->title = 'Horários | ImoUni';
 <div class="horario-index">
     <div class="row">
         <div class="col-lg-5">
-            <h1>Horários</h1>
+            <h1>Horários das visitas</h1>
             <br>
             <div class="panel panel-default">
                 <div class="panel-body">

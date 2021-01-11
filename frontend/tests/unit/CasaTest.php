@@ -24,7 +24,7 @@ class CasaTest extends Unit
     public function testValidacaoParamentsCorretos()
     {
         $casa = new Casa();
-        $casa->nome_rua = 'Rua das Flores';
+        $casa->nome_rua = 'Rua do bairro';
         $this->assertTrue($casa->validate(['nome_rua']));
     }
     public function testValidacaoParamentsIncorretos()
@@ -37,16 +37,16 @@ class CasaTest extends Unit
     public function testRegistoBD()
     {
         $casa = new Casa();
-        $casa->nome_rua = 'Rua das Flores';
+        $casa->nome_rua = 'Rua do bairro';
 
         $casa->safeAttributes();
         $casa->save();
 
-        $this->assertEquals('Rua das Flores', $casa->nome_rua);
+        $this->assertEquals('Rua do bairro', $casa->nome_rua);
 
 
         $this->tester->seeRecord('common\models\Casa', [
-            'nome_rua' => 'Rua das Flores'
+            'nome_rua' => 'Rua do bairro'
         ]);
 
     }

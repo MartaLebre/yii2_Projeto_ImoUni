@@ -43,7 +43,7 @@ class UserCest
         $I->click('Alterar dados');
         $I->see('Atualizar dados da conta');
         $I->fillField('Password', 'password_0');
-        $I->fillField('Número de telemovel', '123456789');
+        $I->fillField('Número de telemóvel', '123456789');
         $I->click('Guardar');
         $I->see('Update efetuado com sucesso');
 

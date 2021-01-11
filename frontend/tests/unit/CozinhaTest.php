@@ -25,31 +25,31 @@ class CozinhaTest extends Unit
     {
         $cozinha = new Cozinha();
 
-        $cozinha->id_casa = '7';
-        $this->assertTrue($cozinha->validate(['id_casa']));
+        $cozinha->fogao = 'eletrico';
+        $this->assertTrue($cozinha->validate(['fogao']));
     }
 
     public function testValidacaoParamentsIncorretos()
     {
         $cozinha = new Cozinha();
 
-        $cozinha->id_casa = null;
-        $this->assertFalse($cozinha->validate(['id_casa']));
+        $cozinha->fogao = null;
+        $this->assertFalse($cozinha->validate(['fogao']));
     }
 
     public function testRegistoBD()
     {
         $cozinha = new Cozinha();
-        $cozinha->id_casa = '7';
+        $cozinha->fogao = 'eletrico';
 
         $cozinha->safeAttributes();
         $cozinha->save();
 
-        $this->assertEquals('7', $cozinha->id_casa);
+        $this->assertEquals('eletrico', $cozinha->fogao);
 
 
         $this->tester->seeRecord('common\models\Cozinha', [
-            'id_casa' => '7'
+            'fogao' => 'eletrico'
         ]);
     }
 }

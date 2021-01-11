@@ -62,14 +62,26 @@ AppAsset::register($this);
                 . '</li>',
             ];
         }
+        elseif(Perfil::findOne(Yii::$app->user->getId())->getAttribute('tipo') == 3){
+            $navLeft = [];
+    
+            $navRight = [
+                ['label' => Yii::$app->user->identity->username],
+                '<li>'
+                . Html::beginForm(['/site/logout'], 'post')
+                . Html::submitButton('Logout', ['class' => 'btn btn-link logout'])
+                . Html::endForm()
+                . '</li>',
+            ];
+        }
         else{
             $navLeft[] = ['label' => 'Pesquisar', 'url' => ['/anuncio/index']];
     
             $navRight = [
                 ['label' => Yii::$app->user->identity->username,
-                 'items' => [
-                     '<li class="dropdown-header">Informações da conta</li>',
-                     ['label' => 'Alterar dados', 'url' => ['/perfil/update?id=' . Yii::$app->user->getId()]]]],
+                    'items' => [
+                        '<li class="dropdown-header">Informações da conta</li>',
+                        ['label' => 'Alterar dados', 'url' => ['/perfil/update?id=' . Yii::$app->user->getId()]]]],
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton('Logout', ['class' => 'btn btn-link logout'])

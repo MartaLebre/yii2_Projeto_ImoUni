@@ -83,8 +83,7 @@ class SignupForm extends Model
      *
      * @return bool whether the creating new account was successful and email was sent
      */
-    public function signup()
-    {
+    public function signup(){
         if (!$this->validate()) {
             return null;
         }
@@ -105,11 +104,11 @@ class SignupForm extends Model
         $perfil->ultimo_nome = $this->ultimo_nome;
         $perfil->genero = $this->genero;
         $perfil->save();
-    
+        
         /*
         $auth = Yii::$app->authManager;
-        $authorRole = $auth->getRole('senhorio');
         if($perfil->tipo == 2){
+            $authorRole = $auth->getRole('senhorio');
             $auth->assign($authorRole, $user->getId());
         }
         */

@@ -20,7 +20,7 @@ class RegistoCest
     public function signupVazio(FunctionalTester $I)
     {
         $I->see('Registar nova conta', 'h1');
-        $I->see('Por favor preencha os seguintes campos:');
+        $I->see('Por favor preencha os seguintes campos');
         $I->submitForm($this->formId, []);
         $I->seeValidationError('Introduza um nome.');
         $I->seeValidationError('Introduza um apelido.');
@@ -60,7 +60,8 @@ class RegistoCest
         $I->dontSee('Escolha uma opção.');
         $I->see('Introduza um e-mail válido.', '.help-block');
     }
-
+    
+    /*
     public function signupCorreto(FunctionalTester $I)
     {
         $I->submitForm($this->formId, [
@@ -74,19 +75,19 @@ class RegistoCest
             'SignupForm[data_nascimento]' => '2020-11-02',
             'SignupForm[tipo]' => 'Estudante',
         ]);
-
+        
         $I->seeRecord('common\models\User', [
             'username' => 'aaaaa123',
             'email' => 'aaaaa123@gmail.com',
         ]);
-
+        
         $I->grabRecord('common\models\Perfil', [
             'primeiro_nome' => 'aaaaa',
             'numero_telemovel' => '922922922',
         ]);
-
+        
         $I->see('Registo efetuado com sucesso.');
-
-    }
+        
+    }*/
 
 }
