@@ -2,6 +2,7 @@
 
 namespace backend\api\controllers;
 
+use common\models\LoginForm;
 use Yii;
 use yii\rest\ActiveController;
 use common\models\User;
@@ -95,7 +96,43 @@ class UserController extends ActiveController
         } else {
             return false;
         }
+    }
 
+    public function actionLogin(){
+        $loginmodel = new LoginForm();
 
+        $loginmodel->username = \Yii::$app->request->post('username');
+        $loginmodel->password = \Yii::$app->request->post('password');
+
+        $usermodel = User::find()->where(['username' => $loginmodel->username])->one();
+
+        if ($usermodel->status != 10) {
+            throw new \yii\web\NotFoundHttpException("Esta conta não pode ser acedida.");
+
+        } else {
+            if ($loginmodel->login()) {
+                return $usermodel;
+            } else {
+                return null;
+            }
+        }
+    }
+
+    public function actionEditar($username){
+        $user = User::find()->where(['username' => $username])->one();
+        if($user != null){
+            $perfil = Perfil::find()->where(['id_user' => $user->id])->one();
+
+            $user->setPassword(\Yii::$app->request->post('password'));
+            $perfil->numero_telemovel = \Yii::$app->request->post('numero_telemovel');
+            $user->save(false);
+            $perfil->id_user = $user->getId();
+            $perfil->save(false);
+
+            if ($user->save() == true && $perfil->save() == true) {
+                return true;
+            }
+        }
+        return "Utilizador não encontrado/atualizado";
     }
 }

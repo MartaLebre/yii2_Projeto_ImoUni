@@ -64,12 +64,15 @@ return [
                         'GET visita/{id}' => 'visita',
                         'GET reserva/{id}' => 'reserva',
                         'POST registo' => 'registo',
+                        'POST login' => 'login',
+                        'PUT editar/{username}' => 'editar',
                     ],
                     'tokens' =>
                         [
                             '{id}' => '<id:\\d+>',
                             '{user}' => '<user:.*?>',
                             '{token}' => '<token:.*?>',
+                            '{username}' => '<username:.*?>',
                         ],
                 ],
                 [
