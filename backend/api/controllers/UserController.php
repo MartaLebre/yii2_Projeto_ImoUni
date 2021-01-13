@@ -66,4 +66,36 @@ class UserController extends ActiveController
 
         return $reserva;
     }
+
+
+    public function actionRegisto()
+    {
+        $user = new User();
+        $userProfile = new Perfil();
+
+        $user->username = \Yii::$app->request->post('username');;
+        $user->email = \Yii::$app->request->post('email');;
+        $user->setPassword(\Yii::$app->request->post('password'));
+        $user->generateAuthKey();
+        $user->generateEmailVerificationToken();
+        $userProfile->primeiro_nome = \Yii::$app->request->post('primeiro_nome');
+        $userProfile->ultimo_nome = \Yii::$app->request->post('ultimo_nome');
+        $userProfile->numero_telemovel = \Yii::$app->request->post('numero_telemovel');
+        $userProfile->genero = \Yii::$app->request->post('genero');
+        $userProfile->data_nascimento = \Yii::$app->request->post('data_nascimento');
+        $userProfile->tipo = \Yii::$app->request->post('tipo');
+
+        $user->save(false);
+        $userProfile->id_user = $user->getId();
+
+        $userProfile->save(false);
+
+        if ($user->save() == true && $userProfile->save() == true) {
+            return true;
+        } else {
+            return false;
+        }
+
+
+    }
 }

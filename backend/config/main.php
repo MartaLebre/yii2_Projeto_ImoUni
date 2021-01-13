@@ -63,10 +63,13 @@ return [
                         'GET total' => 'total', //mostra o total de users
                         'GET visita/{id}' => 'visita',
                         'GET reserva/{id}' => 'reserva',
+                        'POST registo' => 'registo',
                     ],
                     'tokens' =>
                         [
                             '{id}' => '<id:\\d+>',
+                            '{user}' => '<user:.*?>',
+                            '{token}' => '<token:.*?>',
                         ],
                 ],
                 [
