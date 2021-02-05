@@ -2,6 +2,7 @@
 
 namespace backend\api\controllers;
 
+use common\models\LoginForm;
 use Yii;
 use yii\rest\ActiveController;
 use common\models\User;
@@ -65,5 +66,73 @@ class UserController extends ActiveController
         $reserva = Reserva::findOne(['id' => $id]);
 
         return $reserva;
+    }
+
+
+    public function actionRegisto()
+    {
+        $user = new User();
+        $userProfile = new Perfil();
+
+        $user->username = \Yii::$app->request->post('username');;
+        $user->email = \Yii::$app->request->post('email');;
+        $user->setPassword(\Yii::$app->request->post('password'));
+        $user->generateAuthKey();
+        $user->generateEmailVerificationToken();
+        $userProfile->primeiro_nome = \Yii::$app->request->post('primeiro_nome');
+        $userProfile->ultimo_nome = \Yii::$app->request->post('ultimo_nome');
+        $userProfile->numero_telemovel = \Yii::$app->request->post('numero_telemovel');
+        $userProfile->genero = \Yii::$app->request->post('genero');
+        $userProfile->data_nascimento = \Yii::$app->request->post('data_nascimento');
+        $userProfile->tipo = \Yii::$app->request->post('tipo');
+
+        $user->save(false);
+        $userProfile->id_user = $user->getId();
+
+        $userProfile->save(false);
+
+        if ($user->save() == true && $userProfile->save() == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function actionLogin(){
+        $loginmodel = new LoginForm();
+
+        $loginmodel->username = \Yii::$app->request->post('username');
+        $loginmodel->password = \Yii::$app->request->post('password');
+
+        $usermodel = User::find()->where(['username' => $loginmodel->username])->one();
+
+        if ($usermodel->status != 10) {
+            throw new \yii\web\NotFoundHttpException("Esta conta não pode ser acedida.");
+
+        } else {
+            if ($loginmodel->login()) {
+                return $usermodel;
+            } else {
+                return null;
+            }
+        }
+    }
+
+    public function actionEditar($username){
+        $user = User::find()->where(['username' => $username])->one();
+        if($user != null){
+            $perfil = Perfil::find()->where(['id_user' => $user->id])->one();
+
+            $user->setPassword(\Yii::$app->request->post('password'));
+            $perfil->numero_telemovel = \Yii::$app->request->post('numero_telemovel');
+            $user->save(false);
+            $perfil->id_user = $user->getId();
+            $perfil->save(false);
+
+            if ($user->save() == true && $perfil->save() == true) {
+                return true;
+            }
+        }
+        return "Utilizador não encontrado/atualizado";
     }
 }
