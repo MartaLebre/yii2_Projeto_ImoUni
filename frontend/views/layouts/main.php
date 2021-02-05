@@ -29,6 +29,8 @@ AppAsset::register($this);
 
 <div class="wrap">
     <?php
+    $modelPerfil = Perfil::findOne(Yii::$app->user->getId());
+    
     NavBar::begin([
         'brandLabel' => Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
@@ -43,11 +45,8 @@ AppAsset::register($this);
         ];
     }
     else{
-        if(Perfil::findOne(Yii::$app->user->getId())->getAttribute('tipo') == 2){
-            $navLeft = [
-                ['label' => 'Meus anúncios', 'url' => ['/anuncio/index']],
-                ['label' => 'Minhas propriedades', 'url' => ['/casa/index']],
-            ];
+        if($modelPerfil->getAttribute('tipo') == 2){
+            $navLeft[] = ['label' => 'Meus anúncios', 'url' => ['/anuncio/index']];
     
             $navRight = [
                 ['label' => Yii::$app->user->identity->username,
@@ -62,8 +61,11 @@ AppAsset::register($this);
                 . '</li>',
             ];
         }
-        elseif(Perfil::findOne(Yii::$app->user->getId())->getAttribute('tipo') == 3){
-            $navLeft = [];
+        elseif($modelPerfil->getAttribute('tipo') == 3){
+            $navLeft = [
+                ['label' => 'Utilizadores', 'url' => ['/user/index']],
+                ['label' => 'Anúncios', 'url' => ['/anuncio/index']],
+            ];
     
             $navRight = [
                 ['label' => Yii::$app->user->identity->username],

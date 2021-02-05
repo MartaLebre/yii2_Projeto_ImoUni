@@ -10,7 +10,7 @@ use yii\helpers\Html;
 $session = Yii::$app->session;
 $modelCasa = Casa::findOne($session->get('id_casa'));
 
-$this->title = 'Adicionar quarto |' . Yii::$app->name;?>
+$this->title = 'Adicionar quarto | ' . Yii::$app->name;?>
 <div class="quarto-create">
     <div class="row">
         <div class="col-lg-12">

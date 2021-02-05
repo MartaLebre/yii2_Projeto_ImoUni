@@ -2,6 +2,7 @@
 namespace frontend\controllers;
 
 use common\models\AnuncioSearch;
+use common\models\Estatistica;
 use common\models\Perfil;
 use common\models\User;
 use Yii;
@@ -77,22 +78,20 @@ class SiteController extends Controller
      *
      * @return mixed
      */
-    public function actionIndex()
-    {
-        $_perfil = Perfil::findOne(Yii::$app->user->getId());
-        if($_perfil['tipo'] !== 3){
+    public function actionIndex(){
+        $modelPerfil = Perfil::findOne(Yii::$app->user->getId());
+        if($modelPerfil['tipo'] !== 3){
             $searchModel = new AnuncioSearch();
-    
+        
             return $this->render('index', ['searchModel' => $searchModel]);
         }
         else{
-            $modelUsers = User::find()->asArray()->all();
-            $modelAnuncios = Anuncio::find()->asArray()->all();
-            
-            return $this->render('index', [
-                'modelUsers' => $modelUsers,
-                'modelAnuncios' => $modelAnuncios,
-            ]);
+            Estatistica::deleteAll();
+            $estatisticas = new Estatistica();
+            $estatisticas->getEstatisticas();
+            $estatisticas->save();
+    
+            return $this->render('index', ['estatisticas' => $estatisticas]);
         }
     }
 
@@ -101,8 +100,7 @@ class SiteController extends Controller
      *
      * @return mixed
      */
-    public function actionLogin()
-    {
+    public function actionLogin(){
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }

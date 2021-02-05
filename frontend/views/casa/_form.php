@@ -28,26 +28,23 @@ use yii\widgets\ActiveForm;
 
             <div class="row">
                 <div class="col-sm-6">
-                    <?= $form->field($model, 'capacidade')->textInput() ?>
-                </div>
-                <div class="col-sm-6">
                     <?= $form->field($model, 'num_quartos')->textInput() ?>
                 </div>
-            </div>
-
-            <div class="row">
                 <div class="col-sm-6">
                     <?= $form->field($model, 'num_wcs')->textInput() ?>
                 </div>
-                <div class="col-sm-6">
-                    <?= $form->field($model, 'aquecimento_agua')->dropDownList([ 'termoacumulador' => 'Termoacumulador', 'esquentador' => 'Esquentador'], ['prompt' => '']) ?>
-                </div>
             </div>
 
             <div class="row">
                 <div class="col-sm-6">
+                    <?= $form->field($model, 'aquecimento_agua')->dropDownList([ 'termoacumulador' => 'Termoacumulador', 'esquentador' => 'Esquentador'], ['prompt' => '']) ?>
+                </div>
+                <div class="col-sm-6">
                     <?= $form->field($model, 'wifi')->dropDownList([ '0' => 'Não', '1' => 'Sim'], ['prompt' => '']) ?>
                 </div>
+            </div>
+
+            <div class="row">
                 <div class="col-sm-6">
                     <?= $form->field($model, 'area_exterior')->dropDownList([ '0' => 'Não', '1' => 'Sim'], ['prompt' => '']) ?>
                 </div>

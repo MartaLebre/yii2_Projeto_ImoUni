@@ -80,19 +80,13 @@ class QuartoController extends Controller
             
             $model->addQuarto($id_casa, $imgUploaded);
             
-            if($modelCasa->num_quartos <= Quarto::find()->where(['id_casa' => $id_casa])->count()){
-                if($session->has('id_casa'))
-                    $session->remove('id_casa');
-    
-                Yii::$app->session->setFlash('success', 'Propriedade registada com sucesso.');
-                return $this->redirect(['/casa/index']);
-            }
+            if($modelCasa->num_quartos <= Quarto::find()->where(['id_casa' => $id_casa])->count())
+                return $this->redirect(['/anuncio/create']);
             else{
                 $model = new Quarto();
     
                 return $this->redirect(['create', ['model' => $model]]);
             }
-            
         }
     
         return $this->render('create', ['model' => $model]);

@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Casa */
 
-$this->title = 'Adicionar propriedade |' . Yii::$app->name; ?>
+$this->title = 'Adicionar propriedade | ' . Yii::$app->name; ?>
 <div class="casa-create">
     <div class="row">
         <div class="col-lg-12">

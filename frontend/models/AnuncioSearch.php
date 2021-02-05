@@ -68,7 +68,8 @@ class AnuncioSearch extends Anuncio
         ]);
 
         $query->andFilterWhere(['like', 'titulo', $this->titulo])
-            ->andFilterWhere(['like', 'descricao', $this->descricao]);
+            ->andFilterWhere(['like', 'descricao', $this->descricao])
+            ->andFilterWhere(['like', 'id_proprietario', $this->id_proprietario]);
 
         return $dataProvider;
     }

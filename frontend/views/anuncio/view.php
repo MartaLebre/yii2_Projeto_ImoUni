@@ -23,6 +23,9 @@ $modelCasa = Casa::findOne($model['id_casa']);
 $modelCozinha = Cozinha::find()->where(['id_casa' => $modelCasa['id']])->one();
 $modelSala = Sala::find()->where(['id_casa' => $modelCasa['id']])->one();
 $modelQuartos = Quarto::find()->where(['id_casa' => $modelCasa['id']])->asArray()->all();
+
+$current_perfil = Perfil::findOne(Yii::$app->user->getId());
+$modelVisitas = Visita::find()->where(['id_anuncio' => $model['id']])->asArray()->all();
 ?>
 
 <div class="anuncio-view">
@@ -46,13 +49,13 @@ $modelQuartos = Quarto::find()->where(['id_casa' => $modelCasa['id']])->asArray(
         <div class="col-sm-3">
             <h4><?php
                 $data_criacao = new DateTime($model->getAttribute('data_criacao'));
-                $datetime = new DateTime(date("Y-m-d H:i:s"));
-                $diff = $data_criacao->diff($datetime);
+                $current_date = new DateTime();
+                $diff = $data_criacao->diff($current_date);
                 if($diff->days == 0){ ?>
                     Publicado hoje
                 <?php }
-                else{ 
-                    echo $diff->days; ?> dias atrás
+                else{ ?>
+                    Publicado a <?php echo $diff->days; ?> dias atrás
                 <?php }?>
             </h4>
         </div>
@@ -62,40 +65,23 @@ $modelQuartos = Quarto::find()->where(['id_casa' => $modelCasa['id']])->asArray(
         <div class="col-sm-8">
             <h3>Descrição</h3>
             <h4><?= $model['descricao'] ?></h4>
+    
+            <br>
+            <?php if($current_perfil['tipo'] == 1){
+                $visita = false;
+                
+                foreach($modelVisitas as $modelVisita){
+                    if($modelVisita['id_estudante'] == Yii::$app->user->getId())
+                        $visita = true;
+                }
+                if(!$visita){ ?>
+                    <?= Html::a('Marcar visita', ['/visita/create', 'id_anuncio' => $model['id']], ['class'=>'btn btn-info']) ?>
+                <?php }
+            }
+            if($current_perfil['tipo'] == 2 && ($model['id_proprietario'] == Yii::$app->user->getId())){ ?>
+                <?= Html::a('Ver visitas', ['/visita/index', 'id_anuncio' => $model['id']], ['class'=>'btn btn-info']) ?>
+            <?php }?>
         </div>
-        <?php
-        $_perfil = Perfil::findOne(Yii::$app->user->getId());
-        if(($_perfil['tipo'] !== null) && ($_perfil['tipo'] == 1)){ ?>
-            <div class="col-sm-4">
-                <br><br><br>
-                <div class="row" style="text-align: center">
-                    <?php
-                    $modelVisitas = Visita::find()->where(['id_anuncio' => $model['id']])->asArray()->all();
-                    $_visita = false;
-                    foreach($modelVisitas as $modelVisita){
-                        if($modelVisita['id_estudante'] == Yii::$app->user->getId())
-                            $_visita = true;
-                    }
-                    if(!$_visita){ ?>
-                        <div class="col-sm-6">
-                            <?= Html::a('Visitar', ['/visita/create', 'id_anuncio' => $model['id']], ['class'=>'btn btn-info']) ?>
-                        </div>
-                    <?php }
-                    
-                    $modelReservas = Reserva::find()->where(['id_anuncio' => $model['id']])->asArray()->all();
-                    $_reserva = false;
-                    foreach($modelReservas as $modelReserva){
-                        if($modelReserva['id_estudante'] == Yii::$app->user->getId())
-                            $_reserva = true;
-                    }
-                    if(!$_reserva){ ?>
-                        <div class="col-sm-6">
-                            <?= Html::a('Reservar', ['/reserva/create', 'id_anuncio' => $model['id']], ['class'=>'btn btn-info']) ?>
-                        </div>
-                    <?php }?>
-                </div>
-            </div>
-        <?php }?>
     </div>
     <hr>
 
@@ -109,12 +95,7 @@ $modelQuartos = Quarto::find()->where(['id_casa' => $modelCasa['id']])->asArray(
                     </div>
                     
                     <div class="panel-body">
-                        <div class="col-sm-5">
-                            <?php echo '<img src="data:image/jpeg;base64,' . base64_encode($modelCasa['foto']) . '" style="width: 300px; height: 300px">'; ?>
-                        </div>
-
-                        <div class="col-sm-7">
-                            <h4 style="font-weight: bold">Capacidade para <span style="font-weight: normal"><?= $modelCasa['capacidade'] ?> pessoas</h4>
+                        <div class="col-sm-6">
                             <h4 style="font-weight: bold">Rua: <span style="text-transform: capitalize; font-weight: normal"><?= $modelCasa['nome_rua'] ?></span></h4>
                             <h4 style="font-weight: bold">Tipo de alojamento: <span style="font-weight: normal"><?= $modelCasa['tipo_alojamento'] ?></h4>
                             <?php
@@ -130,6 +111,9 @@ $modelQuartos = Quarto::find()->where(['id_casa' => $modelCasa['id']])->asArray(
                                 <h4 style="font-weight: bold">Área exterior</h4>
                             <?php }?>
                         </div>
+                        <div class="col-sm-5">
+                            <?php echo '<img src="data:image/jpeg;base64,' . base64_encode($modelCasa['foto']) . '" style="width: 300px; height: 300px; border-radius: 10px">'; ?>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -140,10 +124,7 @@ $modelQuartos = Quarto::find()->where(['id_casa' => $modelCasa['id']])->asArray(
                         <h3 class="panel-titulo">Características da cozinha</h3>
                     </div>
                     <div class="panel-body">
-                        <div class="col-sm-5">
-                            <?php echo '<img src="data:image/jpeg;base64,' . base64_encode($modelCozinha['foto']) . '" style="width: 300px; height: 300px">'; ?>
-                        </div>
-                        <div class="col-sm-7">
+                        <div class="col-sm-6">
                             <?php
                             if($modelCozinha['lava_loica'] == 1){?>
                                 <h4 style="font-weight: bold">Lava-loiça</h4>
@@ -174,6 +155,9 @@ $modelQuartos = Quarto::find()->where(['id_casa' => $modelCasa['id']])->asArray(
                                 <h4 style="font-weight: bold">Forno</h4>
                             <?php }?>
                         </div>
+                        <div class="col-sm-5">
+                            <?php echo '<img src="data:image/jpeg;base64,' . base64_encode($modelCozinha['foto']) . '" style="width: 300px; height: 300px; border-radius: 10px">'; ?>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -184,10 +168,7 @@ $modelQuartos = Quarto::find()->where(['id_casa' => $modelCasa['id']])->asArray(
                         <h3 class="panel-titulo">Características da sala</h3>
                     </div>
                     <div class="panel-body">
-                        <div class="col-sm-5">
-                            <?php echo '<img src="data:image/jpeg;base64,' . base64_encode($modelSala['foto']) . '" style="width: 300px; height: 300px">'; ?>
-                        </div>
-                        <div class="col-sm-7">
+                        <div class="col-sm-6">
                             <?php
                             if($modelSala['televisao'] == 1){?>
                                 <h4 style="font-weight: bold">Televisão</h4>
@@ -207,24 +188,28 @@ $modelQuartos = Quarto::find()->where(['id_casa' => $modelCasa['id']])->asArray(
                                 <h4 style="font-weight: bold">AC</h4>
                             <?php }?>
                         </div>
+                        <div class="col-sm-5">
+                            <?php echo '<img src="data:image/jpeg;base64,' . base64_encode($modelSala['foto']) . '" style="width: 300px; height: 300px; border-radius: 10px">'; ?>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <?php
-            $numQuarto = 0;
-            foreach($modelQuartos as $modelQuarto){
-                $numQuarto += 1; ?>
-                <div class="row" style="padding-left: 15px">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-titulo">Características do quarto, número <?= $numQuarto ?></h3>
-                        </div>
-                        <div class="panel-body">
-                            <div class="col-sm-5">
-                                <?php echo '<img src="data:image/jpeg;base64,' . base64_encode($modelQuarto['foto']) . '" style="width: 300px; height: 300px">'; ?>
-                            </div>
-                            <div class="col-sm-7">
+            <div class="row" style="padding-left: 15px">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-titulo">Características dos quartos</h3>
+                </div>
+                <div class="panel-body">
+                    <?php
+                    $numQuarto = 0;
+                    foreach($modelQuartos as $modelQuarto){
+                        $numQuarto += 1;?>
+                        <div class="row">
+                            <?php if($numQuarto > 1){?>
+                                <hr>
+                            <?php }?>
+                            <div class="col-sm-6" style="padding-left: 30px">
                                 <h4 style="font-weight: bold">Tamanho: <span style="font-weight: normal"><?= $modelQuarto['tamanho'] ?></h4>
                                 <h4 style="font-weight: bold">Tipo da cama: <span style="font-weight: normal"><?= $modelQuarto['tipo_cama'] ?></h4>
                                 <?php
@@ -240,11 +225,42 @@ $modelQuartos = Quarto::find()->where(['id_casa' => $modelCasa['id']])->asArray(
                                 if($modelQuarto['ac'] == 1){?>
                                     <h4 style="font-weight: bold">AC</h4>
                                 <?php }?>
+                                <br>
+                                <?php
+                                $modelReserva = Reserva::find()->where(['id_quarto' => $modelQuarto['id']])->one();
+                                if($current_perfil['tipo'] == 1){
+                                    if($modelReserva == null)
+                                        $reserva = false;
+                                    
+                                    if($modelReserva['id_quarto'] == $modelQuarto['id'])
+                                        $reserva = true;
+                                    else
+                                        $reserva = false;
+                
+                                    if(!$reserva){ ?>
+                                        <?= Html::a('Reservar', ['/reserva/create', 'id_quarto' => $modelQuarto['id']], ['class'=>'btn btn-info']) ?>
+                                    <?php }
+                                    else{ ?>
+                                        <button class="btn btn-danger">Reservado</button>
+                                    <?php }
+                                }
+                                if($current_perfil['tipo'] == 2){
+                                    if($modelReserva['id_quarto'] == $modelQuarto['id']){?>
+                                        <button class="btn btn-danger">Reservado</button>
+                                    <?php }
+                                    else{ ?>
+                                        <button class="btn btn-info">Por reservar</button>
+                                    <?php }
+                                }?>
+                            </div>
+                            <div class="col-sm-5">
+                                <?php echo '<img src="data:image/jpeg;base64,' . base64_encode($modelQuarto['foto']) . '" style="width: 300px; height: 300px; border-radius: 10px">'; ?>
                             </div>
                         </div>
-                    </div>
+                    <?php }?>
                 </div>
-            <?php }?>
+            </div>
+            </div>
         </div>
         
         <div class="col-sm-4">
@@ -256,6 +272,13 @@ $modelQuartos = Quarto::find()->where(['id_casa' => $modelCasa['id']])->asArray(
                     <h4 style="text-transform: capitalize; font-weight: bold">Proprietario: <span style="font-weight: normal"><?= $modelPerfil['primeiro_nome'] ?> <?= $modelPerfil['ultimo_nome'] ?></h4>
                     <h4 style="font-weight: bold">Número de telemóvel: <span style="font-weight: normal"><?= $modelPerfil['numero_telemovel'] ?></h4>
                     <h4 style="font-weight: bold">E-mail: <span style="font-weight: normal"><?= $modelUser['email'] ?></h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h4 class="panel-titulo">Enviar mensagem ao proprietário</h4>
                 </div>
             </div>
         </div>

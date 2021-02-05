@@ -9,7 +9,7 @@ use Yii;
  *
  * @property int $id
  * @property int|null $id_estudante
- * @property int|null $id_anuncio
+ * @property int $id_quarto
  * @property string $data_reserva
  * @property string $data_entrada
  *
@@ -37,7 +37,7 @@ class Reserva extends \yii\db\ActiveRecord
             ['data_entrada', 'date', 'format' => 'Y-M-d', 'message' => 'Formato de data inválida.'],
             
             [['id_estudante'], 'exist', 'skipOnError' => true, 'targetClass' => Perfil::className(), 'targetAttribute' => ['id_estudante' => 'id_user']],
-            [['id_anuncio'], 'exist', 'skipOnError' => true, 'targetClass' => Anuncio::className(), 'targetAttribute' => ['id_anuncio' => 'id']],
+            [['id_quarto'], 'exist', 'skipOnError' => true, 'targetClass' => Quarto::className(), 'targetAttribute' => ['id_quarto' => 'id']],
         ];
     }
 
@@ -71,7 +71,7 @@ class Reserva extends \yii\db\ActiveRecord
      * @param Anuncio $id_anuncio para qual reserva irá ser associado
      * @return bool se for criado com sucesso
      */
-    public function addReserva($id_user, $id_anuncio){
+    public function addReserva($id_user, $id_quarto){
         if (!$this->validate()) {
             return null;
         }
@@ -79,7 +79,7 @@ class Reserva extends \yii\db\ActiveRecord
         $reserva = new Reserva();
         
         $reserva->id_estudante = $id_user;
-        $reserva->id_anuncio = $id_anuncio;
+        $reserva->id_quarto = $id_quarto;
         $reserva->data_reserva = date('Y-m-d');
         $reserva->data_entrada = $this->data_entrada;
         $reserva->save();

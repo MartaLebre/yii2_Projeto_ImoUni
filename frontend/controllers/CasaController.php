@@ -117,29 +117,8 @@ class CasaController extends Controller
      */
     public function actionDelete($id)
     {
-        $modelQuartos = Quarto::find()
-            ->where(['id_casa' => $id])
-            ->all();
-        
-        foreach($modelQuartos as $modelQuarto)
-            $modelQuarto->delete();
+        $this->findModel($id)->delete();
     
-        Sala::find()
-            ->where(['id_casa' => $id])
-            ->one()
-            ->delete();
-        
-        Cozinha::find()
-            ->where(['id_casa' => $id])
-            ->one()
-            ->delete();
-    
-        Casa::find()
-            ->where(['id' => $id])
-            ->one()
-            ->delete();
-        
-        Yii::$app->session->setFlash('success', 'Propriedade eliminada com sucesso.');
         return $this->redirect(['index']);
     }
 

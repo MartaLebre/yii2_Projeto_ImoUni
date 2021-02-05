@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use DateTime;
 use Yii;
 
 /**
@@ -63,6 +64,14 @@ class Perfil extends \yii\db\ActiveRecord
             'ultimo_nome' => 'Ultimo nome',
             'genero' => 'Género',
         ];
+    }
+    
+    public function getIdade(){
+       $data_nascimento = new DateTime($this->data_nascimento);
+       $data_atual = new DateTime();
+       $diff = $data_nascimento->diff($data_atual);
+       
+       return $diff->y;
     }
 
     /**

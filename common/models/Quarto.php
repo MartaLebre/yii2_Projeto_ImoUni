@@ -40,7 +40,7 @@ class Quarto extends \yii\db\ActiveRecord
     
             [['foto'], 'file', 'extensions' => ['png', 'jpg', 'jpeg'], 'wrongExtension' => 'Apenas ficheiros com estas extenções são permitidos: png, jpg, jpeg. '],
             [['foto'], 'file', 'maxSize' => (1024 * 1024)/2, 'tooBig' => 'O ficheiro tem ser menor que 525KB.'],
-            //[['foto'], 'file', 'skipOnEmpty' => false ,'uploadRequired' => 'Faça upload de uma fotografia.'],
+            [['foto'], 'file', 'skipOnEmpty' => false ,'uploadRequired' => 'Faça upload de uma fotografia.'],
             
             [['id_casa'], 'exist', 'skipOnError' => true, 'targetClass' => Casa::className(), 'targetAttribute' => ['id_casa' => 'id']],
         ];

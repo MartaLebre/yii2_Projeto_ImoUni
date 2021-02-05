@@ -42,7 +42,7 @@ class AnuncioTest extends Unit
         $anuncio = new Anuncio();
         $anuncio->titulo = 'Moradia em Leiria';
 
-        $anuncio->safeAttributes();
+        //$anuncio->safeAttributes();
         $anuncio->save();
 
         $this->assertEquals('Moradia em Leiria', $anuncio->titulo);

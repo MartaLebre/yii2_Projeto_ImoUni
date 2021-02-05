@@ -31,7 +31,6 @@ class RegistoCest
         $I->seeValidationError('Indique o seu genero.');
         $I->seeValidationError('Introduza a sua data de nascimento');
         $I->seeValidationError('Escolha uma opção.');
-
     }
 
     public function signupEmailIncorreto(FunctionalTester $I)
@@ -60,34 +59,4 @@ class RegistoCest
         $I->dontSee('Escolha uma opção.');
         $I->see('Introduza um e-mail válido.', '.help-block');
     }
-    
-    /*
-    public function signupCorreto(FunctionalTester $I)
-    {
-        $I->submitForm($this->formId, [
-            'SignupForm[primeiro_nome]' => 'aaaaa',
-            'SignupForm[ultimo_nome]' => 'aaaaa',
-            'SignupForm[username]' => 'aaaaa123',
-            'SignupForm[email]' => 'aaaaa123@gmail.com',
-            'SignupForm[password]' => '123456',
-            'SignupForm[numero_telemovel]' => '922922922',
-            'SignupForm[genero]' => 'Masculino',
-            'SignupForm[data_nascimento]' => '2020-11-02',
-            'SignupForm[tipo]' => 'Estudante',
-        ]);
-        
-        $I->seeRecord('common\models\User', [
-            'username' => 'aaaaa123',
-            'email' => 'aaaaa123@gmail.com',
-        ]);
-        
-        $I->grabRecord('common\models\Perfil', [
-            'primeiro_nome' => 'aaaaa',
-            'numero_telemovel' => '922922922',
-        ]);
-        
-        $I->see('Registo efetuado com sucesso.');
-        
-    }*/
-
 }

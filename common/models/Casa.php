@@ -14,7 +14,6 @@ use Yii;
  * @property string $tipo_alojamento
  * @property int $wifi
  * @property string $limpeza
- * @property int $capacidade
  * @property int $num_quartos
  * @property int $num_wcs
  * @property string $aquecimento_agua
@@ -48,15 +47,15 @@ class Casa extends \yii\db\ActiveRecord
         return [
             [['tipo_alojamento', 'wifi', 'limpeza', 'aquecimento_agua', 'area_exterior', 'animais', 'fumar', 'visitantes_pernoitar'], 'required', 'message' => 'Escolha uma das opções.'],
             
-            [['capacidade', 'num_quartos', 'num_wcs'], 'integer', 'message' => 'Valor introduzido é inválido.'],
-            [['capacidade', 'num_quartos', 'num_wcs'], 'required', 'message' => 'Introduza um valor.'],
+            [['num_quartos', 'num_wcs'], 'integer', 'message' => 'Valor introduzido é inválido.'],
+            [['num_quartos', 'num_wcs'], 'required', 'message' => 'Introduza um valor.'],
             
             [['nome_rua'], 'string'],
             [['nome_rua'], 'required', 'message' => 'Introduza um endereço.'],
             
             [['foto'], 'file', 'extensions' => ['png', 'jpg', 'jpeg'], 'wrongExtension' => 'Apenas ficheiros com estas extenções são permitidos: png, jpg, jpeg. '],
             [['foto'], 'file', 'maxSize' => (1024 * 1024)/2, 'tooBig' => 'O ficheiro tem ser menor que 525KB.'],
-            //[['foto'], 'file', 'skipOnEmpty' => false ,'uploadRequired' => 'Faça upload de uma fotografia.'],
+            [['foto'], 'file', 'skipOnEmpty' => false ,'uploadRequired' => 'Faça upload de uma fotografia.'],
             
             [['id_proprietario'], 'exist', 'skipOnError' => true, 'targetClass' => Perfil::className(), 'targetAttribute' => ['id_proprietario' => 'id_user']],
         ];
@@ -72,13 +71,12 @@ class Casa extends \yii\db\ActiveRecord
             'id_proprietario' => 'Id Proprietario',
             'nome_rua' => 'Nome da rua',
             'localizacao' => 'Localizacao',
-            'tipo_alojamento' => 'Tipo de alojamento',
+            'tipo_alojamento' => 'Tipo do imóvel',
             'wifi' => 'Wi-Fi',
             'limpeza' => 'Limpeza',
-            'capacidade' => 'Capacidade',
-            'num_quartos' => 'Número de quartos',
-            'num_wcs' => 'Número de WCs',
-            'aquecimento_agua' => 'Aquecimento Agua',
+            'num_quartos' => 'Quartos',
+            'num_wcs' => 'Casas de banho',
+            'aquecimento_agua' => 'Aquecimento da água',
             'area_exterior' => 'Área exterior',
             'animais' => 'Permitido animais',
             'fumar' => 'Permitido fumar',
@@ -93,7 +91,7 @@ class Casa extends \yii\db\ActiveRecord
      * @return bool se for criado com sucesso
      */
     public function addCasa($id_user, $imgUploaded){
-        if (!$this->validate()) {
+        if (!$this->validate()){
             return null;
         }
         
@@ -104,7 +102,6 @@ class Casa extends \yii\db\ActiveRecord
         $casa->tipo_alojamento = $this->tipo_alojamento;
         $casa->wifi = $this->wifi;
         $casa->limpeza = $this->limpeza;
-        $casa->capacidade = $this->capacidade;
         $casa->num_quartos = $this->num_quartos;
         $casa->num_wcs = $this->num_wcs;
         $casa->aquecimento_agua = $this->aquecimento_agua;

@@ -62,13 +62,13 @@ class ReservaController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($id_anuncio)
+    public function actionCreate($id_quarto)
     {
         $model = new Reserva();
         
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             
-            $model->addReserva(Yii::$app->user->getId(), $id_anuncio);
+            $model->addReserva(Yii::$app->user->getId(), $id_quarto);
             
             Yii::$app->session->setFlash('success', 'Reserva marcada com sucesso.');
             return $this->redirect(['/anuncio/index']);

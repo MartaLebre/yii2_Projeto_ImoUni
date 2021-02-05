@@ -1,6 +1,6 @@
 <?php
 
-namespace app\controllers;
+namespace frontend\controllers;
 
 use Yii;
 use common\models\User;
@@ -37,7 +37,7 @@ class UserController extends Controller
     {
         $searchModel = new UserSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+    
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -123,5 +123,17 @@ class UserController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+    
+    public function actionBloquear($id){
+        $this->findModel($id)->updateAttributes(['status' => 9]);
+        
+        return $this->redirect(['index']);
+    }
+    
+    public function actionDesbloquear($id){
+        $this->findModel($id)->updateAttributes(['status' => 10]);
+        
+        return $this->redirect(['index']);
     }
 }

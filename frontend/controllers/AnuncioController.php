@@ -2,9 +2,14 @@
 
 namespace frontend\controllers;
 
-use common\models\Perfil;
+use common\models\Casa;
+use common\models\Cozinha;
+use common\models\Quarto;
+use common\models\Sala;
 use Yii;
 use common\models\Anuncio;
+use common\models\Reserva;
+use common\models\Visita;
 use common\models\AnuncioSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -34,23 +39,14 @@ class AnuncioController extends Controller
      * Lists all Anuncio models.
      * @return mixed
      */
-    public function actionIndex()
-    {
-        if(Yii::$app->user->isGuest || (Perfil::findOne(Yii::$app->user->getId())->getAttribute('tipo') !== 2)){
-            $searchModel = new AnuncioSearch();
-            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+    public function actionIndex(){
+        $searchModel = new AnuncioSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
     
-            return $this->render('index', [
-                'searchModel' => $searchModel,
-                'dataProvider' => $dataProvider,
-            ]);
-        }
-        else{
-            $id_user = Yii::$app->user->getId();
-            $anuncioList = Anuncio::find()->where(['id_proprietario' => $id_user])->asArray()->all();
-    
-            return $this->render('index', ['anuncioList' => $anuncioList]);
-        }
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     /**
@@ -71,12 +67,20 @@ class AnuncioController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($id_casa)
+    public function actionCreate()
     {
+        $session = Yii::$app->session;
+        $id_casa = $session->get('id_casa');
         $id_user = Yii::$app->user->getId();
         $model = new Anuncio();
 
-        if ($model->load(Yii::$app->request->post()) && $model->addAnuncio($id_user, $id_casa)) {
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $model->addAnuncio($id_user, $id_casa);
+            
+            if($session->has('id_casa'))
+                $session->remove('id_casa');
+    
+            Yii::$app->session->setFlash('success', 'Anúncio registado com sucesso.');
             return $this->redirect(['index']);
         }
 
@@ -94,7 +98,7 @@ class AnuncioController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if($model->load(Yii::$app->request->post()) && $model->save()){
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -110,9 +114,52 @@ class AnuncioController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
+    public function actionDelete($id){
+        $id_casa = Anuncio::find()
+            ->where(['id' => $id])
+            ->one()
+            ->getAttribute('id_casa');
+        
+        $modelVisitas = Visita::find()
+            ->where(['id_anuncio' => $id])
+            ->all();
+        
+        $modelReservas = Reserva::find()
+            ->where(['id_anuncio' => $id])
+            ->all();
+        
+        $modelQuartos = Quarto::find()
+            ->where(['id_casa' => $id_casa])
+            ->all();
+    
+        foreach($modelVisitas as $modelVisita)
+            $modelVisita->delete();
+    
+        foreach($modelReservas as $modelReserva)
+            $modelReserva->delete();
+        
+        Anuncio::find()
+            ->where(['id' => $id])
+            ->one()
+            ->delete();
+        
+        foreach($modelQuartos as $modelQuarto)
+            $modelQuarto->delete();
+    
+        Sala::find()
+            ->where(['id_casa' => $id_casa])
+            ->one()
+            ->delete();
+    
+        Cozinha::find()
+            ->where(['id_casa' => $id_casa])
+            ->one()
+            ->delete();
+    
+        Casa::find()
+            ->where(['id' => $id_casa])
+            ->one()
+            ->delete();
     
         Yii::$app->session->setFlash('success', 'Anúncio eliminado com sucesso.');
         return $this->redirect(['index']);
@@ -127,7 +174,7 @@ class AnuncioController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Anuncio::findOne($id)) !== null) {
+        if(($model = Anuncio::findOne($id)) !== null) {
             return $model;
         }
 

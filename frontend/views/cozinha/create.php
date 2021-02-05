@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Cozinha */
 
-$this->title = 'Adicionar cozinha |' . Yii::$app->name;?>
+$this->title = 'Adicionar cozinha | ' . Yii::$app->name;?>
 <div class="cozinha-create">
     <div class="row">
         <div class="col-lg-12">
