@@ -4,14 +4,14 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\UserSearch */
+/* @var $model common\models\MensagemSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="user-search">
+<div class="mensagem-search">
     <?php $form = ActiveForm::begin([
         'layout' => 'horizontal',
-        'action' => ['/user/index'],
+        'action' => ['/mensagem/index'],
         'method' => 'get',
         'fieldConfig' => [
             'template' => "{label}\n{beginWrapper}\n{input}\n{hint}\n{error}\n{endWrapper}",
@@ -23,7 +23,7 @@ use yii\bootstrap\ActiveForm;
     ]);
     
     // Input group
-    echo $form->field($model, 'username',
+    echo $form->field($model, 'categoria',
         ['inputTemplate' =>
             '<div class="input-group">
                 {input}

@@ -4,8 +4,11 @@ namespace frontend\controllers;
 
 use common\models\Casa;
 use common\models\Cozinha;
+use common\models\Mensagem;
+use common\models\Perfil;
 use common\models\Quarto;
 use common\models\Sala;
+use common\models\User;
 use Yii;
 use common\models\Anuncio;
 use common\models\Reserva;
@@ -55,10 +58,29 @@ class AnuncioController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
-    {
+    public function actionView($id){
+        $model = $this->findModel($id);
+        $modelUser = User::findOne($model['id_proprietario']);
+        $modelPerfil = Perfil::findOne($modelUser['id']);
+        $modelCasa = Casa::findOne($model['id_casa']);
+        $modelCozinha = Cozinha::find()->where(['id_casa' => $modelCasa['id']])->one();
+        $modelSala = Sala::find()->where(['id_casa' => $modelCasa['id']])->one();
+        $modelQuartos = Quarto::find()->where(['id_casa' => $modelCasa['id']])->asArray()->all();
+        $current_perfil = Perfil::findOne(Yii::$app->user->getId());
+        $modelVisitas = Visita::find()->where(['id_anuncio' => $model['id']])->asArray()->all();
+        $modelMensagens = Mensagem::find()->where(['id_remetente' => Yii::$app->user->getId()])->asArray()->all();
+        
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+            'modelUser' => $modelUser,
+            'modelPerfil' => $modelPerfil,
+            'modelCasa' => $modelCasa,
+            'modelCozinha' => $modelCozinha,
+            'modelSala' => $modelSala,
+            'modelQuartos' => $modelQuartos,
+            'current_perfil' => $current_perfil,
+            'modelVisitas' => $modelVisitas,
+            'modelMensagens' => $modelMensagens,
         ]);
     }
 

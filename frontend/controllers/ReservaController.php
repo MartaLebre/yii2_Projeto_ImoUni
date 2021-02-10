@@ -2,6 +2,11 @@
 
 namespace frontend\controllers;
 
+use Cassandra\Date;
+use common\models\Anuncio;
+use common\models\Casa;
+use common\models\Quarto;
+use DateTime;
 use Yii;
 use common\models\Reserva;
 use common\models\ReservaSearch;
@@ -62,19 +67,35 @@ class ReservaController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($id_quarto)
-    {
+    public function actionCreate($id_quarto){
         $model = new Reserva();
+        $modelQuarto = Quarto::findOne($id_quarto);
+        $modelAnuncio = Anuncio::find()->where(['id_casa' => $modelQuarto['id_casa']])->one();
+        $data_disponibilidade = new DateTime($modelAnuncio['data_disponibilidade']);
         
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+        if($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $data_entrada = new DateTime($model['data_entrada']);
             
-            $model->addReserva(Yii::$app->user->getId(), $id_quarto);
-            
-            Yii::$app->session->setFlash('success', 'Reserva marcada com sucesso.');
-            return $this->redirect(['/anuncio/index']);
+            if($data_entrada->diff($data_disponibilidade)->invert == 1){
+                $model->addReserva(Yii::$app->user->getId(), $id_quarto);
+                Yii::$app->session->setFlash('success', 'Reserva marcada com sucesso.');
+                
+                return $this->redirect(['/anuncio/index']);
+            }
+            else{
+                Yii::$app->session->setFlash('danger', 'Reserva não efetuada, disponivel a partir de ' . $data_disponibilidade->format('Y-m-d') . '.');
+                
+                return $this->render('create', [
+                    'model' => $model,
+                    'data_disponibilidade' => $data_disponibilidade->format('Y-m-d'),
+                ]);
+            }
         }
         
-        return $this->render('create', ['model' => $model]);
+        return $this->render('create', [
+            'model' => $model,
+            'data_disponibilidade' => $data_disponibilidade->format('Y-m-d'),
+        ]);
     }
 
     /**
