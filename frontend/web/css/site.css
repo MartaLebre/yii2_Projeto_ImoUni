@@ -120,8 +120,7 @@ a.desc:after {
 }
 
 .anuncio-titulo{
-    text-transform: capitalize;
-    display: block;
+    display: inline-block;
     width: 230px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -145,4 +144,24 @@ a.desc:after {
 .panel-default > .panel-heading {
     background-color: #eee !important;
     border-color: #ccc !important;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-info {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
 }

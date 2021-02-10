@@ -70,7 +70,7 @@ class Casa extends \yii\db\ActiveRecord
             'id' => 'ID',
             'id_proprietario' => 'Id Proprietario',
             'nome_rua' => 'Nome da rua',
-            'localizacao' => 'Localizacao',
+            'localizacao' => 'Localização',
             'tipo_alojamento' => 'Tipo do imóvel',
             'wifi' => 'Wi-Fi',
             'limpeza' => 'Limpeza',

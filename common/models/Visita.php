@@ -38,7 +38,7 @@ class Visita extends \yii\db\ActiveRecord
             
             ['hora_visita', 'safe'],
             ['hora_visita', 'required', 'message' => 'Introduza a sua hora da visita.'],
-            ['hora_visita', 'time', 'format' => 'HH:mm', 'message' => 'Formato de hora inválida.'],
+            ['hora_visita', 'time', 'format' => 'H:m', 'message' => 'Formato de hora inválida.'],
             
             [['id_estudante'], 'exist', 'skipOnError' => true, 'targetClass' => Perfil::className(), 'targetAttribute' => ['id_estudante' => 'id_user']],
             [['id_anuncio'], 'exist', 'skipOnError' => true, 'targetClass' => Anuncio::className(), 'targetAttribute' => ['id_anuncio' => 'id']],

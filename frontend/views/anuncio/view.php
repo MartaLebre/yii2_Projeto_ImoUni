@@ -1,36 +1,27 @@
 <?php
 
 use yii\helpers\Html;
-use common\models\User;
-use common\models\Perfil;
-use common\models\Casa;
-use common\models\Cozinha;
-use common\models\Sala;
-use common\models\Quarto;
-use common\models\Visita;
 use common\models\Reserva;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Anuncio */
+/* @var $modelUser common\models\User */
+/* @var $modelPerfil common\models\Perfil */
+/* @var $modelCasa common\models\Casa */
+/* @var $modelCozinha common\models\Cozinha */
+/* @var $modelSala common\models\Sala */
+/* @var $modelQuartos common\models\Quarto */
+/* @var $current_perfil common\models\Perfil */
+/* @var $modelVisitas common\models\Visita */
+/* @var $modelMensagens common\models\Mensagem */
 
 $this->title = $model['titulo'];
-
 \yii\web\YiiAsset::register($this);
-
-$modelUser = User::findOne($model['id_proprietario']);
-$modelPerfil = Perfil::findOne($modelUser['id']);
-$modelCasa = Casa::findOne($model['id_casa']);
-$modelCozinha = Cozinha::find()->where(['id_casa' => $modelCasa['id']])->one();
-$modelSala = Sala::find()->where(['id_casa' => $modelCasa['id']])->one();
-$modelQuartos = Quarto::find()->where(['id_casa' => $modelCasa['id']])->asArray()->all();
-
-$current_perfil = Perfil::findOne(Yii::$app->user->getId());
-$modelVisitas = Visita::find()->where(['id_anuncio' => $model['id']])->asArray()->all();
 ?>
 
 <div class="anuncio-view">
-    <h4 style="font-weight: bold">Disponível a partir de <?= Yii::$app->formatter->asDate($model['data_disponibilidade']) ?></h4>
     <h1><?= $model['titulo'] ?></h1>
+    <h4 style="font-weight: bold">Disponível a partir de <?= Yii::$app->formatter->asDate($model['data_disponibilidade']) ?></h4>
     
     <div class="row">
         <div class="col-sm-2" >
@@ -39,10 +30,10 @@ $modelVisitas = Visita::find()->where(['id_anuncio' => $model['id']])->asArray()
         <div class="col-sm-3">
             <h4><?php
                 if($model['despesas_inc'] == 0){?>
-                    Despesas incluidas
+                    Despesas incluídas
                 <?php }
                 else{ ?>
-                    Despesas não incluidas
+                    Despesas não incluídas
                 <?php }?>
             </h4>
         </div>
@@ -55,7 +46,7 @@ $modelVisitas = Visita::find()->where(['id_anuncio' => $model['id']])->asArray()
                     Publicado hoje
                 <?php }
                 else{ ?>
-                    Publicado a <?php echo $diff->days; ?> dias atrás
+                    Publicado à <?php echo $diff->days; ?> dias atrás
                 <?php }?>
             </h4>
         </div>
@@ -78,7 +69,7 @@ $modelVisitas = Visita::find()->where(['id_anuncio' => $model['id']])->asArray()
                     <?= Html::a('Marcar visita', ['/visita/create', 'id_anuncio' => $model['id']], ['class'=>'btn btn-info']) ?>
                 <?php }
             }
-            if($current_perfil['tipo'] == 2 && ($model['id_proprietario'] == Yii::$app->user->getId())){ ?>
+            if($model['id_proprietario'] == Yii::$app->user->getId()){ ?>
                 <?= Html::a('Ver visitas', ['/visita/index', 'id_anuncio' => $model['id']], ['class'=>'btn btn-info']) ?>
             <?php }?>
         </div>
@@ -97,7 +88,7 @@ $modelVisitas = Visita::find()->where(['id_anuncio' => $model['id']])->asArray()
                     <div class="panel-body">
                         <div class="col-sm-6">
                             <h4 style="font-weight: bold">Rua: <span style="text-transform: capitalize; font-weight: normal"><?= $modelCasa['nome_rua'] ?></span></h4>
-                            <h4 style="font-weight: bold">Tipo de alojamento: <span style="font-weight: normal"><?= $modelCasa['tipo_alojamento'] ?></h4>
+                            <h4 style="font-weight: bold">Tipo do imóvel: <span style="font-weight: normal"><?= $modelCasa['tipo_alojamento'] ?></h4>
                             <?php
                             if($modelCasa['wifi'] == 1){?>
                                 <h4 style="font-weight: bold">Wi-Fi</h4>
@@ -244,7 +235,7 @@ $modelVisitas = Visita::find()->where(['id_anuncio' => $model['id']])->asArray()
                                         <button class="btn btn-danger">Reservado</button>
                                     <?php }
                                 }
-                                if($current_perfil['tipo'] == 2){
+                                if($model['id_proprietario'] == Yii::$app->user->getId()){
                                     if($modelReserva['id_quarto'] == $modelQuarto['id']){?>
                                         <button class="btn btn-danger">Reservado</button>
                                     <?php }
@@ -262,25 +253,41 @@ $modelVisitas = Visita::find()->where(['id_anuncio' => $model['id']])->asArray()
             </div>
             </div>
         </div>
-        
+
+
         <div class="col-sm-4">
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h4 class="panel-titulo">Informações do proprietário</h4>
                 </div>
                 <div class="panel-body">
-                    <h4 style="text-transform: capitalize; font-weight: bold">Proprietario: <span style="font-weight: normal"><?= $modelPerfil['primeiro_nome'] ?> <?= $modelPerfil['ultimo_nome'] ?></h4>
+                    <h4 style="text-transform: capitalize; font-weight: bold">Proprietário: <span style="font-weight: normal"><?= $modelPerfil['primeiro_nome'] ?> <?= $modelPerfil['ultimo_nome'] ?></h4>
                     <h4 style="font-weight: bold">Número de telemóvel: <span style="font-weight: normal"><?= $modelPerfil['numero_telemovel'] ?></h4>
                     <h4 style="font-weight: bold">E-mail: <span style="font-weight: normal"><?= $modelUser['email'] ?></h4>
                 </div>
             </div>
         </div>
-        <div class="col-sm-4">
-            <div class="panel panel-success">
-                <div class="panel-heading">
-                    <h4 class="panel-titulo">Enviar mensagem ao proprietário</h4>
-                </div>
-            </div>
+        
+        <div class="col-sm-4" style="text-align: center">
+            <?php
+            $user_hasMensagem = false;
+        
+            if($modelMensagens){
+                foreach($modelMensagens as $mensagem){
+                    if($mensagem['categoria'] == $model['titulo'])
+                        $user_hasMensagem = true;
+                    else
+                        $user_hasMensagem = false;
+                }
+            }
+            if(!$user_hasMensagem && $current_perfil['tipo'] == 1){?>
+                <?= Html::a('Enviar mensagem ao proprietário', ['/mensagem/create', 'id_anuncio' => $model['id']], ['class' => 'btn btn-success btn-block']) ?>
+            <?php }
+            else{ ?>
+                <button type="button" class="btn btn-success btn-block disabled">
+                    Enviar mensagem ao proprietário
+                </button>
+            <?php }?>
         </div>
     </div>
 </div>

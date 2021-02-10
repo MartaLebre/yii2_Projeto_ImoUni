@@ -30,8 +30,9 @@ AppAsset::register($this);
             <div class="col-lg-6">
                 <h1>Meus anúncios</h1>
             </div>
-            <div class="col-lg-6">
-                <div style="text-align: right; padding-top: 20px">
+            <div class="col-lg-6 text-right">
+                <div style="padding-top: 10px">
+                    <br>
                     <?= Html::a('Adicionar anúncio', ['/casa/create'], ['class'=>'btn btn-primary']) ?>
                 </div>
             </div>
@@ -67,13 +68,13 @@ AppAsset::register($this);
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="card-content">
-                                                <h4 class="card-text"><span style="text-transform: capitalize"><?= Casa::findOne($anuncio['id_casa'])->getAttribute('num_quartos') ?></span> Quartos disponíveis</h4>
+                                            <div class="card-content te">
+                                                <h4 class="card-text"><?= Casa::findOne($anuncio['id_casa'])->getAttribute('num_quartos') ?> Quartos disponíveis</h4>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="card-content">
-                                                <h4 class="card-text"><span style="text-transform: capitalize"><?= $anuncio['preco'] ?></span>€ / mês</h4>
+                                                <h4 class="card-text"><?= $anuncio['preco'] ?>€ / mês</h4>
                                             </div>
                                         </div>
                                     </a>

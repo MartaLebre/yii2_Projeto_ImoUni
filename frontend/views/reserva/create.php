@@ -9,6 +9,7 @@ $this->title = 'Marcar reserva |' . Yii::$app->name;?>
 <div class="reserva-create">
     <div class="row">
         <div class="col-lg-12">
+            <h4 style="font-weight: bold">Disponível a partir de <?= $data_disponibilidade ?></h4>
             <h1>Marcar reserva</h1>
             <h4>Por favor preencha os seguintes campos</h4>
             <br>

@@ -33,15 +33,10 @@ class VisitaController extends Controller
      * Lists all Visita models.
      * @return mixed
      */
-    public function actionIndex()
-    {
-        $searchModel = new VisitaSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+    public function actionIndex($id_anuncio){
+        $modelVisitas = Visita::find()->where(['id_anuncio' => $id_anuncio])->asArray()->all();
+        
+        return $this->render('index', ['modelVisitas' => $modelVisitas]);
     }
 
     /**
