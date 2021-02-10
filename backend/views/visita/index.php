@@ -1,37 +1,47 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use common\models\User;
 
 /* @var $this yii\web\View */
-/* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Visitas';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Visitas | ' . Yii::$app->name;
 ?>
 <div class="visita-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Create Visita', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'id_estudante',
-            'id_anuncio',
-            'hora_visita',
-            'data_visita',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
-
-
+    <div class="row">
+        <div class="col-lg-12">
+            <h1>Visitas</h1>
+            
+            <?php if($modelVisitas == null){?>
+                <hr>
+                <h3 style="text-align: center">Não existem visitas marcadas</h3>
+            <?php }
+            else{ ?>
+                <table class="table" style="font-size: 22px">
+                    <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>E-mail</th>
+                        <th>Hora</th>
+                        <th>Data</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach($modelVisitas as $visita){
+                        $username = User::findOne($visita['id_estudante'])->getAttribute('username');
+                        $email = User::findOne($visita['id_estudante'])->getAttribute('email');
+                        $hora_visita = new DateTime($visita['hora_visita']);
+                        ?>
+                        <tr>
+                            <td><?= $username ?></td>
+                            <td><?= $email ?></td>
+                            <td><?= $hora_visita->format('H:m') ?></td>
+                            <td><?= $visita['data_visita'] ?></td>
+                        </tr>
+                    <?php }?>
+                    </tbody>
+                </table>
+            <?php }?>
+        </div>
+    </div>
 </div>

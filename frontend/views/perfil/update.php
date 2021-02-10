@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 /* @var $perfil common\models\Perfil */
 /* @var $form yii\widgets\ActiveForm */
 
-$this->title = 'Signup | ImoUni';
+$this->title = 'Update | ImoUni';
 ?>
 <div class="perfil-form">
     <h1>Atualizar dados da conta</h1>
@@ -22,9 +22,8 @@ $this->title = 'Signup | ImoUni';
             
             <?= $form->field($perfil, 'numero_telemovel')->textInput() ?>
             
-            <hr>
             <div class="form-group">
-                <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
+                <?= Html::submitButton('Guardar', ['class' => 'btn btn-success btn-block']) ?>
             </div>
             
             <?php ActiveForm::end(); ?>

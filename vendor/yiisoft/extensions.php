@@ -12,15 +12,6 @@ return array (
       '@yii/bootstrap' => $vendorDir . '/yiisoft/yii2-bootstrap/src',
     ),
   ),
-  'nex/yii2-datepicker' => 
-  array (
-    'name' => 'nex/yii2-datepicker',
-    'version' => 'dev-master',
-    'alias' => 
-    array (
-      '@nex/datepicker' => $vendorDir . '/nex/yii2-datepicker',
-    ),
-  ),
   'yiisoft/yii2-debug' => 
   array (
     'name' => 'yiisoft/yii2-debug',
@@ -48,15 +39,6 @@ return array (
       '@yii/gii' => $vendorDir . '/yiisoft/yii2-gii/src',
     ),
   ),
-  'yiisoft/yii2-jui' => 
-  array (
-    'name' => 'yiisoft/yii2-jui',
-    'version' => '2.0.7.0',
-    'alias' => 
-    array (
-      '@yii/jui' => $vendorDir . '/yiisoft/yii2-jui',
-    ),
-  ),
   'yiisoft/yii2-swiftmailer' => 
   array (
     'name' => 'yiisoft/yii2-swiftmailer',
@@ -64,6 +46,15 @@ return array (
     'alias' => 
     array (
       '@yii/swiftmailer' => $vendorDir . '/yiisoft/yii2-swiftmailer/src',
+    ),
+  ),
+  'nex/yii2-datepicker' => 
+  array (
+    'name' => 'nex/yii2-datepicker',
+    'version' => 'dev-master',
+    'alias' => 
+    array (
+      '@nex/datepicker' => $vendorDir . '/nex/yii2-datepicker',
     ),
   ),
 );

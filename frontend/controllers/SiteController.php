@@ -79,20 +79,9 @@ class SiteController extends Controller
      * @return mixed
      */
     public function actionIndex(){
-        $modelPerfil = Perfil::findOne(Yii::$app->user->getId());
-        if($modelPerfil['tipo'] !== 3){
-            $searchModel = new AnuncioSearch();
-        
-            return $this->render('index', ['searchModel' => $searchModel]);
-        }
-        else{
-            Estatistica::deleteAll();
-            $estatisticas = new Estatistica();
-            $estatisticas->getEstatisticas();
-            $estatisticas->save();
+        $searchModel = new AnuncioSearch();
     
-            return $this->render('index', ['estatisticas' => $estatisticas]);
-        }
+        return $this->render('index', ['searchModel' => $searchModel]);
     }
 
     /**
@@ -175,7 +164,7 @@ class SiteController extends Controller
     public function actionSignup()
     {
         $model = new SignupForm();
-        if ($model->load(Yii::$app->request->post()) && $model->signup()) {
+        if($model->load(Yii::$app->request->post()) && $model->signup()){
             Yii::$app->session->setFlash('success', 'Registo efetuado com sucesso.');
             return $this->goHome();
         }
@@ -287,47 +276,4 @@ class SiteController extends Controller
         ]);
     }
     */
-    
-    /**
-     * ELimina um anúncio.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionEliminar($id)
-    {
-        Anuncio::findOne($id)->delete();
-        
-        Yii::$app->session->setFlash('success', 'Anúncio eliminado com sucesso.');
-        return $this->redirect(['index']);
-    }
-    
-    /**
-     * Bloquea um utilizador.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionBloquear($id)
-    {
-        $user = User::findOne($id);
-        $user->status = 9;
-        $user->save();
-        
-        Yii::$app->session->setFlash('success', 'Utilizador bloqueado com sucesso.');
-        return $this->redirect(['index']);
-    }
-    
-    /**
-     * Desbloquea um utilizador.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionDesbloquear($id)
-    {
-        $user = User::findOne($id);
-        $user->status = 10;
-        $user->save();
-        
-        Yii::$app->session->setFlash('success', 'Utilizador desbloqueado com sucesso.');
-        return $this->redirect(['index']);
-    }
 }

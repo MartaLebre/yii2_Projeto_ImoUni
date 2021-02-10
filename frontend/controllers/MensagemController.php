@@ -62,8 +62,7 @@ class MensagemController extends Controller
             ->andWhere(['categoria' => $model['categoria']])
             ->all();
     
-        if(($model['id_remetente'] == Yii::$app->user->getId()) ||
-            (Perfil::findOne(Yii::$app->user->getId())->getAttribute('tipo') == 3)){
+        if($model['id_remetente'] == Yii::$app->user->getId()){
             $remetente = User::findOne($model['id_remetente']);
             $destinatario = User::findOne($model['id_destinatario']);
         }

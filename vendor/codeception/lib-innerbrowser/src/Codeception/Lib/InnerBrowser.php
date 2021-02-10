@@ -209,7 +209,7 @@ class InnerBrowser extends Module implements Web, PageSourceSaver, ElementLocato
                 }
             }
 
-            if ($method !== 'GET' && $content === null && !empty($parameters)) {
+            if (!in_array($method, ['GET', 'HEAD'], true) && $content === null && !empty($parameters)) {
                 $content = http_build_query($parameters);
             }
         }
@@ -2073,5 +2073,62 @@ class InnerBrowser extends Module implements Web, PageSourceSaver, ElementLocato
     public function haveServerParameter($name, $value)
     {
         $this->client->setServerParameter($name, $value);
+    }
+
+    /**
+     * Prevents automatic redirects to be followed by the client.
+     *
+     * ```php
+     * <?php
+     * $I->stopFollowingRedirects();
+     * ```
+     *
+     */
+    public function stopFollowingRedirects()
+    {
+        $this->client->followRedirects(false);
+    }
+
+    /**
+     * Enables automatic redirects to be followed by the client.
+     *
+     * ```php
+     * <?php
+     * $I->startFollowingRedirects();
+     * ```
+     *
+     */
+    public function startFollowingRedirects()
+    {
+        $this->client->followRedirects(true);
+    }
+
+    /**
+     * Follow pending redirect if there is one.
+     *
+     * ```php
+     * <?php
+     * $I->followRedirect();
+     * ```
+     *
+     */
+    public function followRedirect()
+    {
+        $this->client->followRedirect();
+    }
+
+    /**
+     * Sets the maximum number of redirects that the Client can follow.
+     *
+     * ```php
+     * <?php
+     * $I->setMaxRedirects(2);
+     * ```
+     *
+     * @param int $maxRedirects
+     */
+    public function setMaxRedirects($maxRedirects)
+    {
+        $this->client->setMaxRedirects($maxRedirects);
     }
 }

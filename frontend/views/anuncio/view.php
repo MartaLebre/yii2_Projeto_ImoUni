@@ -262,7 +262,7 @@ $this->title = $model['titulo'];
                 </div>
                 <div class="panel-body">
                     <h4 style="text-transform: capitalize; font-weight: bold">Proprietário: <span style="font-weight: normal"><?= $modelPerfil['primeiro_nome'] ?> <?= $modelPerfil['ultimo_nome'] ?></h4>
-                    <h4 style="font-weight: bold">Número de telemóvel: <span style="font-weight: normal"><?= $modelPerfil['numero_telemovel'] ?></h4>
+                    <h4 style="font-weight: bold">Número de telemóvel: <span style="font-weight: normal"><?= $model['numero_telemovel'] ?></h4>
                     <h4 style="font-weight: bold">E-mail: <span style="font-weight: normal"><?= $modelUser['email'] ?></h4>
                 </div>
             </div>

@@ -33,16 +33,11 @@ class VisitaController extends Controller
      * Lists all Visita models.
      * @return mixed
      */
-    public function actionIndex()
-    {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Visita::find(),
-        ]);
-
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-        ]);
-    }
+    public function actionIndex($id_anuncio){
+    $modelVisitas = Visita::find()->where(['id_anuncio' => $id_anuncio])->asArray()->all();
+    
+    return $this->render('index', ['modelVisitas' => $modelVisitas]);
+}
 
     /**
      * Displays a single Visita model.

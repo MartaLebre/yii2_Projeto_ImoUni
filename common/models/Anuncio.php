@@ -16,6 +16,7 @@ use Yii;
  * @property string $data_disponibilidade
  * @property int $despesas_inc
  * @property string $descricao
+ * @property int $numero_telemovel
  *
  * @property Perfil $proprietario
  * @property Casa $casa
@@ -52,6 +53,14 @@ class Anuncio extends \yii\db\ActiveRecord
     
             [['descricao'], 'required', 'message' => 'Introduza uma descrição.'],
             [['descricao'], 'string'],
+    
+            ['numero_telemovel', 'integer', 'message' => 'Número de telemovel incorreto.'],
+            ['numero_telemovel', 'required', 'message' => 'Introduza um número de telemovel.'],
+            [
+                'numero_telemovel', 'string', 'min' => 9, 'max' => 9,
+                'tooShort' => 'O número de telemovel tem que ter 9 dígitos.',
+                'tooLong' => 'O número de telemovel tem que ter 9 dígitos.'
+            ],
             
             [['id_proprietario'], 'exist', 'skipOnError' => true, 'targetClass' => Perfil::className(), 'targetAttribute' => ['id_proprietario' => 'id_user']],
             [['id_casa'], 'exist', 'skipOnError' => true, 'targetClass' => Casa::className(), 'targetAttribute' => ['id_casa' => 'id']],
@@ -73,6 +82,7 @@ class Anuncio extends \yii\db\ActiveRecord
             'data_disponibilidade' => 'Data de disponibilidade',
             'despesas_inc' => 'Despesas incluídas',
             'descricao' => 'Descrição',
+            'numero_telemovel' => 'Número de telemóvel',
         ];
     }
     
@@ -95,6 +105,7 @@ class Anuncio extends \yii\db\ActiveRecord
         $anuncio->data_disponibilidade = $this->data_disponibilidade;
         $anuncio->despesas_inc = $this->despesas_inc;
         $anuncio->descricao = $this->descricao;
+        $anuncio->numero_telemovel = $this->numero_telemovel;
         $anuncio->save();
         
         return true;

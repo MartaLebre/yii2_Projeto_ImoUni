@@ -11,14 +11,13 @@ use nex\datepicker\DatePicker;
 $this->title = 'Signup | ImoUni';
 ?>
 <div class="site-signup">
-    <h1>Registar nova conta</h1>
-    <h4>Por favor preencha os seguintes campos</h4>
-    <br>
-
     <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-4 col-lg-offset-4" style="margin-top: 50px">
+            <h1>Registar nova conta</h1>
+            <h4>Por favor preencha os seguintes campos</h4>
+            <br>
+    
             <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
-
 
             <div class="row">
                 <div class="col-sm-6">
@@ -43,9 +42,8 @@ $this->title = 'Signup | ImoUni';
             
             <?= $form->field($model, 'tipo')->dropDownList(['1' => 'Estudante', '2' => 'Proprietario'], ['prompt' => ''])->label('Tipo de utilizador') ?>
             
-            <hr>
             <div class="form-group">
-                <?= Html::submitButton('Registar', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+                <?= Html::submitButton('Registar', ['class' => 'btn btn-primary btn-block', 'name' => 'signup-button']) ?>
             </div>
             
             <?php ActiveForm::end(); ?>

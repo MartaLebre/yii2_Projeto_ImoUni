@@ -3,29 +3,11 @@ body {
     height: 100%;
 }
 
-body.blank {
-    display: flex;
-    padding: 40px 0;
-}
-
 .wrap {
     min-height: 100%;
     height: auto;
     margin: 0 auto -60px;
     padding: 0 0 60px;
-}
-
-body.blank .wrap {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    max-width: 400px;
-    margin: -40px auto;
-    padding: 15px;
-}
-
-body.blank .wrap > div {
-    width: 100%;
 }
 
 .wrap > .container {
@@ -67,11 +49,11 @@ a.asc:after, a.desc:after {
 }
 
 a.asc:after {
-    content: /*"\e113"*/ "\e151";
+    content: "\e151";
 }
 
 a.desc:after {
-    content: /*"\e114"*/ "\e152";
+    content: "\e152";
 }
 
 .sort-numerical a.asc:after {
@@ -90,8 +72,7 @@ a.desc:after {
     content: "\e156";
 }
 
-.grid-view th,
-.grid-view td:last-child {
+.grid-view td {
     white-space: nowrap;
 }
 
@@ -136,4 +117,51 @@ a.desc:after {
 
 .nav > li > form > button.logout:focus {
     outline: none;
+}
+
+.anuncio-titulo{
+    display: inline-block;
+    width: 230px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.btn{
+    font-weight: bold !important;
+    text-transform: uppercase !important;
+}
+
+.panel-titulo{
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.panel-default{
+    border-color: #ccc !important;
+}
+
+.panel-default > .panel-heading {
+    background-color: #eee !important;
+    border-color: #ccc !important;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-info {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
 }

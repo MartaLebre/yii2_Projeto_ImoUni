@@ -53,48 +53,32 @@ AppAsset::register($this);
             foreach($anuncioSearch as $anuncio){?>
                 <div class="col-lg-3">
                     <div class="panel panel-default">
-                        <div class="panel-body">
-                            <div class="container card">
-                                <div class="card-body">
-                                    <a href="<?=Url::to(['/anuncio/view', 'id' => $anuncio['id']]); ?>">
-                                        <div class="row">
-                                            <div class="card-content">
-                                                <?php echo '<img src="data:image/jpeg;base64,' . base64_encode(Casa::findOne($anuncio['id_casa'])->getAttribute('foto')) . '" style="width: 230px; height: 230px">'; ?>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="card-content">
-                                                <h4 class="card-text"><span class="anuncio-titulo"><?= $anuncio['titulo'] ?></span></h4>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="card-content te">
-                                                <h4 class="card-text"><?= Casa::findOne($anuncio['id_casa'])->getAttribute('num_quartos') ?> Quartos disponíveis</h4>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="card-content">
-                                                <h4 class="card-text"><?= $anuncio['preco'] ?>€ / mês</h4>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <?php if(($anuncio['id_proprietario'] == Yii::$app->user->getId()) || ($modelPerfil['tipo'] == 3)){ ?>
-                                        <div class="row">
-                                            <div class="card-content">
-                                                <p class="card-text">
-                                                    <?= Html::a('Apagar anúncio', ['delete', 'id' => $anuncio['id']], [
-                                                        'class' => 'btn btn-danger',
-                                                        'data' => [
-                                                            'confirm' => 'Tem a certeza que deseja eliminar este anúncio?',
-                                                            'method' => 'post',
-                                                        ],
-                                                    ]) ?>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    <?php } ?>
+                        <div class="panel-body" style="margin: 0 15px 0 15px">
+                            <a href="<?=Url::to(['/anuncio/view', 'id' => $anuncio['id']]); ?>">
+                                <div class="row">
+                                    <?php echo '<img src="data:image/jpeg;base64,' . base64_encode(Casa::findOne($anuncio['id_casa'])->getAttribute('foto')) . '" style="width: 230px; height: 230px">'; ?>
                                 </div>
-                            </div>
+                                <div class="row">
+                                    <h4><span class="anuncio-titulo"><?= $anuncio['titulo'] ?></span></h4>
+                                </div>
+                                <div class="row">
+                                    <h4><?= Casa::findOne($anuncio['id_casa'])->getAttribute('num_quartos') ?> Quartos disponíveis</h4>
+                                </div>
+                                <div class="row">
+                                    <h4><?= $anuncio['preco'] ?>€ / mês</h4>
+                                </div>
+                            </a>
+                            <?php if(($anuncio['id_proprietario'] == Yii::$app->user->getId()) || ($modelPerfil['tipo'] == 3)){ ?>
+                                <div class="row">
+                                    <?= Html::a('Apagar anúncio', ['delete', 'id' => $anuncio['id']], [
+                                        'class' => 'btn btn-danger btn-block',
+                                        'data' => [
+                                            'confirm' => 'Tem a certeza que deseja eliminar este anúncio?',
+                                            'method' => 'post',
+                                        ],
+                                    ]) ?>
+                                </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>

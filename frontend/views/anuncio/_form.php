@@ -29,14 +29,14 @@ use nex\datepicker\DatePicker;
             <?= $form->field($model, 'data_disponibilidade')->widget(DatePicker::className(), ['clientOptions' => ['format' => 'Y-M-D']]);?>
     
             <?= $form->field($model, 'descricao')->textarea(['rows' => 6]) ?>
+    
+            <?= $form->field($model, 'numero_telemovel') ?>
             
-            <hr>
+            <div class="form-group">
+                <?= Html::submitButton('Adicionar anúncio', ['class' => 'btn btn-success btn-block']) ?>
+            </div
         </div>
-    </div>
-
-    <div class="form-group">
-        <?= Html::submitButton('Adicionar anúncio', ['class' => 'btn btn-success']) ?>
-    </div>
+    </div>>
     
     <?php ActiveForm::end(); ?>
 </div>

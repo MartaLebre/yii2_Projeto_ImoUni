@@ -124,4 +124,26 @@ class UserController extends Controller
         
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+    
+    /**
+     * Bloquea um utilizador.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionBloquear($id){
+        $this->findModel($id)->updateAttributes(['status' => 9]);
+        
+        return $this->redirect(['index']);
+    }
+    
+    /**
+     * Desbloquea um utilizador.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDesbloquear($id){
+        $this->findModel($id)->updateAttributes(['status' => 10]);
+        
+        return $this->redirect(['index']);
+    }
 }

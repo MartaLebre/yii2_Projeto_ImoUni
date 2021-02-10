@@ -84,8 +84,7 @@ class PerfilController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
-    {
+    public function actionUpdate($id){
         $user = User::findOne($id);
         $perfil = Perfil::findOne($id);
         

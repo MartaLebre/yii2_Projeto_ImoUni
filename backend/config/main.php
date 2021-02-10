@@ -11,21 +11,10 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [
-        'api' => [
-            'class' => 'backend\api\Module',
-        ],
-    ],
+    'modules' => [],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
-            'parsers' => [
-                'application/json' => 'yii\web\JsonParser',
-            ]
-        ],
-        'authManager' => [
-            'class' => 'yii\rbac\DbManager',
-            'defaultRoles' => ['guest'],
         ],
         'user' => [
             'identityClass' => 'common\models\User',
@@ -48,70 +37,18 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-
         'urlManager' => [
-            'enablePrettyUrl' => true,
+            'class' => 'yii\web\UrlManager',
+            // Disable index.php
             'showScriptName' => false,
-            'rules' => [
-                [
-                    'class' => 'yii\rest\UrlRule',
-                    'controller' => 'api/user',
-                    'pluralize' => false,
-                    'extraPatterns' => [
-                        'GET {id}/detalhes' => 'detalhes', //mostra informação da tabela user e da tabela perfil
-                        'GET {id}/email' => 'email', //mostra o email de um user
-                        'GET total' => 'total', //mostra o total de users
-                        'GET visita/{id}' => 'visita',
-                        'GET reserva/{id}' => 'reserva',
-                        'POST registo' => 'registo',
-                        'POST login' => 'login',
-                        'PUT editar/{username}' => 'editar',
-                    ],
-                    'tokens' =>
-                        [
-                            '{id}' => '<id:\\d+>',
-                            '{user}' => '<user:.*?>',
-                            '{token}' => '<token:.*?>',
-                            '{username}' => '<username:.*?>',
-                        ],
-                ],
-                [
-                    'class' => 'yii\rest\UrlRule',
-                    'controller' => 'api/anuncios',
-                    'pluralize' => false,
-                    'extraPatterns' =>
-                        [
-                            'PUT alterar/{id}' => 'alterar', //Altera os dados de um anúncio
-                            'DELETE apagar/{id}' => 'apagar', //Apaga um anúncio
-                            'POST adicionar' => 'adicionar', //Adiciona um anúncio novo
-                        ],
-                    'tokens' =>
-                        [
-                            '{id}' => '<id:\\d+>'
-                        ],
-                ],
-                [
-                    'class' => 'yii\rest\UrlRule',
-                    'controller' => 'api/casas',
-                    'pluralize' => false,
-                    'extraPatterns' =>
-                        [
-                            'GET {id}/detalhes' => 'detalhes', //mostra detalhes de uma casa
-                            'DELETE apagar/{id}' => 'apagar', //apaga uma casa
-                            'GET {n_registos}/registos' => 'registos', //define um limite de registos e mostra esses registos
-                            'GET cozinha/{id}' => 'cozinha',
-                            'GET quarto/{id}' => 'quarto',
-                            'GET sala/{id}' => 'sala',
-                        ],
-                    'tokens' =>
-                        [
-                            '{id}' => '<id:\\d+>',
-                            '{n_registos}' => '<n_registos:\\d+>'
-                        ],
-                ],
-            ],
+            // Disable r= routes
+            'enablePrettyUrl' => true,
+            'rules' => array(
+                '<controller:\w+>/<id:\d+>' => '<controller>/view',
+                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+            ),
         ],
-
     ],
     'params' => $params,
 ];

@@ -14,32 +14,15 @@ $this->title = $categoria . ' | ' . Yii::$app->name;
 ?>
 <div class="mensagem-view">
     <div class="row">
-        <?php if(Perfil::findOne(Yii::$app->user->getId())->getAttribute('tipo') !== 3){ ?>
-            <div class="col-sm-4">
-                <h3>Enviar mensagem para:</h3>
-                <h4><span style="font-weight: bold">Username: </span><?= $destinatario['username'] ?></h4>
-                <h4><span style="font-weight: bold">E-mail: </span><?= $destinatario['email'] ?></h4>
-            </div>
-            <div class="col-sm-8 text-right">
-                <br>
-                <h1><?= $categoria ?></h1>
-            </div>
-        <?php }
-        else{?>
-            <div class="col-sm-4">
-                <h3>Remetente:</h3>
-                <h4><span style="font-weight: bold">Username: </span><?= $remetente['username'] ?></h4>
-                <h4><span style="font-weight: bold">E-mail: </span><?= $remetente['email'] ?></h4>
-            </div>
-            <div class="col-sm-4">
-                <h3>Destinatario:</h3>
-                <h4><span style="font-weight: bold">Username: </span><?= $destinatario['username'] ?></h4>
-                <h4><span style="font-weight: bold">E-mail: </span><?= $destinatario['email'] ?></h4>
-            </div>
-            <div class="col-sm-4 text-right">
-                <h1><?= $categoria ?></h1>
-            </div>
-        <?php }?>
+        <div class="col-sm-4">
+            <h3>Enviar mensagem para:</h3>
+            <h4><span style="font-weight: bold">Username: </span><?= $destinatario['username'] ?></h4>
+            <h4><span style="font-weight: bold">E-mail: </span><?= $destinatario['email'] ?></h4>
+        </div>
+        <div class="col-sm-8 text-right">
+            <br>
+            <h1><?= $categoria ?></h1>
+        </div>
     </div>
     <hr>
     
@@ -95,15 +78,14 @@ $this->title = $categoria . ' | ' . Yii::$app->name;
                 </div>
             </div>
         <?php }
-    }
-    if(Perfil::findOne(Yii::$app->user->getId())->getAttribute('tipo') !== 3){?>
-        <hr>
-        <div class="row">
-            <div class="col-sm-6 col-sm-offset-7">
-                <div class="mensagem-form">
-                    <?= $this->render('_form', ['model' => $mensagemNova]) ?>
-                </div>
+    }?>
+
+    <hr>
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-7">
+            <div class="mensagem-form">
+                <?= $this->render('_form', ['model' => $mensagemNova]) ?>
             </div>
         </div>
-    <?php }?>
+    </div>
 </div>

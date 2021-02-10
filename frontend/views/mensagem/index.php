@@ -9,7 +9,6 @@ use yii\helpers\Html;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Mensagem | ' . Yii::$app->name;
-$modelPerfil = Perfil::findOne(Yii::$app->user->getId());
 ?>
 
 <div class="mensagem-index">
@@ -21,8 +20,7 @@ $modelPerfil = Perfil::findOne(Yii::$app->user->getId());
         
         foreach($dataProvider->getModels() as $modelMensagem){
             if(($modelMensagem['id_remetente'] == Yii::$app->user->getId()) ||
-                ($modelMensagem['id_destinatario'] == Yii::$app->user->getId()) ||
-                ($modelPerfil['tipo'] == 3)){
+                ($modelMensagem['id_destinatario'] == Yii::$app->user->getId())){
                 if($mensagemList){
                     foreach($mensagemList as $_modelMensagem){
                         if($modelMensagem['categoria'] == $_modelMensagem['categoria'])
@@ -52,10 +50,6 @@ $modelPerfil = Perfil::findOne(Yii::$app->user->getId());
                     <thead>
                     <tr>
                         <th>Assunto</th>
-                        <?php if($modelPerfil['tipo'] == 3){ ?>
-                            <th>Remetente</th>
-                            <th>Destinatario</th>
-                        <?php }?>
                         <th></th>
                     </tr>
                     </thead>
@@ -63,10 +57,6 @@ $modelPerfil = Perfil::findOne(Yii::$app->user->getId());
                     <?php foreach($mensagemList as $mensagem){ ?>
                         <tr>
                             <td><?= $mensagem['categoria'] ?></td>
-                            <?php if($modelPerfil['tipo'] == 3){?>
-                                <td><?= User::findOne($mensagem['id_remetente'])->getAttribute('username') ?></td>
-                                <td><?= User::findOne($mensagem['id_destinatario'])->getAttribute('username') ?></td>
-                            <?php }?>
                             <td style="text-align: right"><?= Html::a('Mensagens', ['view', 'id' => $mensagem['id']], ['class' => 'btn btn-success']) ?></td>
                         </tr>
                     <?php }?>
