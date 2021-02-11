@@ -14,12 +14,12 @@ class InstalledVersions
 private static $installed = array (
   'root' => 
   array (
-    'pretty_version' => '1.0.0+no-version-set',
-    'version' => '1.0.0.0',
+    'pretty_version' => 'dev-master',
+    'version' => 'dev-master',
     'aliases' => 
     array (
     ),
-    'reference' => NULL,
+    'reference' => '18403ddcc5010432a1a610a29c605cc77591e393',
     'name' => 'yiisoft/yii2-app-advanced',
   ),
   'versions' => 
@@ -150,6 +150,15 @@ private static $installed = array (
       ),
       'reference' => '781be167fb1557bfc9b61e0a4eac60a32c534ec1',
     ),
+    'codeception/module-webdriver' => 
+    array (
+      'pretty_version' => '1.2.0',
+      'version' => '1.2.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '63ea08880a44df809bdfbca08597e1b68cee9f87',
+    ),
     'codeception/module-yii2' => 
     array (
       'pretty_version' => '1.1.2',
@@ -222,6 +231,13 @@ private static $installed = array (
       ),
       'reference' => '08e27c97e4c6ed02f37c5b2b20488046c8d90d75',
     ),
+    'facebook/webdriver' => 
+    array (
+      'replaced' => 
+      array (
+        0 => '*',
+      ),
+    ),
     'fakerphp/faker' => 
     array (
       'pretty_version' => 'v1.13.0',
@@ -289,6 +305,15 @@ private static $installed = array (
       array (
       ),
       'reference' => 'e4782611070e50613683d2b9a57730e9a3ba5451',
+    ),
+    'php-webdriver/webdriver' => 
+    array (
+      'pretty_version' => '1.9.0',
+      'version' => '1.9.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'e3633154554605274cc9d59837f55a7427d72003',
     ),
     'phpdocumentor/reflection-common' => 
     array (
@@ -723,6 +748,15 @@ private static $installed = array (
       ),
       'reference' => 'dc3063ba22c2a1fd2f45ed856374d79114998f91',
     ),
+    'symfony/process' => 
+    array (
+      'pretty_version' => 'v5.2.3',
+      'version' => '5.2.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '313a38f09c77fbcdc1d223e57d368cea76a2fd2f',
+    ),
     'symfony/service-contracts' => 
     array (
       'pretty_version' => 'v2.2.0',
@@ -779,12 +813,12 @@ private static $installed = array (
     ),
     'yiisoft/yii2-app-advanced' => 
     array (
-      'pretty_version' => '1.0.0+no-version-set',
-      'version' => '1.0.0.0',
+      'pretty_version' => 'dev-master',
+      'version' => 'dev-master',
       'aliases' => 
       array (
       ),
-      'reference' => NULL,
+      'reference' => '18403ddcc5010432a1a610a29c605cc77591e393',
     ),
     'yiisoft/yii2-bootstrap' => 
     array (

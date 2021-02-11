@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
+    'Codeception\\Exception\\ConnectionException' => $vendorDir . '/codeception/module-webdriver/src/Codeception/Exception/ConnectionException.php',
     'Codeception\\Exception\\ExternalUrlException' => $vendorDir . '/codeception/lib-innerbrowser/src/Codeception/Exception/ExternalUrlException.php',
     'Codeception\\Lib\\Connector\\Yii2' => $vendorDir . '/codeception/module-yii2/src/Codeception/Lib/Connector/Yii2.php',
     'Codeception\\Lib\\Connector\\Yii2\\ConnectionWatcher' => $vendorDir . '/codeception/module-yii2/src/Codeception/Lib/Connector/Yii2/ConnectionWatcher.php',
@@ -16,9 +17,12 @@ return array(
     'Codeception\\Lib\\Connector\\Yii2\\TransactionForcer' => $vendorDir . '/codeception/module-yii2/src/Codeception/Lib/Connector/Yii2/TransactionForcer.php',
     'Codeception\\Lib\\Framework' => $vendorDir . '/codeception/lib-innerbrowser/src/Codeception/Lib/Framework.php',
     'Codeception\\Lib\\InnerBrowser' => $vendorDir . '/codeception/lib-innerbrowser/src/Codeception/Lib/InnerBrowser.php',
+    'Codeception\\Lib\\Interfaces\\ScreenshotSaver' => $vendorDir . '/codeception/module-webdriver/src/Codeception/Lib/Interfaces/ScreenshotSaver.php',
+    'Codeception\\Lib\\Interfaces\\SessionSnapshot' => $vendorDir . '/codeception/module-webdriver/src/Codeception/Lib/Interfaces/SessionSnapshot.php',
     'Codeception\\Module\\AbstractAsserts' => $vendorDir . '/codeception/module-asserts/src/Codeception/Module/AbstractAsserts.php',
     'Codeception\\Module\\Asserts' => $vendorDir . '/codeception/module-asserts/src/Codeception/Module/Asserts.php',
     'Codeception\\Module\\Filesystem' => $vendorDir . '/codeception/module-filesystem/src/Codeception/Module/Filesystem.php',
+    'Codeception\\Module\\WebDriver' => $vendorDir . '/codeception/module-webdriver/src/Codeception/Module/WebDriver.php',
     'Codeception\\Module\\Yii2' => $vendorDir . '/codeception/module-yii2/src/Codeception/Module/Yii2.php',
     'Codeception\\Util\\HttpCode' => $vendorDir . '/codeception/lib-innerbrowser/src/Codeception/Util/HttpCode.php',
     'Codeception\\Util\\Shared\\Asserts' => $vendorDir . '/codeception/lib-asserts/src/Codeception/Util/Shared/Asserts.php',

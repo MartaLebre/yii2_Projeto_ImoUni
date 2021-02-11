@@ -1,6 +1,7 @@
 <?php
 return [
     [
+        'id' => 1,
         'username' => 'erau',
         'auth_key' => 'tUu1qHcde0diwUol3xeI-18MuHkkprQI',
         // password_0
