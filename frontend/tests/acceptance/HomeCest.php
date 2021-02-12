@@ -2,10 +2,10 @@
 namespace frontend\tests\acceptance;
 
 use frontend\tests\AcceptanceTester;
-use yii\helpers\Url;
 use common\fixtures\UserFixture;
+use yii\helpers\Url;
 
-class HomeCest
+class MainCest
 {
     public function _fixtures()
     {
@@ -17,6 +17,14 @@ class HomeCest
         ];
     }
 
+    protected function formParams($login, $password)
+    {
+        return [
+            'LoginForm[username]' => $login,
+            'LoginForm[password]' => $password,
+        ];
+    }
+
     public function checkHome(AcceptanceTester $I)
     {
         $I->amOnPage(Url::toRoute('/site/index'));
@@ -24,13 +32,12 @@ class HomeCest
         $I->see('Encontre a sua propriedade hoje!');
     }
 
-    public function checkLogin(AcceptanceTester $I)
-    {
-        $I->amOnPage('/site/login');
-        $I->fillField('Nome de Utilizador', 'erau');
-        $I->fillField('Password', 'password_0');
-        $I->click('login-button');
 
+    public function  checkLogin(AcceptanceTester $I){
+        $I->amOnPage(Url::toRoute('/site/login'));
+        $I->submitForm('#login-form', $this->formParams('erau', 'password_0'));
         $I->see('Logout');
+        $I->dontSeeLink('Login');
+        $I->dontSeeLink('Signup');
     }
 }

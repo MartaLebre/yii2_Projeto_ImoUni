@@ -137,6 +137,15 @@
       ),
       'reference' => '781be167fb1557bfc9b61e0a4eac60a32c534ec1',
     ),
+    'codeception/module-webdriver' => 
+    array (
+      'pretty_version' => '1.2.0',
+      'version' => '1.2.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '63ea08880a44df809bdfbca08597e1b68cee9f87',
+    ),
     'codeception/module-yii2' => 
     array (
       'pretty_version' => '1.1.2',
@@ -209,6 +218,13 @@
       ),
       'reference' => '08e27c97e4c6ed02f37c5b2b20488046c8d90d75',
     ),
+    'facebook/webdriver' => 
+    array (
+      'replaced' => 
+      array (
+        0 => '*',
+      ),
+    ),
     'fakerphp/faker' => 
     array (
       'pretty_version' => 'v1.13.0',
@@ -276,6 +292,15 @@
       array (
       ),
       'reference' => 'e4782611070e50613683d2b9a57730e9a3ba5451',
+    ),
+    'php-webdriver/webdriver' => 
+    array (
+      'pretty_version' => '1.9.0',
+      'version' => '1.9.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'e3633154554605274cc9d59837f55a7427d72003',
     ),
     'phpdocumentor/reflection-common' => 
     array (
@@ -360,12 +385,12 @@
     ),
     'phpunit/php-token-stream' => 
     array (
-      'pretty_version' => '4.0.4',
-      'version' => '4.0.4.0',
+      'pretty_version' => '3.1.2',
+      'version' => '3.1.2.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'a853a0e183b9db7eed023d7933a858fa1c8d25a3',
+      'reference' => '472b687829041c24b25f475e14c2f38a09edf1c2',
     ),
     'phpunit/phpunit' => 
     array (
@@ -709,6 +734,15 @@
       array (
       ),
       'reference' => 'dc3063ba22c2a1fd2f45ed856374d79114998f91',
+    ),
+    'symfony/process' => 
+    array (
+      'pretty_version' => 'v5.2.3',
+      'version' => '5.2.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '313a38f09c77fbcdc1d223e57d368cea76a2fd2f',
     ),
     'symfony/service-contracts' => 
     array (
