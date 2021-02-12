@@ -69,6 +69,7 @@ class AnuncioController extends Controller
         $current_perfil = Perfil::findOne(Yii::$app->user->getId());
         $modelVisitas = Visita::find()->where(['id_anuncio' => $model['id']])->asArray()->all();
         $modelMensagens = Mensagem::find()->where(['id_remetente' => Yii::$app->user->getId()])->asArray()->all();
+        $APIkey = 'AIzaSyBqiJxxvX-85A6G0oxuaD3N-S7U9PFAKZA';
         
         return $this->render('view', [
             'model' => $model,
@@ -81,6 +82,7 @@ class AnuncioController extends Controller
             'current_perfil' => $current_perfil,
             'modelVisitas' => $modelVisitas,
             'modelMensagens' => $modelMensagens,
+            'APIkey' => $APIkey,
         ]);
     }
 

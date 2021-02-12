@@ -77,7 +77,7 @@ class ReservaController extends Controller
             $data_entrada = new DateTime($model['data_entrada']);
             
             if($data_entrada->diff($data_disponibilidade)->invert == 1){
-                $model->addReserva(Yii::$app->user->getId(), $id_quarto);
+                $model->addReserva(Yii::$app->user->getId(), $modelQuarto);
                 Yii::$app->session->setFlash('success', 'Reserva marcada com sucesso.');
                 
                 return $this->redirect(['/anuncio/index']);

@@ -22,7 +22,7 @@ $this->title = $model['titulo'];
 <div class="anuncio-view">
     <h1><?= $model['titulo'] ?></h1>
     <h4 style="font-weight: bold">Disponível a partir de <?= Yii::$app->formatter->asDate($model['data_disponibilidade']) ?></h4>
-    
+
     <div class="row">
         <div class="col-sm-2" >
             <h4><?= $model['preco'] ?>€ /mês</h4>
@@ -51,12 +51,12 @@ $this->title = $model['titulo'];
             </h4>
         </div>
     </div>
-    
+
     <div class="row">
         <div class="col-sm-8">
             <h3>Descrição</h3>
             <h4><?= $model['descricao'] ?></h4>
-    
+
             <br>
             <?php if($current_perfil['tipo'] == 1){
                 $visita = false;
@@ -78,13 +78,13 @@ $this->title = $model['titulo'];
 
     <div class="row">
         <div class="col-sm-8">
-            
+
             <div class="row" style="padding-left: 15px">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-titulo">Características da propriedade</h3>
                     </div>
-                    
+
                     <div class="panel-body">
                         <div class="col-sm-6">
                             <h4 style="font-weight: bold">Rua: <span style="text-transform: capitalize; font-weight: normal"><?= $modelCasa['nome_rua'] ?></span></h4>
@@ -108,7 +108,7 @@ $this->title = $model['titulo'];
                     </div>
                 </div>
             </div>
-            
+
             <div class="row" style="padding-left: 15px">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -187,73 +187,63 @@ $this->title = $model['titulo'];
             </div>
 
             <div class="row" style="padding-left: 15px">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-titulo">Características dos quartos</h3>
-                </div>
-                <div class="panel-body">
-                    <?php
-                    $numQuarto = 0;
-                    foreach($modelQuartos as $modelQuarto){
-                        $numQuarto += 1;?>
-                        <div class="row">
-                            <?php if($numQuarto > 1){?>
-                                <hr>
-                            <?php }?>
-                            <div class="col-sm-6" style="padding-left: 30px">
-                                <h4 style="font-weight: bold">Tamanho: <span style="font-weight: normal"><?= $modelQuarto['tamanho'] ?></h4>
-                                <h4 style="font-weight: bold">Tipo da cama: <span style="font-weight: normal"><?= $modelQuarto['tipo_cama'] ?></h4>
-                                <?php
-                                if($modelQuarto['varanda'] == 1){?>
-                                    <h4 style="font-weight: bold">Varanda</h4>
-                                <?php }
-                                if($modelQuarto['secretaria'] == 1){?>
-                                    <h4 style="font-weight: bold">Secretária</h4>
-                                <?php }
-                                if($modelQuarto['armario'] == 1){?>
-                                    <h4 style="font-weight: bold">Armário</h4>
-                                <?php }
-                                if($modelQuarto['ac'] == 1){?>
-                                    <h4 style="font-weight: bold">AC</h4>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-titulo">Características dos quartos</h3>
+                    </div>
+                    <div class="panel-body">
+                        <?php
+                        $numQuarto = 0;
+                        foreach($modelQuartos as $modelQuarto){
+                            $numQuarto += 1;?>
+                            <div class="row">
+                                <?php if($numQuarto > 1){?>
+                                    <hr>
                                 <?php }?>
-                                <br>
-                                <?php
-                                $modelReserva = Reserva::find()->where(['id_quarto' => $modelQuarto['id']])->one();
-                                if($current_perfil['tipo'] == 1){
-                                    if($modelReserva == null)
-                                        $reserva = false;
-                                    
-                                    if($modelReserva['id_quarto'] == $modelQuarto['id'])
-                                        $reserva = true;
-                                    else
-                                        $reserva = false;
-                
-                                    if(!$reserva){ ?>
-                                        <?= Html::a('Reservar', ['/reserva/create', 'id_quarto' => $modelQuarto['id']], ['class'=>'btn btn-info']) ?>
+                                <div class="col-sm-6" style="padding-left: 30px">
+                                    <h4 style="font-weight: bold">Tamanho: <span style="font-weight: normal"><?= $modelQuarto['tamanho'] ?></h4>
+                                    <h4 style="font-weight: bold">Tipo da cama: <span style="font-weight: normal"><?= $modelQuarto['tipo_cama'] ?></h4>
+                                    <?php
+                                    if($modelQuarto['varanda'] == 1){?>
+                                        <h4 style="font-weight: bold">Varanda</h4>
                                     <?php }
-                                    else{ ?>
-                                        <button class="btn btn-danger">Reservado</button>
+                                    if($modelQuarto['secretaria'] == 1){?>
+                                        <h4 style="font-weight: bold">Secretária</h4>
                                     <?php }
-                                }
-                                if($model['id_proprietario'] == Yii::$app->user->getId()){
-                                    if($modelReserva['id_quarto'] == $modelQuarto['id']){?>
-                                        <button class="btn btn-danger">Reservado</button>
+                                    if($modelQuarto['armario'] == 1){?>
+                                        <h4 style="font-weight: bold">Armário</h4>
                                     <?php }
-                                    else{ ?>
-                                        <button class="btn btn-info">Por reservar</button>
-                                    <?php }
-                                }?>
+                                    if($modelQuarto['ac'] == 1){?>
+                                        <h4 style="font-weight: bold">AC</h4>
+                                    <?php }?>
+                                    <br>
+                                    <?php
+                                    if($model['id_proprietario'] == Yii::$app->user->getId()){
+                                        if($modelQuarto['disponibilidade'] == 1){?>
+                                            <button class="btn btn-info">Por reservar</button>
+                                        <?php }
+                                        else{ ?>
+                                            <button class="btn btn-danger">Reservado</button>
+                                        <?php }
+                                    }
+                                    else{
+                                        if($modelQuarto['disponibilidade'] == 1){ ?>
+                                            <?= Html::a('Reservar', ['/reserva/create', 'id_quarto' => $modelQuarto['id']], ['class'=>'btn btn-info']) ?>
+                                        <?php }
+                                        else{ ?>
+                                            <button class="btn btn-danger">Reservado</button>
+                                        <?php }
+                                    }?>
+                                </div>
+                                <div class="col-sm-5">
+                                    <?php echo '<img src="data:image/jpeg;base64,' . base64_encode($modelQuarto['foto']) . '" style="width: 300px; height: 300px; border-radius: 10px">'; ?>
+                                </div>
                             </div>
-                            <div class="col-sm-5">
-                                <?php echo '<img src="data:image/jpeg;base64,' . base64_encode($modelQuarto['foto']) . '" style="width: 300px; height: 300px; border-radius: 10px">'; ?>
-                            </div>
-                        </div>
-                    <?php }?>
+                        <?php }?>
+                    </div>
                 </div>
-            </div>
             </div>
         </div>
-
 
         <div class="col-sm-4">
             <div class="panel panel-primary">
@@ -267,11 +257,11 @@ $this->title = $model['titulo'];
                 </div>
             </div>
         </div>
-        
-        <div class="col-sm-4" style="text-align: center">
+
+        <div class="col-sm-4 text-center">
             <?php
             $user_hasMensagem = false;
-        
+            
             if($modelMensagens){
                 foreach($modelMensagens as $mensagem){
                     if($mensagem['categoria'] == $model['titulo'])
@@ -288,6 +278,22 @@ $this->title = $model['titulo'];
                     Enviar mensagem ao proprietário
                 </button>
             <?php }?>
+        </div>
+        
+        <div class="col-sm-4 text-center" style="padding-top: 20px">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-titulo">Localização</h3>
+                </div>
+                <div class="panel-body">
+                    <iframe
+                            class="mapa"
+                            frameborder="0"
+                            src="https://www.google.com/maps/embed/v1/place?key=<?= $APIkey ?>&q=<?= $modelCasa['nome_rua'] ?>"
+                            allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
         </div>
     </div>
 </div>

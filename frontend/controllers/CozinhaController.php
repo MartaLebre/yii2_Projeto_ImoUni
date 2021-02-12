@@ -71,9 +71,13 @@ class CozinhaController extends Controller
     
         if($model->load(Yii::$app->request->post()) && $model->validate()){
             $file = UploadedFile::getInstance($model,'foto');
-            $fp = fopen($file->tempName, 'r');
-            $imgUploaded = fread($fp, filesize($file->tempName));
-            fclose($fp);
+            if($file){
+                $fp = fopen($file->tempName, 'r');
+                $imgUploaded = fread($fp, filesize($file->tempName));
+                fclose($fp);
+            }
+            else
+                $imgUploaded = null;
             
             $model->addCozinha($id_casa, $imgUploaded);
         

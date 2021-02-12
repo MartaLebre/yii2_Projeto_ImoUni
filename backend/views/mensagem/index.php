@@ -48,7 +48,7 @@ $this->title = 'Mensagem | ' . Yii::$app->name;
                     <tr>
                         <th>Assunto</th>
                         <th>Remetente</th>
-                        <th>Destinatario</th>
+                        <th>Destinatário</th>
                         <th></th>
                     </tr>
                     </thead>

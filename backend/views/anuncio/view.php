@@ -205,8 +205,7 @@ $this->title = $model['titulo'];
                                     <?php }?>
                                     <br>
                                     <?php
-                                    $modelReserva = Reserva::find()->where(['id_quarto' => $modelQuarto['id']])->one();
-                                    if($modelReserva['id_quarto'] == $modelQuarto['id']){?>
+                                    if($modelQuarto['disponibilidade'] == 0){ ?>
                                         <button class="btn btn-danger">Reservado</button>
                                     <?php }
                                     else{ ?>
@@ -241,6 +240,22 @@ $this->title = $model['titulo'];
             <button type="button" class="btn btn-success btn-block disabled">
                 Enviar mensagem ao proprietário
             </button>
+        </div>
+
+        <div class="col-sm-4 text-center" style="padding-top: 20px">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-titulo">Localização</h3>
+                </div>
+                <div class="panel-body">
+                    <iframe
+                            class="mapa"
+                            frameborder="0"
+                            src="https://www.google.com/maps/embed/v1/place?key=<?= $APIkey ?>&q=<?= $modelCasa['nome_rua'] ?>"
+                            allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
         </div>
     </div>
 </div>

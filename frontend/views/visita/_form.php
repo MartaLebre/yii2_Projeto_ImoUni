@@ -16,13 +16,14 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'hora_visita')->textInput()->widget(DatePicker::className(), ['clientOptions' => ['format' => 'HH:mm']]); ?>
             
             <?= $form->field($model, 'data_visita')->textInput()->widget(DatePicker::className(), ['clientOptions' => ['format' => 'Y-M-D']]); ?>
-            <hr>
+            
+            <div class="form-group">
+                <?= Html::submitButton('Marcar', ['class' => 'btn btn-success btn-block']) ?>
+            </div>
         </div>
     </div>
 
-    <div class="form-group">
-        <?= Html::submitButton('Marcar', ['class' => 'btn btn-success']) ?>
-    </div>
+    
 
     <?php ActiveForm::end(); ?>
 </div>

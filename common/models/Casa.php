@@ -55,7 +55,7 @@ class Casa extends \yii\db\ActiveRecord
             
             [['foto'], 'file', 'extensions' => ['png', 'jpg', 'jpeg'], 'wrongExtension' => 'Apenas ficheiros com estas extenções são permitidos: png, jpg, jpeg. '],
             [['foto'], 'file', 'maxSize' => (1024 * 1024)/2, 'tooBig' => 'O ficheiro tem ser menor que 525KB.'],
-            [['foto'], 'file', 'skipOnEmpty' => false ,'uploadRequired' => 'Faça upload de uma fotografia.'],
+            //[['foto'], 'file', 'skipOnEmpty' => false ,'uploadRequired' => 'Faça upload de uma fotografia.'],
             
             [['id_proprietario'], 'exist', 'skipOnError' => true, 'targetClass' => Perfil::className(), 'targetAttribute' => ['id_proprietario' => 'id_user']],
         ];
@@ -70,7 +70,6 @@ class Casa extends \yii\db\ActiveRecord
             'id' => 'ID',
             'id_proprietario' => 'Id Proprietario',
             'nome_rua' => 'Nome da rua',
-            'localizacao' => 'Localização',
             'tipo_alojamento' => 'Tipo do imóvel',
             'wifi' => 'Wi-Fi',
             'limpeza' => 'Limpeza',

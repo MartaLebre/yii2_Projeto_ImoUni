@@ -52,25 +52,9 @@ AppAsset::register($this);
                 ['label' => Yii::$app->user->identity->username,
                  'items' => [
                      ['label' => 'Mensagens', 'url' => ['/mensagem/index']],
-                     '<li class="dropdown-header">Informações da conta</li>',
+                     '<li class="dropdown-header">Detalhes da conta</li>',
                      ['label' => 'Alterar dados', 'url' => ['/perfil/update?id=' . Yii::$app->user->getId()]],
                      ['label' => 'Horários', 'url' => ['/horario/index']]]],
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton('Logout', ['class' => 'btn btn-link logout'])
-                . Html::endForm()
-                . '</li>',
-            ];
-        }
-        elseif($modelPerfil->getAttribute('tipo') == 3){
-            $navLeft = [
-                ['label' => 'Utilizadores', 'url' => ['/user/index']],
-                ['label' => 'Anúncios', 'url' => ['/anuncio/index']],
-                ['label' => 'Mensagens', 'url' => ['/mensagem/index']],
-            ];
-    
-            $navRight = [
-                ['label' => Yii::$app->user->identity->username],
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton('Logout', ['class' => 'btn btn-link logout'])
@@ -85,7 +69,7 @@ AppAsset::register($this);
                 ['label' => Yii::$app->user->identity->username,
                     'items' => [
                         ['label' => 'Mensagens', 'url' => ['/mensagem/index']],
-                        '<li class="dropdown-header">Informações da conta</li>',
+                        '<li class="dropdown-header">Detalhes da conta</li>',
                         ['label' => 'Alterar dados', 'url' => ['/perfil/update?id=' . Yii::$app->user->getId()]]]],
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')

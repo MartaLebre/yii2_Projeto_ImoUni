@@ -71,7 +71,7 @@ class Reserva extends \yii\db\ActiveRecord
      * @param Anuncio $id_anuncio para qual reserva irá ser associado
      * @return bool se for criado com sucesso
      */
-    public function addReserva($id_user, $id_quarto){
+    public function addReserva($id_user, Quarto $modelQuarto){
         if (!$this->validate()) {
             return null;
         }
@@ -79,10 +79,12 @@ class Reserva extends \yii\db\ActiveRecord
         $reserva = new Reserva();
         
         $reserva->id_estudante = $id_user;
-        $reserva->id_quarto = $id_quarto;
+        $reserva->id_quarto = $modelQuarto['id'];
         $reserva->data_reserva = date('Y-m-d');
         $reserva->data_entrada = $this->data_entrada;
         $reserva->save();
+        
+        $modelQuarto->updateAttributes(['disponibilidade' => 0]);
         
         return true;
     }
