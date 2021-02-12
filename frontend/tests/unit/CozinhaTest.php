@@ -22,7 +22,7 @@ class CozinhaTest extends \Codeception\Test\Unit
     {
         $cozinha = new Cozinha();
         $cozinha->id = '40';
-        $cozinha->id_casa = '30';
+        //$cozinha->id_casa = '30';
         $cozinha->lava_loica = '1';
         $cozinha->maquina_roupa = '0';
         $cozinha->maquina_loica = '0';
@@ -51,22 +51,22 @@ class CozinhaTest extends \Codeception\Test\Unit
     public function testAddErroCozinha(){
 
         $cozinha = new Cozinha();
-        $cozinha->id = 'ola';
-        $cozinha->id_casa = 'ola';
-        $cozinha->lava_loica = '2';
-        $cozinha->maquina_roupa = '3';
-        $cozinha->maquina_loica = '2';
-        $cozinha->tostadeira = '3';
-        $cozinha->torradeira = '3';
-        $cozinha->mircro_ondas = '3';
-        $cozinha->frigorifico = 'sem congelador';
-        $cozinha->arca = '2';
-        $cozinha->fogao = 'gas';
-        $cozinha->forno = '8';
+        $cozinha->id = '';
+        //$cozinha->id_casa = 'ola';
+        $cozinha->lava_loica = '';
+        $cozinha->maquina_roupa = '';
+        $cozinha->maquina_loica = '';
+        $cozinha->tostadeira = '';
+        $cozinha->torradeira = '';
+        $cozinha->mircro_ondas = '';
+        $cozinha->frigorifico = '';
+        $cozinha->arca = '';
+        $cozinha->fogao = '';
+        $cozinha->forno = '';
 
         $this->assertFalse($cozinha->save());
 
-        $this->tester->dontSeeRecord(Cozinha::class, ['id' => 'ola']);
+        $this->tester->dontSeeRecord(Cozinha::class, ['id' => '']);
     }
 
     public function testDeleteCozinha(){
@@ -82,7 +82,7 @@ class CozinhaTest extends \Codeception\Test\Unit
         $cozinha = new Cozinha();
         $cozinha->save();
         $cozinha->id = '40';
-        $cozinha->id_casa = '30';
+        //$cozinha->id_casa = '30';
         $cozinha->lava_loica = '0';
         $cozinha->maquina_roupa ='1';
         $cozinha->maquina_loica = '1';
@@ -94,7 +94,7 @@ class CozinhaTest extends \Codeception\Test\Unit
         $cozinha->fogao = 'eletrico';
         $cozinha->forno = '0';
         $cozinha->save();
-        $this->tester->seeRecord(Cozinha::class, ['id' => '40', 'id_casa' => '30','lava_loica' => '0',
+        $this->tester->seeRecord(Cozinha::class, ['id' => '40', 'lava_loica' => '0',
             'maquina_roupa' => '1',
             'maquina_loica' => '1', 'tostadeira' => '0',
             'torradeira' => '0','mircro_ondas' => '1',

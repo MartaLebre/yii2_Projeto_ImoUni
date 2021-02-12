@@ -33,7 +33,7 @@ class AnuncioTest extends \Codeception\Test\Unit
         return $anuncio;
     }
 
-    public function testFields(){
+    public function testCamposAnuncio(){
         $anuncio = $this->addAnuncio();
         $this->assertTrue($anuncio->validate());
     }
