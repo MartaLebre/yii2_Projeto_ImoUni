@@ -2,6 +2,7 @@
 
 namespace frontend\tests\functional;
 
+use common\fixtures\PerfilFixture;
 use frontend\tests\FunctionalTester;
 use common\fixtures\UserFixture;
 
@@ -20,6 +21,10 @@ class LoginCest
             'user' => [
                 'class' => UserFixture::className(),
                 'dataFile' => codecept_data_dir() . 'login_data.php',
+            ],
+            'perfil' => [
+                'class' => PerfilFixture::className(),
+                'dataFile' => codecept_data_dir() . 'perfil_data.php'
             ],
         ];
     }
@@ -53,8 +58,12 @@ class LoginCest
 
     public function checkLoginValido(FunctionalTester $I)
     {
-        $I->submitForm('#login-form', $this->formParams('erau', 'password_0'));
-        $I->see('Logout (erau)', 'form button[type=submit]');
+        //$I->submitForm('#login-form', $this->formParams('erau', 'password_0'));
+        //$I->see('Logout (erau)', 'form button[type=submit]');
+        $I->fillField('Nome de Utilizador', 'erau');
+        $I->fillField('Password', 'password_0');
+        $I->click('login-button');
+        $I->see('Meus anúncios');
         $I->dontSeeLink('Login');
         $I->dontSeeLink('Signup');
     }
