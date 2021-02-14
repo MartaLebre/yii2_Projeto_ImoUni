@@ -132,7 +132,7 @@ $this->title = $model['titulo'];
                             if($modelCozinha['torradeira'] == 1){?>
                                 <h4 style="font-weight: bold">Torradeira</h4>
                             <?php }
-                            if($modelCozinha['mircro_ondas'] == 1){?>
+                            if($modelCozinha['micro_ondas'] == 1){?>
                                 <h4 style="font-weight: bold">Micro-ondas</h4>
                             <?php }?>
                             <h4 style="font-weight: bold">Frigorifico <span style="font-weight: normal"><?= $modelCozinha['frigorifico'] ?></h4>

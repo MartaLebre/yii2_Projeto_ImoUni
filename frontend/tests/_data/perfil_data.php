@@ -9,4 +9,13 @@ return [
         'tipo' => 2,
         'id_user' => 1,
     ],
+    [
+        'primeiro_nome' => 'testeeeeeee',
+        'ultimo_nome' => 'teste',
+        'numero_telemovel' => '233432456',
+        'genero' => 'Masculino',
+        'data_nascimento' => '1999-01-02',
+        'tipo' => 1,
+        'id_user' => 4,
+    ],
 ];

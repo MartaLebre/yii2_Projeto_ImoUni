@@ -17,7 +17,7 @@ class CozinhaSearch extends Cozinha
     public function rules()
     {
         return [
-            [['id', 'id_casa', 'lava_loica', 'maquina_roupa', 'maquina_loica', 'tostadeira', 'torradeira', 'mircro_ondas', 'arca', 'forno'], 'integer'],
+            [['id', 'id_casa', 'lava_loica', 'maquina_roupa', 'maquina_loica', 'tostadeira', 'torradeira', 'micro_ondas', 'arca', 'forno'], 'integer'],
             [['frigorifico', 'fogao', 'foto'], 'safe'],
         ];
     }
@@ -65,7 +65,7 @@ class CozinhaSearch extends Cozinha
             'maquina_loica' => $this->maquina_loica,
             'tostadeira' => $this->tostadeira,
             'torradeira' => $this->torradeira,
-            'mircro_ondas' => $this->mircro_ondas,
+            'micro_ondas' => $this->micro_ondas,
             'arca' => $this->arca,
             'forno' => $this->forno,
         ]);
