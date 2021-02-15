@@ -55,11 +55,54 @@ class ReservaCest
     }
 
     // tests
-    public function tryToTest(FunctionalTester $I)
+    public function marcarReserva(FunctionalTester $I)
     {
         $I->see('Pesquisar');
         $I->click('Pesquisar');
 
         $I->click('teste');
+        $I->see('Características dos quartos');
+        $I->see('Reservar');
+        $I->click('Reservar');
+        $I->see('Marcar reserva');
+        $I->see('Por favor preencha os seguintes campos');
+        $I->fillField('Data da entrada', '2021-02-12');
+        $I->see('Marcar');
+        $I->click('Marcar');
+        $I->see('Reserva marcada com sucesso.');
+    }
+
+    public function marcarReservaErro(FunctionalTester $I)
+    {
+        $I->see('Pesquisar');
+        $I->click('Pesquisar');
+
+        $I->click('teste');
+        $I->see('Características dos quartos');
+        $I->see('Reservar');
+        $I->click('Reservar');
+        $I->see('Marcar reserva');
+        $I->see('Por favor preencha os seguintes campos');
+        $I->fillField('Data da entrada', '2020-02-12');
+        $I->see('Marcar');
+        $I->click('Marcar');
+        $I->see('Reserva não efetuada, disponivel a partir de 2021-01-12.');
+    }
+
+    public function marcarReservaVazio(FunctionalTester $I)
+    {
+        $I->see('Pesquisar');
+        $I->click('Pesquisar');
+
+        $I->click('teste');
+        $I->see('Características dos quartos');
+        $I->see('Reservar');
+        $I->click('Reservar');
+        $I->see('Marcar reserva');
+        $I->see('Por favor preencha os seguintes campos');
+        $I->fillField('Data da entrada', '');
+        $I->see('Marcar');
+        $I->click('Marcar');
+        $I->seeValidationError('Introduza a sua data de entrada.');
     }
 }
