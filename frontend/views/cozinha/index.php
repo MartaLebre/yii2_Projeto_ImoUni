@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'maquina_loica',
             //'tostadeira',
             //'torradeira',
-            //'mircro_ondas',
+            //'micro_ondas',
             //'frigorifico',
             //'arca',
             //'fogao',

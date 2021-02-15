@@ -65,7 +65,7 @@ class CozinhaSearch extends Cozinha
             'maquina_loica' => $this->maquina_loica,
             'tostadeira' => $this->tostadeira,
             'torradeira' => $this->torradeira,
-            'mircro_ondas' => $this->mircro_ondas,
+            'mircro_ondas' => $this->micro_ondas,
             'arca' => $this->arca,
             'forno' => $this->forno,
         ]);

@@ -28,7 +28,7 @@ class CozinhaTest extends \Codeception\Test\Unit
         $cozinha->maquina_loica = '0';
         $cozinha->tostadeira = '1';
         $cozinha->torradeira = '1';
-        $cozinha->mircro_ondas = '0';
+        $cozinha->micro_ondas = '0';
         $cozinha->frigorifico = 'sem congelador';
         $cozinha->arca = '0';
         $cozinha->fogao = 'gas';
@@ -58,7 +58,7 @@ class CozinhaTest extends \Codeception\Test\Unit
         $cozinha->maquina_loica = '';
         $cozinha->tostadeira = '';
         $cozinha->torradeira = '';
-        $cozinha->mircro_ondas = '';
+        $cozinha->micro_ondas = '';
         $cozinha->frigorifico = '';
         $cozinha->arca = '';
         $cozinha->fogao = '';
@@ -88,7 +88,7 @@ class CozinhaTest extends \Codeception\Test\Unit
         $cozinha->maquina_loica = '1';
         $cozinha->tostadeira = '0';
         $cozinha->torradeira = '0';
-        $cozinha->mircro_ondas = '1';
+        $cozinha->micro_ondas = '1';
         $cozinha->frigorifico = 'com congelador';
         $cozinha->arca = '0';
         $cozinha->fogao = 'eletrico';

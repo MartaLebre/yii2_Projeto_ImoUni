@@ -96,6 +96,8 @@ class MainCest
         $I->fillField('Password', 'Test1234');
         $I->click('login-button');
 
+        $I->amOnPage(\Yii::$app->homeUrl);
+
         $I->see('Pesquisar');
         $I->click('Pesquisar');
 
