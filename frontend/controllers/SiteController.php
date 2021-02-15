@@ -95,15 +95,24 @@ class SiteController extends Controller
         }
 
         $model = new LoginForm();
-        if($model->load(Yii::$app->request->post()) && $model->login()){
-            return $this->goHome();
+        if($model->load(Yii::$app->request->post()) && $model->validate()){
+            $user = User::find()->where(['username' => $model->username])->one();
+            $perfilTipo = Perfil::findOne($user['id'])->getAttribute('tipo');
+        
+            if($perfilTipo !== 3){
+                $model->login();
+                return $this->goHome();
+            }
+            else{
+                Yii::$app->session->setFlash('danger', 'Login apenas para estudantes/proprietários.');
+            
+                $model->password = '';
+                return $this->render('login', ['model' => $model]);
+            }
         }
         else{
             $model->password = '';
-
-            return $this->render('login', [
-                'model' => $model,
-            ]);
+            return $this->render('login', ['model' => $model]);
         }
     }
 
