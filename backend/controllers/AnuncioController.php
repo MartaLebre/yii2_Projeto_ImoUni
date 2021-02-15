@@ -8,6 +8,7 @@ use common\models\Cozinha;
 use common\models\Mensagem;
 use common\models\Perfil;
 use common\models\Quarto;
+use common\models\Reserva;
 use common\models\Sala;
 use common\models\User;
 use common\models\Visita;
@@ -132,10 +133,63 @@ class AnuncioController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
+    public function actionDelete($id){
+        $id_casa = Anuncio::find()
+            ->where(['id' => $id])
+            ->one()
+            ->getAttribute('id_casa');
+        
+        //VISITAS
+        $modelVisitas = Visita::find()
+            ->where(['id_anuncio' => $id])
+            ->all();
+        
+        foreach($modelVisitas as $modelVisita)
+            $modelVisita->delete();
+        
+        //RESERVAS
+        $modelQuartos = Quarto::find()
+            ->where(['id_casa' => $id_casa])
+            ->all();
+        
+        foreach($modelQuartos as $modelQuarto){
+            $modelReserva = Reserva::find()
+                ->where(['id_quarto' => $modelQuarto['id']])
+                ->one();
+            
+            if($modelReserva)
+                $modelReserva->delete();
+        }
+        
+        //ANUNCIOS
+        Anuncio::find()
+            ->where(['id' => $id])
+            ->one()
+            ->delete();
+        
+        //QUARTOS
+        foreach($modelQuartos as $modelQuarto)
+            $modelQuarto->delete();
+        
+        //SALA
+        Sala::find()
+            ->where(['id_casa' => $id_casa])
+            ->one()
+            ->delete();
+        
+        //COZINHA
+        Cozinha::find()
+            ->where(['id_casa' => $id_casa])
+            ->one()
+            ->delete();
+        
+        //CASA
+        Casa::find()
+            ->where(['id' => $id_casa])
+            ->one()
+            ->delete();
+        
+        Yii::$app->session->setFlash('success', 'Anúncio eliminado com sucesso.');
         return $this->redirect(['index']);
     }
 

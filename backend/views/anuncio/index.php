@@ -2,6 +2,7 @@
 
 use common\models\Casa;
 use common\models\Perfil;
+use common\models\Quarto;
 use frontend\assets\AppAsset;
 use yii\helpers\Url;
 use yii\helpers\Html;
@@ -33,7 +34,8 @@ AppAsset::register($this);
             <h3 style="text-align: center">Não existem anúncios registados</h3>
         <?php }
         else{
-            foreach($anuncioSearch as $anuncio){?>
+            foreach($anuncioSearch as $anuncio){
+                $modelQuartos = Quarto::find()->where(['id_casa' => $anuncio['id_casa']])->asArray()->all()?>
                 <div class="col-lg-3">
                     <div class="panel panel-default">
                         <div class="panel-body" style="margin: 0 15px 0 15px">
@@ -45,7 +47,13 @@ AppAsset::register($this);
                                     <h4><span class="anuncio-titulo"><?= $anuncio['titulo'] ?></span></h4>
                                 </div>
                                 <div class="row">
-                                    <h4><?= Casa::findOne($anuncio['id_casa'])->getAttribute('num_quartos') ?> Quartos disponíveis</h4>
+                                    <?php
+                                    $numDisponiveis = 0;
+                                    foreach($modelQuartos as $modelQuarto){
+                                        if($modelQuarto['disponibilidade'] == 1)
+                                            $numDisponiveis += 1;
+                                    }?>
+                                    <h4><?= $numDisponiveis ?>/<?= count($modelQuartos) ?> Quartos disponíveis</h4>
                                 </div>
                                 <div class="row">
                                     <h4><?= $anuncio['preco'] ?>€ / mês</h4>

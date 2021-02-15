@@ -17,10 +17,9 @@ use nex\datepicker\DatePicker;
     <?= $form->field($model, 'hora_fim')->widget(DatePicker::className(), ['clientOptions' => ['format' => 'HH:mm']]);?>
 
     <?= $form->field($model, 'dia_semana')->dropDownList([ 'segunda' => 'Segunda', 'terca' => 'Terca', 'quarta' => 'Quarta', 'quinta' => 'Quinta', 'sexta' => 'Sexta', ], ['prompt' => '']) ?>
-
-    <hr>
+    
     <div class="form-group">
-        <?= Html::submitButton('Adicionar', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Adicionar', ['class' => 'btn btn-success btn-block']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

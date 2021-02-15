@@ -30,12 +30,11 @@ $this->title = 'Visitas | ' . Yii::$app->name;
                     <?php foreach($modelVisitas as $visita){
                         $username = User::findOne($visita['id_estudante'])->getAttribute('username');
                         $email = User::findOne($visita['id_estudante'])->getAttribute('email');
-                        $hora_visita = new DateTime($visita['hora_visita']);
-                        ?>
+                        $hora_visita = new DateTime($visita['hora_visita']);?>
                         <tr>
                             <td><?= $username ?></td>
                             <td><?= $email ?></td>
-                            <td><?= $hora_visita->format('H:m') ?></td>
+                            <td><?= $hora_visita->format('H:i') ?></td>
                             <td><?= $visita['data_visita'] ?></td>
                         </tr>
                     <?php }?>
