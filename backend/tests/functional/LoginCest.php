@@ -3,6 +3,7 @@
 namespace backend\tests\functional;
 
 use backend\tests\FunctionalTester;
+use common\fixtures\PerfilFixture;
 use common\fixtures\UserFixture;
 
 /**
@@ -23,7 +24,11 @@ class LoginCest
             'user' => [
                 'class' => UserFixture::className(),
                 'dataFile' => codecept_data_dir() . 'login_data.php'
-            ]
+            ],
+            'perfil' => [
+                'class' => PerfilFixture::className(),
+                'dataFile' => codecept_data_dir() . 'perfil_data.php'
+            ],
         ];
     }
     
@@ -36,7 +41,6 @@ class LoginCest
         $I->fillField('Nome de Utilizador', 'admin');
         $I->fillField('Password', 'admin123');
         $I->click('login-button');
-
         $I->see('Logout');
         $I->dontSeeLink('Login');
         $I->dontSeeLink('Signup');

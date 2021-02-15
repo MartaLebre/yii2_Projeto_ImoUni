@@ -2,6 +2,7 @@
 
 namespace frontend\tests\functional;
 
+use common\fixtures\PerfilFixture;
 use frontend\tests\FunctionalTester;
 use common\fixtures\UserFixture;
 
@@ -21,6 +22,10 @@ class LoginCest
                 'class' => UserFixture::className(),
                 'dataFile' => codecept_data_dir() . 'login_data.php',
             ],
+            'perfil' => [
+                'class' => PerfilFixture::className(),
+                'dataFile' => codecept_data_dir() . 'perfil_data.php'
+            ],
         ];
     }
 
@@ -37,24 +42,28 @@ class LoginCest
         ];
     }
 
-    public function checkEmpty(FunctionalTester $I)
+    public function checkLoginVazio(FunctionalTester $I)
     {
         $I->submitForm('#login-form', $this->formParams('', ''));
         $I->seeValidationError('Introduza um nome de utilizador.');
         $I->seeValidationError('Introduza uma password.');
     }
 
-    public function checkWrongPassword(FunctionalTester $I)
+    public function checkLoginPassword(FunctionalTester $I)
     {
         $I->submitForm('#login-form', $this->formParams('admin', 'wrong'));
         $I->seeValidationError('Username ou password incorretos.');
     }
 
 
-    public function checkValidLogin(FunctionalTester $I)
+    public function checkLoginValido(FunctionalTester $I)
     {
-        $I->submitForm('#login-form', $this->formParams('erau', 'password_0'));
-        $I->see('Logout (erau)', 'form button[type=submit]');
+        //$I->submitForm('#login-form', $this->formParams('erau', 'password_0'));
+        //$I->see('Logout (erau)', 'form button[type=submit]');
+        $I->fillField('Nome de Utilizador', 'erau');
+        $I->fillField('Password', 'password_0');
+        $I->click('login-button');
+        $I->see('Meus anúncios');
         $I->dontSeeLink('Login');
         $I->dontSeeLink('Signup');
     }
