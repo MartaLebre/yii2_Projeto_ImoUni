@@ -90,7 +90,7 @@ class MainCest
         $I->see('LOGOUT');
     }
 
-    public function checkReserva(AcceptanceTester $I){
+    /*public function checkReserva(AcceptanceTester $I){
         $I->amOnPage('/site/login');
         $I->fillField('Nome de Utilizador', 'teste_estudante');
         $I->fillField('Password', 'Test1234');
@@ -111,9 +111,9 @@ class MainCest
         $I->see('Marcar');
         $I->click('Marcar');
        // $I->see('Reserva marcada com sucesso.');
-    }
+    }*/
 
-    public function checkHorario(AcceptanceTester $I)
+    /*public function checkHorario(AcceptanceTester $I)
     {
         $I->amOnPage('/site/login');
         $I->fillField('Nome de Utilizador', 'erau');
@@ -133,6 +133,6 @@ class MainCest
         $I->selectOption('Horario[dia_semana]', 'Quarta');
         $I->click('Adicionar');
         $I->see('Horário registado com sucesso');
-    }
+    }*/
 
 }
