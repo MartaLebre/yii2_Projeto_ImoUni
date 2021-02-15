@@ -73,7 +73,7 @@ class AnuncioProprietarioCest
         $I->selectOption('Cozinha[maquina_loica]', 'Sim');
         $I->selectOption('Cozinha[tostadeira]', 'Sim');
         $I->selectOption('Cozinha[torradeira]', 'Não');
-        $I->selectOption('Cozinha[micro_ondas]', 'Sim');
+        $I->selectOption('Cozinha[mircro_ondas]', 'Sim');
         $I->selectOption('Cozinha[frigorifico]', 'Sem congelador');
         $I->selectOption('Cozinha[arca]', 'Não');
         $I->selectOption('Cozinha[fogao]', 'Gás');
