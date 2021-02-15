@@ -72,13 +72,13 @@ class RegistoCest
             'SignupForm[data_nascimento]' => '2020-11-02',
             'SignupForm[tipo]' => 'Proprietario'
         ]);
-/**
+
         $I->seeRecord(User::className(), [
             'username' => 'aaaaa',
             'email' => 'aaaaa123@mail.com',
             'status' => \common\models\User::STATUS_ACTIVE
         ]);
-**/
+
         $I->see('Registo efetuado com sucesso.');
 
     }

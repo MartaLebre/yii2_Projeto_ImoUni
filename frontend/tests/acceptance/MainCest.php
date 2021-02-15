@@ -1,7 +1,6 @@
 <?php
 namespace frontend\tests\acceptance;
 
-use common\fixtures\PerfilFixture;
 use common\models\User;
 use frontend\tests\AcceptanceTester;
 use common\fixtures\UserFixture;
@@ -17,10 +16,6 @@ class MainCest
             'user' => [
                 'class' => UserFixture::className(),
                 'dataFile' => codecept_data_dir() . 'login_data.php',
-            ],
-            'perfil' => [
-                'class' => PerfilFixture::className(),
-                'dataFile' => codecept_data_dir() . 'perfil_data.php'
             ],
         ];
     }
@@ -60,10 +55,9 @@ class MainCest
     public function  checkLogin(AcceptanceTester $I){
         $I->amOnPage(Url::toRoute('/site/login'));
         $I->submitForm('#login-form', $this->formParams('erau', 'password_0'));
+        $I->see('Logout');
         $I->dontSeeLink('Login');
         $I->dontSeeLink('Signup');
-        $I->see('LOGOUT');
-
     }
 
 
