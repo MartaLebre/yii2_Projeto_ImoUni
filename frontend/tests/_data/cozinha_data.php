@@ -8,7 +8,7 @@ return [
         'maquina_loica' => '1',
         'tostadeira' => '1',
         'torradeira' => '1',
-        'micro_ondas' => '1',
+        'mircro_ondas' => '1',
         'frigorifico' => 'com congelador',
         'arca' => '0',
         'fogao' => 'eletrico',
