@@ -97,7 +97,7 @@ class CozinhaTest extends \Codeception\Test\Unit
         $this->tester->seeRecord(Cozinha::class, ['id' => '40', 'lava_loica' => '0',
             'maquina_roupa' => '1',
             'maquina_loica' => '1', 'tostadeira' => '0',
-            'torradeira' => '0','mircro_ondas' => '1',
+            'torradeira' => '0','micro_ondas' => '1',
             'frigorifico' => 'com congelador','arca' => '0',
             'fogao' => 'eletrico','forno' => '0']);
     }
