@@ -158,11 +158,13 @@ class AnuncioController extends Controller
             ->all();
         
         foreach($modelQuartos as $modelQuarto){
-            Reserva::find()
+            $modelReservas[] = Reserva::find()
                 ->where(['id_quarto' => $modelQuarto['id']])
-                ->one()
-                ->delete();
+                ->one();
         }
+        
+        foreach($modelReservas as $modelReserva)
+            $modelReserva->delete();
         
         //ANUNCIOS
         Anuncio::find()
