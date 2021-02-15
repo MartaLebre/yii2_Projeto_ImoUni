@@ -47,8 +47,8 @@ class ReservaCest
     public function _before(FunctionalTester $I)
     {
         $I->amOnPage('/site/login');
-        $I->fillField('Nome de Utilizador', 'teste_estudante');
-        $I->fillField('Password', 'Test1234');
+        $I->fillField('Nome de Utilizador', 'estudante_teste');
+        $I->fillField('Password', '123456');
         $I->click('login-button');
 
         $I->amOnPage(\Yii::$app->homeUrl);

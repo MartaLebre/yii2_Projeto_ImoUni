@@ -18,4 +18,13 @@ return [
         'tipo' => 1,
         'id_user' => 4,
     ],
+    [
+        'primeiro_nome' => 'estudante',
+        'ultimo_nome' => 'estudante',
+        'numero_telemovel' => '456333211',
+        'genero' => 'Masculino',
+        'data_nascimento' => '1999-01-02',
+        'tipo' => 1,
+        'id_user' => 6,
+    ],
 ];

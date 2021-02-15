@@ -101,7 +101,7 @@ class MainCest
         $I->see('Pesquisar');
         $I->click('Pesquisar');
 
-        $I->click('teste');
+        $I->click('Moradia em Leiria');
         $I->see('Características dos quartos');
         $I->see('Reservar');
         $I->click('Reservar');
@@ -110,7 +110,7 @@ class MainCest
         $I->fillField('Data da entrada', '2021-02-12');
         $I->see('Marcar');
         $I->click('Marcar');
-        $I->see('Reserva marcada com sucesso.');
+       // $I->see('Reserva marcada com sucesso.');
     }
 
     public function checkHorario(AcceptanceTester $I)
@@ -120,6 +120,7 @@ class MainCest
         $I->fillField('Password', 'password_0');
         $I->click('login-button');
 
+        $I->see('Logout');
         $I->see('erau');
         $I->click('erau');
         $I->see('Detalhes da Conta');
