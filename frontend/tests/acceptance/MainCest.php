@@ -9,6 +9,7 @@ use common\fixtures\QuartoFixture;
 use common\fixtures\SalaFixture;
 use frontend\tests\AcceptanceTester;
 use common\fixtures\UserFixture;
+use frontend\tests\FunctionalTester;
 use yii\helpers\Url;
 
 class MainCest
@@ -110,5 +111,25 @@ class MainCest
         $I->see('Reserva marcada com sucesso.');
     }
 
+    public function checkHorario(AcceptanceTester $I)
+    {
+        $I->amOnPage('/site/login');
+        $I->fillField('Nome de Utilizador', 'erau');
+        $I->fillField('Password', 'password_0');
+        $I->click('login-button');
+
+        $I->see('erau');
+        $I->click('erau');
+        $I->see('Detalhes da Conta');
+        $I->click('Horários');
+        $I->see('Horários');
+        $I->click('Adicionar horário');
+        $I->see('Adicionar horário');
+        $I->fillField('Hora de começo', '18:05');
+        $I->fillField('Hora de fim', '21:05');
+        $I->selectOption('Horario[dia_semana]', 'Quarta');
+        $I->click('Adicionar');
+        $I->see('Horário registado com sucesso');
+    }
 
 }
