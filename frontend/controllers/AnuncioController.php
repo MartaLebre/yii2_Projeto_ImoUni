@@ -143,43 +143,50 @@ class AnuncioController extends Controller
             ->where(['id' => $id])
             ->one()
             ->getAttribute('id_casa');
-        
+    
+        //VISITAS
         $modelVisitas = Visita::find()
             ->where(['id_anuncio' => $id])
-            ->all();
-        
-        $modelReservas = Reserva::find()
-            ->where(['id_anuncio' => $id])
-            ->all();
-        
-        $modelQuartos = Quarto::find()
-            ->where(['id_casa' => $id_casa])
             ->all();
     
         foreach($modelVisitas as $modelVisita)
             $modelVisita->delete();
     
-        foreach($modelReservas as $modelReserva)
-            $modelReserva->delete();
+        //RESERVAS
+        $modelQuartos = Quarto::find()
+            ->where(['id_casa' => $id_casa])
+            ->all();
         
+        foreach($modelQuartos as $modelQuarto){
+            Reserva::find()
+                ->where(['id_quarto' => $modelQuarto['id']])
+                ->one()
+                ->delete();
+        }
+        
+        //ANUNCIOS
         Anuncio::find()
             ->where(['id' => $id])
             ->one()
             ->delete();
         
+        //QUARTOS
         foreach($modelQuartos as $modelQuarto)
             $modelQuarto->delete();
     
+        //SALA
         Sala::find()
             ->where(['id_casa' => $id_casa])
             ->one()
             ->delete();
     
+        //COZINHA
         Cozinha::find()
             ->where(['id_casa' => $id_casa])
             ->one()
             ->delete();
     
+        //CASA
         Casa::find()
             ->where(['id' => $id_casa])
             ->one()
