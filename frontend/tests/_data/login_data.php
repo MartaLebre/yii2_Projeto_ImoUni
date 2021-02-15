@@ -22,16 +22,4 @@ return [
         'updated_at' => '1548675330',
         'verification_token' => '4ch0qbfhvWwkcuWqjN8SWRq72SOw1KYT_1548675330',
     ],
-    [
-        'id' => 4,
-        'username' => 'teste_estudante',
-        'auth_key' => '',
-        // Test1234
-        'password_hash' => 'O87GkY3_UfmMHYkyezZ7QLfmkKNsllzT',
-        'email' => 'test_estudante@mail.com',
-        'status' => '9',
-        'created_at' => '1548675330',
-        'updated_at' => '1548675330',
-        'verification_token' => '',
-    ],
 ];

@@ -29,7 +29,7 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'torradeira') ?>
 
-    <?php // echo $form->field($model, 'micro_ondas') ?>
+    <?php // echo $form->field($model, 'mircro_ondas') ?>
 
     <?php // echo $form->field($model, 'frigorifico') ?>
 

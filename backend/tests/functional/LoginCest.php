@@ -3,7 +3,6 @@
 namespace backend\tests\functional;
 
 use backend\tests\FunctionalTester;
-use common\fixtures\PerfilFixture;
 use common\fixtures\UserFixture;
 
 /**
@@ -24,11 +23,7 @@ class LoginCest
             'user' => [
                 'class' => UserFixture::className(),
                 'dataFile' => codecept_data_dir() . 'login_data.php'
-            ],
-            'perfil' => [
-                'class' => PerfilFixture::className(),
-                'dataFile' => codecept_data_dir() . 'perfil_data.php'
-            ],
+            ]
         ];
     }
     
@@ -38,12 +33,10 @@ class LoginCest
     public function loginUser(FunctionalTester $I)
     {
         $I->amOnPage('/site/login');
-        $I->submitForm('#login-form', [
-            'LoginForm[username]' => 'erau',
-            'LoginForm[password]' => 'password_0',
-        ], 'login-button');
+        $I->fillField('Nome de Utilizador', 'admin');
+        $I->fillField('Password', 'admin123');
+        $I->click('login-button');
 
-        $I->dontSee('Login');
         $I->see('Logout');
         $I->dontSeeLink('Login');
         $I->dontSeeLink('Signup');

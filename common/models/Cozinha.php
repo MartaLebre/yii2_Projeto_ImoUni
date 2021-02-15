@@ -14,7 +14,7 @@ use Yii;
  * @property int $maquina_loica
  * @property int $tostadeira
  * @property int $torradeira
- * @property int $micro_ondas
+ * @property int $mircro_ondas
  * @property string $frigorifico
  * @property int $arca
  * @property string $fogao
@@ -39,7 +39,7 @@ class Cozinha extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['lava_loica', 'maquina_roupa', 'maquina_loica', 'tostadeira', 'torradeira', 'micro_ondas', 'frigorifico', 'arca', 'fogao', 'forno'], 'required', 'message' => 'Escolha uma das opções.'],
+            [['lava_loica', 'maquina_roupa', 'maquina_loica', 'tostadeira', 'torradeira', 'mircro_ondas', 'frigorifico', 'arca', 'fogao', 'forno'], 'required', 'message' => 'Escolha uma das opções.'],
     
             [['foto'], 'file', 'extensions' => ['png', 'jpg', 'jpeg'], 'wrongExtension' => 'Apenas ficheiros com estas extenções são permitidos: png, jpg, jpeg. '],
             [['foto'], 'file', 'maxSize' => (1024 * 1024)/2, 'tooBig' => 'O ficheiro tem ser menor que 525KB.'],
@@ -62,7 +62,7 @@ class Cozinha extends \yii\db\ActiveRecord
             'maquina_loica' => 'Maquina loica',
             'tostadeira' => 'Tostadeira',
             'torradeira' => 'Torradeira',
-            'micro_ondas' => 'Micro-ondas',
+            'mircro_ondas' => 'Mircro-ondas',
             'frigorifico' => 'Frigorifico',
             'arca' => 'Arca',
             'fogao' => 'Fogão',
@@ -89,7 +89,7 @@ class Cozinha extends \yii\db\ActiveRecord
         $cozinha->maquina_loica = $this->maquina_loica;
         $cozinha->tostadeira = $this->tostadeira;
         $cozinha->torradeira = $this->torradeira;
-        $cozinha->micro_ondas = $this->micro_ondas;
+        $cozinha->mircro_ondas = $this->mircro_ondas;
         $cozinha->frigorifico = $this->frigorifico;
         $cozinha->arca = $this->arca;
         $cozinha->fogao = $this->fogao;

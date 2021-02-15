@@ -38,7 +38,7 @@ use yii\widgets\ActiveForm;
                     <?= $form->field($model, 'torradeira')->dropDownList([ '0' => 'Não', '1' => 'Sim'], ['prompt' => '']) ?>
                 </div>
                 <div class="col-sm-6">
-                    <?= $form->field($model, 'micro_ondas')->dropDownList([ '0' => 'Não', '1' => 'Sim'], ['prompt' => '']) ?>
+                    <?= $form->field($model, 'mircro_ondas')->dropDownList([ '0' => 'Não', '1' => 'Sim'], ['prompt' => '']) ?>
                 </div>
             </div>
 

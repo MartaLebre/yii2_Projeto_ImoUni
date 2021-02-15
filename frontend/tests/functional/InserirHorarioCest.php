@@ -8,7 +8,7 @@ use common\fixtures\UserFixture;
 use frontend\tests\FunctionalTester;
 
 
-class HorarioProprietarioCest
+class InserirHorarioCest
 {
 
 
@@ -44,7 +44,7 @@ class HorarioProprietarioCest
     {
         $I->see('erau');
         $I->click('erau');
-        $I->see('Detalhes da Conta');
+        $I->see('Informações da Conta');
         $I->click('Horários');
         $I->see('Horários');
         $I->click('Adicionar horário');
@@ -54,23 +54,6 @@ class HorarioProprietarioCest
         $I->selectOption('Horario[dia_semana]', 'Quarta');
         $I->click('Adicionar');
         $I->see('Horário registado com sucesso');
-    }
 
-    public function InserirHorarioVazio(FunctionalTester $I)
-    {
-        $I->see('erau');
-        $I->click('erau');
-        $I->see('Detalhes da Conta');
-        $I->click('Horários');
-        $I->see('Horários');
-        $I->click('Adicionar horário');
-        $I->see('Adicionar horário');
-        $I->fillField('Hora de começo', '');
-        $I->fillField('Hora de fim', '');
-        $I->selectOption('Horario[dia_semana]', '');
-        $I->click('Adicionar');
-        $I->seeValidationError('Introduza a hora.');
-        $I->seeValidationError('Introduza a hora.');
-        $I->seeValidationError('Introduza o dia da semana.');
     }
 }

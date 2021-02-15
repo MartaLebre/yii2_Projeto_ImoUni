@@ -37,21 +37,21 @@ class LoginCest
         ];
     }
 
-    public function checkLoginVazio(FunctionalTester $I)
+    public function checkEmpty(FunctionalTester $I)
     {
         $I->submitForm('#login-form', $this->formParams('', ''));
         $I->seeValidationError('Introduza um nome de utilizador.');
         $I->seeValidationError('Introduza uma password.');
     }
 
-    public function checkLoginPassword(FunctionalTester $I)
+    public function checkWrongPassword(FunctionalTester $I)
     {
         $I->submitForm('#login-form', $this->formParams('admin', 'wrong'));
         $I->seeValidationError('Username ou password incorretos.');
     }
 
 
-    public function checkLoginValido(FunctionalTester $I)
+    public function checkValidLogin(FunctionalTester $I)
     {
         $I->submitForm('#login-form', $this->formParams('erau', 'password_0'));
         $I->see('Logout (erau)', 'form button[type=submit]');
