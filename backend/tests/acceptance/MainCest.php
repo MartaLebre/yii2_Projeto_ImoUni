@@ -1,24 +1,17 @@
 <?php
+namespace backend\tests\acceptance;
 
-namespace backend\tests\functional;
 
-use backend\tests\FunctionalTester;
 use common\fixtures\PerfilFixture;
+use backend\tests\AcceptanceTester;
 use common\fixtures\UserFixture;
+
 use yii\helpers\Url;
 
-/**
- * Class LoginCest
- */
-class LoginCest
+class MainCest
 {
-    /**
-     * Load fixtures before db transaction begin
-     * Called in _before()
-     * @see \Codeception\Module\Yii2::_before()
-     * @see \Codeception\Module\Yii2::loadFixtures()
-     * @return array
-     */
+    protected $formSignupId = '#form-signup';
+
     public function _fixtures()
     {
         return [
@@ -29,7 +22,7 @@ class LoginCest
             'perfil' => [
                 'class' => PerfilFixture::className(),
                 'dataFile' => codecept_data_dir() . 'perfil_data.php'
-            ],
+            ]
         ];
     }
 
@@ -41,15 +34,12 @@ class LoginCest
         ];
     }
 
-    /**
-     * @param FunctionalTester $I
-     */
-    public function loginUser(FunctionalTester $I)
-    {
+    public function  checkLogin(AcceptanceTester $I){
         $I->amOnPage(Url::toRoute('/site/login'));
         $I->submitForm('#login-form', $this->formParams('admin', 'admin123'));
         $I->dontSeeLink('Login');
         $I->dontSeeLink('Signup');
-        $I->see('LOGOUT');
+        $I->see('Estatísticas');
     }
+
 }

@@ -1,10 +1,10 @@
 <?php
 return [
     [
-        'id' => 31,
+        'id' => 1,
         'username' => 'admin',
         'auth_key' => '',
-        // Test1234
+        // admin123
         'password_hash' => '$2y$13$9rSPpyZds844uCYWwPDavOo4WT7HiQphtqI7QCIeUXt9O5w..hTnW',
         'email' => 'admin123@mail.com',
         'status' => '10',
