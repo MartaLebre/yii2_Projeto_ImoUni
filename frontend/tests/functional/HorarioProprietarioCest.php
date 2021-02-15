@@ -73,4 +73,21 @@ class HorarioProprietarioCest
         $I->seeValidationError('Introduza a hora.');
         $I->seeValidationError('Introduza o dia da semana.');
     }
+
+    public function InserirHorarioErro(FunctionalTester $I)
+    {
+        $I->see('erau');
+        $I->click('erau');
+        $I->see('Detalhes da Conta');
+        $I->click('Horários');
+        $I->see('Horários');
+        $I->click('Adicionar horário');
+        $I->see('Adicionar horário');
+        $I->fillField('Hora de começo', '25:90');
+        $I->fillField('Hora de fim', '45:70');
+        $I->selectOption('Horario[dia_semana]', 'Segunda');
+        $I->click('Adicionar');
+        $I->seeValidationError('Formato da hora inválido.');
+        $I->seeValidationError('Formato da hora inválido.');
+    }
 }
