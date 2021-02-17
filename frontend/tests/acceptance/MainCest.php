@@ -94,15 +94,17 @@ class MainCest
         $I->amOnPage(Url::toRoute('/site/login'));
         $I->submitForm('#login-form', $this->formParams('erau', 'password_0'));
         $I->wait(2);
-        $I->click('login-button');
+        //$I->click('login-button');
 
         $I->see('Meus anúncios');
         $I->click('Meus anúncios');
         $I->see('Adicionar anúncio');
         $I->click('Adicionar anúncio');
 
+        $I->amOnPage(Url::toRoute('/casa/create'));
+
         //Adicionar Propriedade
-        $I->see('Adicionar propriedade', 'h1');
+        $I->see('Adicionar propriedade');
         $I->see('Por favor preencha os seguintes campos');
         $I->see('Caracteristicas da propriedade');
         $I->fillField('Nome da rua', 'teste');
@@ -122,8 +124,10 @@ class MainCest
         $I->see('Adicionar propriedade');
         $I->click('Adicionar propriedade');
 
+        $I->amOnPage(Url::toRoute('/cozinha/create'));
+
         //Adicionar Cozinha
-        $I->see('Adicionar cozinha', 'h1');
+        $I->see('Adicionar cozinha');
         $I->see('Por favor preencha os seguintes campos');
         $I->see('Caracteristicas da cozinha');
         $I->selectOption('Cozinha[lava_loica]', 'Não');
@@ -140,6 +144,8 @@ class MainCest
         $I->see('Adicionar cozinha');
         $I->click('Adicionar cozinha');
 
+        $I->amOnPage(Url::toRoute('/sala/create'));
+
         //Adicionar Sala
         $I->see('Adicionar sala');
         $I->see('Por favor preencha os seguintes campos');
@@ -154,8 +160,9 @@ class MainCest
         $I->see('Adicionar sala');
         $I->click('Adicionar sala');
 
+        $I->amOnPage(Url::toRoute('/quarto/create'));
         //Adicionar quarto
-        $I->see('Adicionar quarto (1/1)', 'h1');
+        $I->see('Adicionar quarto (1/1)');
         $I->see('Por favor preencha os seguintes campos');
         $I->see('Caracteristicas do quarto');
         $I->selectOption('Quarto[tamanho]', 'Pequeno');
@@ -168,8 +175,9 @@ class MainCest
         $I->see('Adicionar quarto');
         $I->click('Adicionar quarto');
 
+        $I->amOnPage(Url::toRoute('/anuncio/create'));
         //Adicionar anúncio
-        $I->see('Adicionar anúncio', 'h1');
+        $I->see('Adicionar anúncio');
         $I->see('Por favor preencha os seguintes campos');
         $I->fillField('Título', 'teste anúncio');
         $I->fillField('Preço', 170);
@@ -181,7 +189,11 @@ class MainCest
         $I->see('Adicionar anúncio');
         $I->click('Adicionar anúncio');
 
+        $I->amOnPage(Url::toRoute('/anuncio/index'));
+
         $I->see('Anúncio registado com sucesso.');
+
+
     }
 
     /*public function checkReserva(AcceptanceTester $I){
